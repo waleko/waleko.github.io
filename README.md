@@ -1,14 +1,16 @@
 # Welcome to my GitHub Page
 
-You can visit [my github page](http://waleko.github.io)
+You can visit [my github page](http://gtihub.com/waleko)
 or my own simillar to this [site](http://alex.unaux.com)
 
 ## About me
+
 ### Who am I?
 ![It's me](https://pp.userapi.com/c840026/v840026683/1a841/Oc9IUNv1-CA.jpg?ava=1)
 
 Hi! :smiley: My name is Alex Kovrigin, I am student at Physical-Tehcnical High School in Saint-Petersburg, Russsia.
 I create all sorts of coding projects for my eduction.
+
 ### My favourite programming languages
 I code in:
 * **Qt C++**
