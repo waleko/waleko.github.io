@@ -1,37 +1,31 @@
-## Welcome to GitHub Pages
+# Welcome to my GitHub Page
 
-You can use the [editor on GitHub](https://github.com/waleko/waleko.github.io/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+You can visit [my github page](http://waleko.github.io)
+or my own simillar to this [site](http://alex.unaux.com)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## About me
+### Who am I?
+![It's me](https://pp.userapi.com/c840026/v840026683/1a841/Oc9IUNv1-CA.jpg?ava=1)
 
-### Markdown
+Hi! :smiley: My name is Alex Kovrigin, I am student at Physical-Tehcnical High School in Saint-Petersburg, Russsia.
+I create all sorts of coding projects for my eduction.
+### My favourite programming languages
+I code in:
+* **Qt C++**
+* Normal C++
+* a bit Python
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Extra info
+I am obsessed with Neural Networks, but I don't know how to use them yet. :pensive:
 
-```markdown
-Syntax highlighted code block
+## My projects
+Here are some of my best projects
+* [PictureCrypt](http://alex.unaux.com/picturecrypt)
+* [15 Puzzle](http://alex.unaux.com/15-puzzle/)
+* [BlackJack](http://alex.unaux.com/black-jack/)
+* [SQL-Phonebook](http://alex.unaux.com/sql-phonebook/)
+* [Explorer](http://alex.unaux.com/explorer/)
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/waleko/waleko.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+## Contact me
+Questions or suggestions are welcome!
+Email me a.kovrigin0@gmail.com or use [telegram](t.me/alex_kovrigin)
