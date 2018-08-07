@@ -29,3 +29,6 @@ Here are some of my best projects
 ## Contact me
 Questions or suggestions are welcome!
 Email me a.kovrigin0@gmail.com or use [telegram](t.me/alex_kovrigin)
+
+
+:copyright: Alex Kovrigin (2018)
