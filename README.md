@@ -1,32 +1,13 @@
-# Welcome to my GitHub Page
+# Github Page Site (kinda)
 
-You can visit [my github page](https://github.com/waleko)
-or my own, simillar to this, [site](http://alex.unaux.com)
+Hi! It's my github page repository (kinda)
 
-## About me
+## What does it mean?
+Previously I was using standard github pages thing, but then I realised that
+you can make your own site and use github pages as some kind of web hosting
 
-### Who am I?
-![It's me](https://pp.userapi.com/c840026/v840026683/1a841/Oc9IUNv1-CA.jpg?ava=1)
-
-Hi! :smiley: My name is Alex Kovrigin, I am student at Physical-Tehcnical High School in Saint-Petersburg, Russsia.
-I create all sorts of coding projects for my eduction.
-
-### My favourite programming languages
-I code in:
-* **Qt C++**
-* Normal C++
-* a bit Python
-
-### Extra info
-I am obssesed with two things: encryption and neural networks, though I don't know how to do the second one. :pensive:
-
-## My projects
-Here are some of my best projects
-* [PictureCrypt](http://alex.unaux.com/picturecrypt)
-* [15 Puzzle](http://alex.unaux.com/15-puzzle/)
-* [BlackJack](http://alex.unaux.com/black-jack/)
-* [SQL-Phonebook](http://alex.unaux.com/sql-phonebook/)
-* [Explorer](http://alex.unaux.com/explorer/)
+## Visit the site
+[click](https://waleko.github.io/)
 
 ## Contact me
 Questions or suggestions are welcome!
