@@ -1,7 +1,7 @@
 # Welcome to my GitHub Page
 
-You can visit [my github page](http://gtihub.com/waleko)
-or my own simillar to this [site](http://alex.unaux.com)
+You can visit [my github page](https://github.com/waleko)
+or my own, simillar to this, [site](http://alex.unaux.com)
 
 ## About me
 
@@ -18,7 +18,7 @@ I code in:
 * a bit Python
 
 ### Extra info
-I am obsessed with Neural Networks, but I don't know how to use them yet. :pensive:
+I am obssesed with two things: encryption and neural networks, though I don't know how to do the second one. :pensive:
 
 ## My projects
 Here are some of my best projects
@@ -30,7 +30,6 @@ Here are some of my best projects
 
 ## Contact me
 Questions or suggestions are welcome!
-Email me a.kovrigin0@gmail.com or use [telegram](t.me/alex_kovrigin)
+Email me a.kovrigin0@gmail.com or use [telegram](t.me/alex_kovrigin).
 
-
-:copyright: Alex Kovrigin (2018)
+Alex Kovrigin :copyright: (2018)
