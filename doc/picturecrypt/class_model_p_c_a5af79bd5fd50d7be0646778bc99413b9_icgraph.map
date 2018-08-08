@@ -1,0 +1,5 @@
+<map id="ModelPC::saveImage" name="ModelPC::saveImage">
+<area shape="rect" id="node2" href="$class_model_p_c.html#aaaa6f90d415a6651234fca6089840511" title="ModelPC::encrypt Slot to be called when encrypt mode in ViewPC is selected and started. " alt="" coords="197,5,324,32"/>
+<area shape="rect" id="node3" href="$class_model_p_c.html#ac40ce6f48075c1e38e56d4ab592ebc4f" title="ModelPC::start Slot to zip and encrypt data and provide it with some extra stuff After completion sta..." alt="" coords="372,5,481,32"/>
+<area shape="rect" id="node4" href="$class_controller_p_c.html#afa6c92d67bf3b6531c42385fc5938003" title="ControllerPC::ControllerPC Constructor of controller Constructor checks the version of the app and cr..." alt="" coords="529,5,705,32"/>
+</map>

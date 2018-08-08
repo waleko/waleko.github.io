@@ -1,0 +1,7 @@
+<map id="ModelPC::processPixel" name="ModelPC::processPixel">
+<area shape="rect" id="node2" href="$class_model_p_c.html#a1d0091062a0c836b283ec2f67411623b" title="ModelPC::circuit The brain of the app. Via special circuit stores data in image. " alt="" coords="212,31,331,57"/>
+<area shape="rect" id="node3" href="$class_model_p_c.html#aaaa6f90d415a6651234fca6089840511" title="ModelPC::encrypt Slot to be called when encrypt mode in ViewPC is selected and started. " alt="" coords="379,5,505,32"/>
+<area shape="rect" id="node6" href="$class_model_p_c.html#a9846d88cc9ff897fd69fa86f836bea5b" title="ModelPC::decrypt Slot to be called when decrypt mode in ViewPC is selected and started. " alt="" coords="379,56,505,83"/>
+<area shape="rect" id="node4" href="$class_model_p_c.html#ac40ce6f48075c1e38e56d4ab592ebc4f" title="ModelPC::start Slot to zip and encrypt data and provide it with some extra stuff After completion sta..." alt="" coords="553,5,663,32"/>
+<area shape="rect" id="node5" href="$class_controller_p_c.html#afa6c92d67bf3b6531c42385fc5938003" title="ControllerPC::ControllerPC Constructor of controller Constructor checks the version of the app and cr..." alt="" coords="711,5,887,32"/>
+</map>
