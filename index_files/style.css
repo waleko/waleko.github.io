@@ -419,7 +419,8 @@ a:hover{
     color:#fff;
     text-align:center;
     background-color:#159957;
-    background-image:linear-gradient(120deg, #0099f7, #f11712)
+    background-image: linear-gradient(135deg, #00f260, #0575e6);
+    /*background-image:linear-gradient(120deg, #0099f7, #f11712)*/
 }
 @media screen and (min-width: 64em){
     .page-header{
@@ -510,7 +511,7 @@ a:hover{
     margin-top:2rem;
     margin-bottom:1rem;
     font-weight:normal;
-    color:#159957
+    color:#26AA68
 }
 .main-content p{
     margin-bottom:1em
@@ -624,6 +625,7 @@ a:hover{
     border:0
 }
 .site-footer{
+    background-color:white;
     padding-top:2rem;
     margin-top:2rem;
     border-top:solid 1px #eff0f1

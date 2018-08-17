@@ -3,7 +3,7 @@
 Hi! It's my github page repository (kinda)
 
 ## Visit the site
-[click](https://waleko.github.io/)
+[click](https://alexkovrigin.me/)
 
 ## Contact me
 Questions or suggestions are welcome!
