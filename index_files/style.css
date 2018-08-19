@@ -3,7 +3,8 @@
 html{
     font-family:sans-serif;
     -ms-text-size-adjust:100%;
-    -webkit-text-size-adjust:100%
+    -webkit-text-size-adjust:100%;
+    background-color:#F9FCFD
 }
 body{
     margin:0
@@ -40,6 +41,9 @@ dfn{
 h1{
     font-size:2em;
     margin:0.67em 0
+}
+form{
+  margin-top: 5px
 }
 mark{
     background:#ff0;
@@ -477,7 +481,7 @@ a:hover{
     }
 }
 .main-content{
-    background-color:#FFFFFF;
+    background-color:#F9FCFD;
     word-wrap:break-word
 }
 .main-content:margin
