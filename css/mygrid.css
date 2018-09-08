@@ -16,6 +16,7 @@
 
 .grid {
   display: grid;
+  margin: auto;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 20px 20px;
   grid-auto-rows: minmax(auto, auto);
