@@ -50,7 +50,7 @@
     height: 150px;
   }
 }
-@media screen and (max-width: 42em){
+@media screen and (max-width: 42em) and (min-width: 30em){
   .card {
     width: 100px;
     height: 100px;
@@ -58,5 +58,15 @@
   .card img {
     width: 100px;
     height: 100px;
+  }
+}
+@media screen and (max-width: 30em){
+  .card {
+    width: 50px;
+    height: 50px;
+  }
+  .card img {
+    width: 50px;
+    height: 50px;
   }
 }
