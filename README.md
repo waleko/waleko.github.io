@@ -1,9 +1,10 @@
 # Github Page Site (kinda)
 
-Hi! It's my github page repository (kinda)
+Hi! It's my github page project repository
 
 ## Visit the site
 [click](https://alexkovrigin.me/)
+Project is in constant development
 
 ## Contact me
 Questions or suggestions are welcome!
