@@ -146,6 +146,8 @@ optgroup{
     font-weight:bold
 }
 table{
+    border: 1px solid black;
+    text-align: left;
     border-collapse:collapse;
     border-spacing:0
 }
