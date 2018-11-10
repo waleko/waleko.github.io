@@ -19,6 +19,7 @@
 
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/mygrid.css">
+    <link rel="stylesheet" href="./files/icons.css">
 
 </head>
 <body>
@@ -29,6 +30,8 @@
   <section class="main-content">
 
 <!-- Main content -->
+<p><font color="red"> For new stuff, </font> go to <a href="#desk2app">desk2app</a> and <a href="#app2desk-upd">app2desk</a></p>
+
 <table style="width:100%; table-layout: auto; font-size: 17px;">
   <tr>
     <th>Operating System ( & Distro)</th>
@@ -43,8 +46,8 @@
     <th><a href="#os">Linux - Ubuntu 18.04.1</a></th>
     <th><a href="#branch">1.3</a></th>
     <th><a href="#remote">Success</a></th>
-    <th><a href="#desk2app">Fail</a></th>
-    <th><a href="#app2desk">Fail</a></th>
+    <th><a href="#desk2app">Success</a></th>
+    <th><a href="#app2desk">Partly Fail</a></th>
     <th><a href="#reconnect-desktop">Success</a></th>
     <th><a href="#reconnect-phone">Success</a></th>
   </tr>
@@ -52,39 +55,48 @@
 
 <h2 id="os"> Operating System </h2>
 <p>Linux - Ubuntu 18.04.1</p>
-<img width="560" height="315" src="./files/os/screen.png" alt="OS">
+<img width="560" src="./files/os/screen.png" alt="OS">
 
 <h2 id="branch"> Branch </h2>
-<p><a href="https://cgit.kde.org/kdeconnect-kde.git/log/?h=1.3">Branch 1.3</a></p>
+<p><a href="https://cgit.kde.org/kdeconnect-kde.git/log/?h=1.3">Branch 1.3</a>. Cloned from <a href="https://github.com/KDE/kdeconnect-kde/tree/1.3">github mirror</a>.</p>
 
-<h2 id="remote"> Remote input </h2>
+<h2 id="remote"> <img class="ok"> Remote input </h2>
 <p>Remote input example video.</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/SzAYpbadKEI?rel=0&amp;ecver=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<h2 id="desk2app"> File Transfer (Desk2App) </h2>
-<p>Previously, it was just a fail, when I click "Send to [my phone]" button, just nothing happens, now there is even no such button, just "Send to", which send via email. :( </p>
+<h2 id="desk2app"> <img class="ok"> File Transfer (Desk2App) </h2>
+<p>Solved. Firstly, I should have given the app access to files on my phone :| ... </p>
+<p>Then, the "Send to ..." button isn't just there in standard file browser, but in Dolphin everything works just fine. </p>
+<img width="800" src="./files/desk2app/ph1.png" alt="Screenshot">
 
-<h2 id="app2desk"> File Transfer (App2Desk) </h2>
+<h2 id="app2desk"> <img class="fail"> File Transfer (App2Desk) </h2>
 <p> App2Desk doesn't work. The file is successfully sent from the app, but on the desktop, you get just ~40% and it just stalls.</p>
-<img width="417" height="600" src="./files/app2desk/transfer.png" alt="Transfer">
+<img width="417" src="./files/app2desk/transfer.png" alt="Transfer">
 <p> Original image (memez): </p>
-<img width="418" height="375" src="./files/app2desk/original.jpg" alt="Original">
+<img width="418" src="./files/app2desk/original.jpg" alt="Original">
 <p> The result (if cancelled, else it just doesn't do anything): <p>
-<img width="418" height="375" src="./files/app2desk/fail.jpg" alt="Result">
+<img width="418" src="./files/app2desk/fail.jpg" alt="Result">
 
-<h2 id="reconnect-desktop"> Reconnect (Desktop disruption) </h2>
+<h3 id="app2desk-upd"> UPD </h3>
+<p>The issue is still present, tried rebuilding, reinstalling and restarting - nothing helped. Here is a screenshot of the stalled transfers of five different files.</p>
+<img width="800" src="./files/app2desk/ph0.png" alt="Screenshot">
+<p>However, using the Dolphin, connected to the device and drag&drop'ing files works fine:</p>
+<img width="700" src="./files/app2desk/ph1.png" alt="Screenshot">
+<img width="700" src="./files/app2desk/ph2.png" alt="Screenshot">
+
+<h2 id="reconnect-desktop"> <img class="ok"> Reconnect (Desktop disruption) </h2>
 <p> Works like a charm </p>
 
-<img width="225" height="400" src="./files/reconnect-desktop/ph1.jpg" alt="Screenshot">
-<img width="225" height="400" src="./files/reconnect-desktop/ph2.jpg" alt="Screenshot">
-<img width="225" height="400" src="./files/reconnect-desktop/ph3.jpg" alt="Screenshot">
+<img width="225" src="./files/reconnect-desktop/ph1.jpg" alt="Screenshot">
+<img width="225" src="./files/reconnect-desktop/ph2.jpg" alt="Screenshot">
+<img width="225" src="./files/reconnect-desktop/ph3.jpg" alt="Screenshot">
 
-<h2 id="reconnect-phone"> Reconnect (Phone disruption) </h2>
+<h2 id="reconnect-phone"> <img class="ok"> Reconnect (Phone disruption) </h2>
 <p> Works like a charm </p>
 
-<img width="225" height="400" src="./files/reconnect-phone/ph1.jpg" alt="Screenshot">
-<img width="225" height="400" src="./files/reconnect-phone/ph2.jpg" alt="Screenshot">
-<img width="225" height="400" src="./files/reconnect-phone/ph3.jpg" alt="Screenshot">
+<img width="225" src="./files/reconnect-phone/ph1.jpg" alt="Screenshot">
+<img width="225" src="./files/reconnect-phone/ph2.jpg" alt="Screenshot">
+<img width="225" src="./files/reconnect-phone/ph3.jpg" alt="Screenshot">
 
 
 <!-- Footer -->
