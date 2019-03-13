@@ -8,6 +8,6 @@ Project is in constant development
 
 ## Contact me
 Questions or suggestions are welcome!
-Email me a.kovrigin0@gmail.com or use [telegram](t.me/alex_kovrigin).
+Email me a.kovrigin0@gmail.com or use [telegram](t.me/waleko).
 
-Alex Kovrigin :copyright: (2018)
+Alex Kovrigin :copyright: (2018-2019)
