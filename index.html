@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home - Alex Kovrigin</title>
+    <meta name="theme-color" content="#fc5c7d">
+    <meta property="og:site_name" content="alexkovrigin.me">
+    <meta property="og:url" content="https://alexkovrigin.me/">
+    <meta property="og:locale" content="en_US">
+    <meta name="description" content="Student @ Physical-Techincal High School">
+    <link rel="icon" type="image/png" sizes="1000x1000" href="assets/img/waleko.png">
+    <link rel="icon" type="image/png" sizes="1000x1000" href="assets/img/waleko.png">
+    <link rel="icon" type="image/png" sizes="1000x1000" href="assets/img/waleko.png">
+    <link rel="icon" type="image/png" sizes="1000x1000" href="assets/img/waleko.png">
+    <link rel="icon" type="image/png" sizes="1000x1000" href="assets/img/waleko.png">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
+    <link rel="stylesheet" href="assets/css/styles.min.css">
+<script src="/js/jquery-3.4.1.min.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-53219795-2"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-53219795-2');
+</script>
+<script src="https://browser.sentry-cdn.com/5.11.2/bundle.min.js"
+    integrity="sha384-FLzYisBa7tvsi/ZP1ISnzZJqBkmw5mvwk7KOmH82W9wdPZKG3bG9hSO8GQFVSlOu" crossorigin="anonymous">
+    </script>
+<script>
+    
+</script>
+<script>
+    $(document).ready(function () {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        document.getElementById("year").innerHTML = new Date().getFullYear();
+        Sentry.init({ dsn: 'https://74b74203ffaa4df6892c0ab12db67853@sentry.io/2156568' });
+    });
+</script>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient">
+        <div class="container"><a class="navbar-brand logo" href="/">Alex Kovrigin</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navbarNav"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse"
+                id="navbarNav">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="/">Home</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/projects">Projects</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/contact">Contact Me</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="page lanidng-page">
+        <section class="portfolio-block block-intro">
+            <div class="container">
+                <div class="avatar" style="background-image: url(&quot;assets/img/me.jpg&quot;);"></div>
+                <div class="about-me">
+                    <p>Hello! I am <strong>Alex Kovrigin (@waleko)</strong>. <br>I am a student at&nbsp;<a href="http://school.ioffe.ru" style="color: #212529;">Physical-Technical High School<br></a>&nbsp;in Saint-Petersburg, and I like coding.</p><a class="btn btn-outline-primary"
+                        role="button" href="https://github.com/waleko">Visit my GitHub profile</a></div>
+            </div>
+        </section>
+        <section class="portfolio-block skills">
+            <div class="container">
+                <div class="heading">
+                    <h2>MY Skills</h2>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card special-skill-item border-0">
+                            <div class="card-header bg-transparent border-0"><i class="icon my-img-icon"><img src="assets/img/icons8-qt.svg" style="height: 70%;"></i>
+</div>
+                            <div class="card-body">
+                                <h3 class="card-title">Qt</h3><p class="card-text">Qt is a cross-platform application development framework. For example, <a href="https://picturecrypt.alexkovrigin.me">PictureCrypt</a> is built on Qt<br /></p></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card special-skill-item border-0">
+                            <div class="card-header bg-transparent border-0"><i class="icon ion-social-python"></i></div>
+                            <div class="card-body">
+                                <h3 class="card-title">Python</h3><p class="card-text">Python is a programming language that lets you work quicklyand integrate systems more effectively. For example, <a href="https://cavoke.alexkovrigin.me">Cavoke lib and server</a> are written in python.</p></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card special-skill-item border-0">
+                            <div class="card-header bg-transparent border-0"><i class="icon my-img-icon"><img src="assets/img/kotlin-1.svg" style="height: 50%;"></i>
+</div>
+                            <div class="card-body">
+                                <h3 class="card-title">Kotlin</h3><p class="card-text">Kotlin is a programming language for mobile, cross-platform and web development, server-side, native and data science. For example, our <a href="https://github.com/waleko/kotlin-messenger">kotlin-messenger</a> is written in Kotlin.</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <section id="cavoke-card" class="portfolio-block website gradient">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-12 col-lg-5 offset-lg-1 text">
+                    <h3><a href="https://cavoke.alexkovrigin.me" style="color: #fff;"><strong>Cavoke</strong><br></a></h3>
+                    <p>Cavoke is a cross-platform tool for creating text-based and board games. Sources are available on GitHub.<br></p>
+                </div>
+                <div class="col-md-12 col-lg-5">
+                    <div class="portfolio-laptop-mockup">
+                        <div class="screen">
+                            <div class="screen-content" style="background-image: url(&quot;assets/img/cavoke-screenshot.jpg&quot;);"></div>
+                        </div>
+                        <div class="keyboard"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="portfolio-block call-to-action border-bottom">
+        <div class="container">
+            <div class="d-flex justify-content-center align-items-center content">
+                <h3>Like what you see?</h3><a href="/projects"><button class="btn btn-outline-primary btn-lg" type="button">View all recent projects</button></a></div>
+        </div>
+    </section>
+    <section id="picturecrypt-card" class="portfolio-block website gradient">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-12 col-lg-5">
+                    <div class="portfolio-laptop-mockup">
+                        <div class="screen">
+                            <div class="screen-content" style="background-image: url(&quot;assets/img/picturecrypt-screenshot-bg.jpg&quot;);"></div>
+                        </div>
+                        <div class="keyboard"></div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-5 offset-lg-1 text">
+                    <h3><a href="https://picturecrypt.alexkovrigin.me" style="color: #fff;"><strong>PictureCrypt</strong><br></a></h3>
+                    <p><br>PictureCrypt is&nbsp;a simple cross-platform steganography project, that hides data in images. Sources are available on GitHub.<br><br><br></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="page-footer">
+        <div class="container">
+            <div class="links"><a href="/">About me</a><a href="/contact">Contact me</a><a href="/projects">Projects</a></div><div class="social-icons"><a href="https://github.com/waleko"><i class="icon ion-social-github"></i></a><a href="mailto:a.kovrigin0@gmail.com"><i class="icon ion-android-mail icon"></i></a><a href="https://vk.com/alex.kovrigin"><i class="fab fa-vk icon"></i></a><a href="tg://resolve?domain=waleko"><i class="fab fa-telegram-plane"></i></a><a href="https://www.facebook.com/hi.alexkovrigin"><i class="icon ion-social-facebook"></i></a><a href="https://twitter.com/_waleko"><i class="icon ion-social-twitter"></i></a></div></div><p style="color: #ccc;">© Copyright <span id="year"></span> Alexander Kovrigin<br /></p></footer>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+    <script src="assets/js/script.min.js"></script>
+</body>
+
+</html>
