@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="/assets/fonts/ionicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
     <link rel="stylesheet" href="/assets/css/styles.min.css">
-<script src="/assets/js/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-53219795-2"></script>
 <script>
@@ -75,15 +75,21 @@
             <div class="container">
                 <div class="heading">
                     <h2>Contact me</h2>
-                </div>
-                <form>
-                    <div class="form-group"><label for="name">Your Name</label><input class="form-control item" type="text" id="name"></div>
-                    <div class="form-group"><label for="subject">Subject</label><input class="form-control item" type="text" id="subject"></div>
-                    <div class="form-group"><label for="email">Email</label><input class="form-control item" type="email" id="email"></div>
-                    <div class="form-group"><label for="message">Message</label><textarea class="form-control item" id="message"></textarea></div>
-                    <div class="form-group"><button class="btn btn-primary btn-block btn-lg" type="submit">Submit Form</button></div>
-                </form>
-            </div>
+                </div><script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+    function onSubmit(token) {
+        document.getElementById("contact-form").submit();
+        window.location.href = '/post-contact.html' // TODO: remove
+    }
+</script>
+<iframe width="0" height="0" border="0" name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+<form target="dummyframe" id='contact-form' action="https://us-central1-waleko-personal.cloudfunctions.net/mail" method="POST">
+    <div class="form-group"><label for="name">Your Name</label><input class="form-control item" type="text" id="name" name="name"/></div>
+    <div class="form-group"><label for="subject">Subject</label><input class="form-control item" type="text" id="subject" name="subject"/></div>
+    <div class="form-group"><label for="email">Email</label><input class="form-control item" type="email" id="email" name="email" /></div>
+    <div class="form-group"><label for="message">Message</label><textarea class="form-control item" id="message" name="message"></textarea></div>
+    <div class="form-group"><button class="btn btn-primary btn-block btn-lg g-recaptcha" data-sitekey="6Le_C9UUAAAAAKSXRFV7B-kPG8N1giG_4KMs3SDK" data-callback='onSubmit' type="submit">Submit Form</button></div>
+</form></div>
         </section>
     </main>
     <footer class="page-footer">
