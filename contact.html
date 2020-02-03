@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
     <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Code:400,500">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
     <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="/assets/fonts/ionicons.min.css">
@@ -71,25 +72,46 @@
         </div>
     </nav>
     <main class="page contact-page">
+        <div id="sanitizer-div" style="display: none;"></div>
         <section class="portfolio-block contact">
             <div class="container">
                 <div class="heading">
                     <h2>Contact me</h2>
                 </div><script src="https://www.google.com/recaptcha/api.js" async defer></script>
-<script>
-    function onSubmit(token) {
-        document.getElementById("contact-form").submit();
-        window.location.href = '/post-contact' // TODO: remove
-    }
-</script>
-<iframe width="0" height="0" border="0" name="dummyframe" id="dummyframe" style="display: none;"></iframe>
-<form target="dummyframe" id='contact-form' action="https://us-central1-waleko-personal.cloudfunctions.net/mail" method="POST">
+<script src="http://malsup.github.com/jquery.form.js"></script> 
+<script src="contact.js"></script>
+<iframe width="0" height="0" border="0" name="dummyframe" id="dummyframe" style="display: none;" onload=""></iframe>
+<form target="dummyframe" id='contact-form'> 
+<!--    action="https://europe-west1-waleko-personal.cloudfunctions.net/mail" method="POST"   -->
     <div class="form-group"><label for="name">Your Name</label><input class="form-control item" type="text" id="name" name="name"/></div>
     <div class="form-group"><label for="subject">Subject</label><input class="form-control item" type="text" id="subject" name="subject"/></div>
     <div class="form-group"><label for="email">Email</label><input class="form-control item" type="email" id="email" name="email" /></div>
     <div class="form-group"><label for="message">Message</label><textarea class="form-control item" id="message" name="message"></textarea></div>
-    <div class="form-group"><button class="btn btn-primary btn-block btn-lg g-recaptcha" data-sitekey="6Le_C9UUAAAAAKSXRFV7B-kPG8N1giG_4KMs3SDK" data-callback='onSubmit' type="submit">Submit Form</button></div>
+    <div class="form-group"><button class="btn btn-primary btn-block btn-lg g-recaptcha" data-sitekey="6Le_C9UUAAAAAKSXRFV7B-kPG8N1giG_4KMs3SDK" data-callback='onSubmit' type="submit" id='submit-button'><span class="spinner-border spinner-border-md" role="status" aria-hidden="true" id='submit-spinner' style="margin-right: 5px; margin-bottom: 2px; vertical-align: middle; display: none;"></span>Submit Form</button></div>
 </form></div>
+            <div class="modal fade" role="dialog" tabindex="-1" id="modal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col d-xl-flex justify-content-xl-end">
+                                        <p class="text-right d-xl-flex align-items-xl-center" id="modal-code" style="padding: .2em .4em;margin: 0;font-size: 85%;background-color: rgba(27,31,35,.05);border-radius: 3px;width: fit-content;font-family: 'Fira Code', monospace;color: #555;">user:error</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <h4 class="modal-title" id="modal-title">Title</h4>
+                                    </div>
+                                </div>
+                            </div><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                        <div class="modal-body">
+                            <p id="modal-body" style="white-space: pre-line;">The content of your modal.</p>
+                        </div>
+                        <div class="modal-footer"><a class="btn btn-secondary" role="button" data-dismiss="modal" href="/">Back to home page</a><a class="btn btn-primary" role="button" href=".">Try again</a></div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
     <footer class="page-footer">
