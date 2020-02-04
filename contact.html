@@ -15,7 +15,7 @@
     <link rel="icon" type="image/png" sizes="180x180" href="/assets/img/favicon-180.png?h=a0550a116f95ed8271ae438d54147cd9">
     <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicon-192.png?h=a0550a116f95ed8271ae438d54147cd9">
     <link rel="icon" type="image/png" sizes="512x512" href="/assets/img/favicon-512.png?h=10237a85fd67fb065089d8134d852505">
-    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css?h=81eb357104bad74d8e38996a3142b3d6">
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css?h=0555cfc57a386a7268ed5a3f3afc149b">
     <link rel="manifest" href="/manifest.json?h=28a14d5df4f0fdb928bfb7379270ed09">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Code:400,500">
@@ -72,6 +72,29 @@
             </div>
         </div>
     </nav>
+    <div class="modal fade" role="dialog" tabindex="-1" id="modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col text-right d-xl-flex justify-content-xl-end" style="text-align: right!important;display: flex!important;justify-content: flex-end!important;">
+                                <p class="text-right d-sm-flex d-xl-flex align-items-xl-center" id="modal-code" style="padding: .2em .4em;margin: 0;font-size: 85%;background-color: rgba(27,31,35,.05);border-radius: 3px;width: fit-content;font-family: 'Fira Code', monospace;color: #555;">base:blank</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h4 class="modal-title" id="modal-title">Errors will be displayed here</h4>
+                            </div>
+                        </div>
+                    </div><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                <div class="modal-body">
+                    <p id="modal-body" style="white-space: pre-line;">This is the body of the modal.</p>
+                </div>
+                <div class="modal-footer"><a class="btn btn-secondary" role="button" data-dismiss="modal" href="/">Back to home page</a><a class="btn btn-primary" role="button" href=".">Try again</a></div>
+            </div>
+        </div>
+    </div>
     <main class="page contact-page">
         <section class="portfolio-block contact">
             <div class="container">
@@ -85,29 +108,6 @@
     <div class="form-group"><label for="message">Message</label><textarea class="form-control item" id="message" name="message"></textarea></div>
     <div class="form-group"><button class="btn btn-primary btn-block btn-lg g-recaptcha" data-sitekey="6Le_C9UUAAAAAKSXRFV7B-kPG8N1giG_4KMs3SDK" data-callback='onSubmit' type="submit" id='submit-button'><span class="spinner-border spinner-border-md" role="status" aria-hidden="true" id='submit-spinner' style="margin-right: 5px; margin-bottom: 2px; vertical-align: middle; display: none;"></span>Submit Form</button></div>
 </form></div>
-            <div class="modal fade" role="dialog" tabindex="-1" id="modal">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col d-xl-flex justify-content-xl-end">
-                                        <p class="text-right d-xl-flex align-items-xl-center" id="modal-code" style="padding: .2em .4em;margin: 0;font-size: 85%;background-color: rgba(27,31,35,.05);border-radius: 3px;width: fit-content;font-family: 'Fira Code', monospace;color: #555;">user:error</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <h4 class="modal-title" id="modal-title">Title</h4>
-                                    </div>
-                                </div>
-                            </div><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
-                        <div class="modal-body">
-                            <p id="modal-body" style="white-space: pre-line;">The content of your modal.</p>
-                        </div>
-                        <div class="modal-footer"><a class="btn btn-secondary" role="button" data-dismiss="modal" href="/">Back to home page</a><a class="btn btn-primary" role="button" href=".">Try again</a></div>
-                    </div>
-                </div>
-            </div>
         </section>
     </main>
     <footer class="page-footer">
