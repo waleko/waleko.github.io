@@ -1,12 +1,18 @@
-# Personal website
+<a href="https://alexkovrigin.me/">
+  <img align="left" height="80px" src="/assets/img/favicon-512.png">
+</a>
+<h1 style="display: inline;">
+  Alexander Kovrigin 
+</h1>
 
-This is my personal website's repository.
+<p>My personal website</p>
 
-## Visit the site
-[click](https://alexkovrigin.me/)
+![Website](https://img.shields.io/website?style=flat-square&url=https%3A%2F%2Falexkovrigin.me)
 
-## Contact me
-Questions or suggestions are welcome!
-Email me a.kovrigin0@gmail.com or use [telegram](t.me/waleko).
+## License
 
-Alex Kovrigin :copyright: (2018-2020)
+[MIT](./LICENSE)
+
+---
+
+> [@waleko](https://github.com/waleko)
