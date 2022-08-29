@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Projects | Alexander Kovrigin</title><link>https://alexkovrigin.me/project/</link><atom:link href="https://alexkovrigin.me/project/index.xml" rel="self" type="application/rss+xml"/><description>Projects</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 01 Jul 2022 00:00:00 +0000</lastBuildDate><image><url>https://alexkovrigin.me/media/icon_huad89ef012113088e1f0c2075cb15810b_3109_512x512_fill_lanczos_center_3.png</url><title>Projects</title><link>https://alexkovrigin.me/project/</link></image><item><title>Cavoke</title><link>https://alexkovrigin.me/project/cavoke/</link><pubDate>Fri, 01 Jul 2022 00:00:00 +0000</pubDate><guid>https://alexkovrigin.me/project/cavoke/</guid><description>&lt;h2 id="overview">Overview&lt;/h2>
+&lt;h3 id="problem-formulation">Problem formulation&lt;/h3>
+&lt;p>We believe that developing a desktop multiplayer game is always a great adventure that has many wonderful opportunities
+to learn something new along the way.
+However, in our opinion this journey, is often riddled with unnecessary challenges of implementing mechanisms that are
+common for many games. This includes:&lt;/p>
+&lt;ul>
+&lt;li>Developing a &lt;strong>client application&lt;/strong> with many UI components for game creation process&lt;/li>
+&lt;li>&lt;strong>Networking&lt;/strong>, which in itself includes
+&lt;ul>
+&lt;li>&lt;strong>Synchronizing the game state&lt;/strong> among clients&lt;/li>
+&lt;li>Handling network issues on client&amp;rsquo;s side&lt;/li>
+&lt;li>SSL and Security&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Game state persistence&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Game move validation&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Role choosing&lt;/strong> (e.g. White/Black in Chess)&lt;/li>
+&lt;li>Managing &lt;strong>game sessions&lt;/strong> and &lt;strong>shareable invites&lt;/strong> for friends to play with you&lt;/li>
+&lt;li>&lt;strong>Game and User statistics&lt;/strong> (win rate, total time spent, etc.)&lt;/li>
+&lt;li>User &lt;strong>Authentication and Authorization&lt;/strong>&lt;/li>
+&lt;li>Game versioning&lt;/li>
+&lt;li>Hosting server logic and scalability&lt;/li>
+&lt;/ul>
+&lt;p>To make these obstacles easier to avoid, we developed a framework for developing multiplayer turn-based board games
+that comes with built-in solutions to solve all the above-mentioned problems.&lt;/p>
+&lt;h3 id="our-solution">Our solution&lt;/h3>
+&lt;p>We have developed a solution that works for many board games. Your board game can work with cavoke if:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Requirement&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>✅ &lt;strong>Is a board game&lt;/strong>&lt;/td>
+&lt;td>Has a &lt;strong>simple 2D interface&lt;/strong>. Game interface must be implementable using QML.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>✅ &lt;strong>Is based on moves&lt;/strong>&lt;/td>
+&lt;td>All changes during the game are based on the &lt;strong>moves&lt;/strong> and &lt;strong>updates&lt;/strong> that are representable as a string.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>✅ &lt;strong>No race conditions&lt;/strong>&lt;/td>
+&lt;td>If multiple players are eligible to move at the given moment, there is no guarantee that the first one to move will be recorded as such. However, there is &lt;strong>a guarantee that the resulting game state is achieved via a valid subsequence of game moves&lt;/strong>.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="developers-side">Developers side&lt;/h4>
+&lt;p>Our platform provides an easy way for developers to create a desktop game. A developer should provide only two
+components:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Server logic component&lt;/strong> that verifies one&amp;rsquo;s move correctness and updates the game state&lt;/li>
+&lt;li>&lt;strong>Client game component&lt;/strong>. A &lt;a href="https://doc.qt.io/qt-6/qmlapplications.html" target="_blank" rel="noopener">QML&lt;/a> application that communicates with the
+main Cavoke Client application and sends player&amp;rsquo;s moves through this gateway. It also receives updates from other
+players&amp;rsquo; moves to update its user interface.&lt;/li>
+&lt;/ul>
+&lt;p>You can read more about creating your own cavoke game on
+our &lt;a href="https://github.com/cavoke-project/cavoke-game-template" target="_blank" rel="noopener">Cavoke Game Template&lt;/a> GitHub page that has been made to
+flatten the learning curve.&lt;/p>
+&lt;h4 id="players-side">Players side&lt;/h4>
+&lt;p>Furthermore, we provide many features in our cavoke client for the users. These include:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Cross-platform&lt;/strong>: Available on Windows, macOS and Linux&lt;/li>
+&lt;li>&lt;strong>User Authentication&lt;/strong> using Email-Password or SSO via Google or GitHub&lt;/li>
+&lt;li>&lt;strong>Catalog of available cavoke games&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Rooms&lt;/strong> with shareable invites for your friends, so you can play multiple games without the need to change the app&lt;/li>
+&lt;li>&lt;strong>User&amp;rsquo;s statistics&lt;/strong> for every game&lt;/li>
+&lt;li>&lt;strong>Developer mode&lt;/strong> to test QML components locally&lt;/li>
+&lt;/ul>
+&lt;p>
+&lt;figure >
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >&lt;img src="https://raw.githubusercontent.com/cavoke-project/cavoke/develop/.github/assets/cavoke-demo.gif" alt="Demo" loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;/figure>
+&lt;/p>
+&lt;h2 id="how-to-use">How To Use&lt;/h2>
+&lt;p>Please see the instructions for how to clone and build server and client components in its subdirectories.&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="./server">Server&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./client">Client&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="download">Download&lt;/h2>
+&lt;p>You can &lt;a href="https://github.com/cavoke-project/cavoke/releases/" target="_blank" rel="noopener">download&lt;/a> the latest installable version of Cavoke Client
+for Windows, macOS and Linux.&lt;/p>
+&lt;h2 id="credits">Credits&lt;/h2>
+&lt;p>This software uses the following open source projects:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://www.qt.io/" target="_blank" rel="noopener">Qt&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/drogonframework/drogon" target="_blank" rel="noopener">Drogon&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.iconfinder.com/iconsets/circle-icons-1" target="_blank" rel="noopener">Circle Icons&lt;/a> by Nick Roach&lt;/li>
+&lt;li>&lt;a href="https://www.boost.org/" target="_blank" rel="noopener">Boost&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/KDE/karchive" target="_blank" rel="noopener">KArchive&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/KDE/Craft" target="_blank" rel="noopener">KDE Craft&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/KDE/extra-cmake-modules" target="_blank" rel="noopener">ECM&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/Thalhammer/jwt-cpp" target="_blank" rel="noopener">jwt-cpp&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/frankosterfeld/qtkeychain" target="_blank" rel="noopener">qtkeychain&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/nlohmann/json" target="_blank" rel="noopener">nlohmann/json&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/quassel/quassel" target="_blank" rel="noopener">Quassel&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>Credit to &lt;a href="https://github.com/Mudlet/Mudlet" target="_blank" rel="noopener">Mudlet&lt;/a> and &lt;a href="https://github.com/amitmerchant1990/electron-markdownify" target="_blank" rel="noopener">Markdownify&lt;/a> for the README inspiration.&lt;/p>
+&lt;h2 id="license">License&lt;/h2>
+&lt;p>&lt;a href="https://github.com/cavoke-project/cavoke/blob/master/LICENSE" target="_blank" rel="noopener">MIT&lt;/a>&lt;/p>
+&lt;hr>
+&lt;blockquote>
+&lt;p>&lt;a href="https://github.com//MarkTheHopeful" target="_blank" rel="noopener">@MarkTheHopeful&lt;/a>  · 
+&lt;a href="https://github.com/waleko" target="_blank" rel="noopener">@waleko&lt;/a>  · 
+&lt;a href="https://github.com/petrtsv" target="_blank" rel="noopener">@petrtsv&lt;/a>&lt;/p>
+&lt;/blockquote></description></item><item><title>Wikirace</title><link>https://alexkovrigin.me/project/wikirace/</link><pubDate>Wed, 29 Dec 2021 00:00:00 +0000</pubDate><guid>https://alexkovrigin.me/project/wikirace/</guid><description>&lt;h2 id="what-is-wikirace">What is Wikirace&lt;/h2>
+&lt;p>Wikirace is a single-/multiplayer game about traversing links from one wikipedia page to another.&lt;/p>
+&lt;p>Players are given two wikipedia page titles. Their goal is to make their way from the one to the other by only clicking
+links on the wikipedia page they are on. The faster you get to the goal page, the more points you get!
+You can read more about rules &lt;a href="https://en.wikipedia.org/wiki/Wikipedia:Wiki_Game" target="_blank" rel="noopener">here&lt;/a>.&lt;/p>
+&lt;h2 id="features">Features&lt;/h2>
+&lt;ul>
+&lt;li>Both singleplayer and multiplayer supported&lt;/li>
+&lt;li>Automatic round generation&lt;/li>
+&lt;li>Persistence of state after page refresh&lt;/li>
+&lt;li>Asynchronous websockets&lt;/li>
+&lt;li>Postgresql and Redis databases&lt;/li>
+&lt;li>Automatic deploy and CI/CD&lt;/li>
+&lt;/ul>
+&lt;h2 id="goals-of-this-project">Goals of this project&lt;/h2>
+&lt;p>This website is a first year educational project for &lt;a class="mylink" href="https://spb.hse.ru/en/ba/appmath/">AMI at HSE SPb&lt;/a>.
+Therefore it&amp;rsquo;s main purpose is familiarizing myself with various technologies.&lt;/p>
+&lt;h2 id="work-of-other-people-used">Work of other people used&lt;/h2>
+&lt;p>&amp;lsquo;Circle Icons&amp;rsquo; by Nick Roach provided under &lt;a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank" rel="noopener">GPL v3.0&lt;/a>.&lt;/p>
+&lt;h2 id="license">License&lt;/h2>
+&lt;p>This project is &lt;a href="./LICENSE">MIT&lt;/a> licensed.&lt;/p></description></item><item><title>AlgorithmD</title><link>https://alexkovrigin.me/project/algorithmd/</link><pubDate>Mon, 19 Jul 2021 00:00:00 +0000</pubDate><guid>https://alexkovrigin.me/project/algorithmd/</guid><description>&lt;h2 id="what-is-algorithmd">What is AlgorithmD&lt;/h2>
+&lt;p>AlgorithmD is a website for sharing snippets of code.&lt;/p>
+&lt;p>It is named after Donald Knuth&amp;rsquo;s &amp;ldquo;Algorithm D&amp;rdquo;, that implements division of nonnegative integers (&lt;a href="https://skanthak.homepage.t-online.de/division.html" target="_blank" rel="noopener">learn more&lt;/a>).&lt;/p>
+&lt;p>You can even see an &lt;a href="https://algorithmd.wlko.me/view/fb792837-c2db-4f80-a002-d0b4801991df" target="_blank" rel="noopener">implementation&lt;/a> of Algorithm D on AlgorithmD!&lt;/p>
+&lt;h2 id="features">Features&lt;/h2>
+&lt;ul>
+&lt;li>Built-in code editor that supports all major languages&lt;/li>
+&lt;li>Drag-n-drop support&lt;/li>
+&lt;li>Snippet tags for grouping&lt;/li>
+&lt;li>Search of snippets by title, filename, tags, code or their parts&lt;/li>
+&lt;li>Publicly accessible URLs&lt;/li>
+&lt;li>Download and copy functionalities&lt;/li>
+&lt;/ul>
+&lt;h2 id="goals-of-this-project">Goals of this project&lt;/h2>
+&lt;p>The main goal of this project is educational, as countless other alternatives exist (&lt;a href="https://gist.github.com" target="_blank" rel="noopener">gist&lt;/a>, &lt;a href="https://pastebin.com" target="_blank" rel="noopener">pastebin&lt;/a> and many others). While creating this website I got to familiarize myself with such technologies as Angular, Ktor, Google App Engine, Firebase Realtime Database, Auth0 and much more.&lt;/p>
+&lt;h2 id="linked-repositories">Linked repositories&lt;/h2>
+&lt;ul>
+&lt;li>Frontend: &lt;a href="https://github.com/waleko/algorithmd" target="_blank" rel="noopener">waleko/algorithmd&lt;/a>. Built with Angular. Hosted on Cloudflare Pages.&lt;/li>
+&lt;li>Backend: &lt;a href="https://github.com/waleko/algorithmd-uploader" target="_blank" rel="noopener">waleko/algorithmd-uploader&lt;/a>. Written in Kotlin using Ktor. Hosted on Google App Engine.&lt;/li>
+&lt;/ul>
+&lt;h2 id="license">License&lt;/h2>
+&lt;p>AlgorithmD is &lt;a href="./LICENSE">Apache 2&lt;/a> licensed.&lt;/p></description></item><item><title>OGPS Corrector</title><link>https://alexkovrigin.me/project/ogps_corrector/</link><pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate><guid>https://alexkovrigin.me/project/ogps_corrector/</guid><description>&lt;h2 id="what-is-this">What is this&lt;/h2>
+&lt;p>OGPS corrector is a research project completed at the &lt;em>Academic lyceum &amp;ldquo;Physical-Technical High School&amp;rdquo; named after Zh. I. Alfyorov&lt;/em>. Together with my classmate, Mark Ipatov, during a year-long research internship at O-GPS Center we have developed a system for correcting the path of an orienteering sportsman.&lt;/p>
+&lt;h2 id="abstract">Abstract&lt;/h2>
+&lt;p>Many sports (for example, sailing, multi-racing, various marathons and orienteering) do not allow spectators to constantly watch the athletes.
+To increase entertainment and control, trackers are used, the data from which is shown to viewers in real time.
+However, when conducting such online broadcasts, the organizers face the problem of inaccurate display of the position of the athlete.
+This can make it difficult for viewers to follow the dynamics of the event.&lt;/p>
+&lt;p>The goal of our work is to create a correction system that will correctly display the location of the athlete using a specific model for a particular sport. Our work is devoted to methods of correction for orienteering.&lt;/p>
+&lt;p>To achieve the goal, we implemented and compared several correction methods: naive pulling the athlete to the road, Kalman filter, hybrid options.&lt;/p>
+&lt;p>As a result, one of our hybrid options turned out to be 36% more accurate than the naive one. However, further improvement of this correction algorithm is possible.&lt;/p></description></item><item><title>PictureCrypt</title><link>https://alexkovrigin.me/project/picturecrypt/</link><pubDate>Tue, 19 Feb 2019 00:00:00 +0000</pubDate><guid>https://alexkovrigin.me/project/picturecrypt/</guid><description>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Encryption
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">QByteArray&lt;/span> &lt;span class="nf">message&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;secret&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">QImage&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">image&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="n">QImage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;./images/sunset.jpg&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">QImage&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">image_to_send&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ModelPC&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">Encrypt&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">message&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">image&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;password1&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Decryption
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">QByteArray&lt;/span> &lt;span class="n">incoming_message&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ModelPC&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">Decrypt&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image_to_send&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;password1&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// &amp;#34;secret&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="what-is-picturecrypt">What is PictureCrypt&lt;/h2>
+&lt;p>PictureCrypt is a simple educational cross-platform steganography tool that hides data in images.
+This project is built on &lt;a href="https://qt.io" target="_blank" rel="noopener">Qt Platform&lt;/a> using the MVC pattern and features GUI and console interface.
+Project repository is available on &lt;a href="https://github.com/waleko/PictureCrypt" target="_blank" rel="noopener">GitHub&lt;/a>.&lt;/p>
+&lt;h2 id="download">Download&lt;/h2>
+&lt;p>Get stable binary files at &lt;a href="https://github.com/waleko/PictureCrypt/releases/latest" target="_blank" rel="noopener">latest release page&lt;/a>
+Or download latest &lt;strong>potentially unstable&lt;/strong> files:&lt;/p>
+&lt;h3 id="links">Links&lt;/h3>
+&lt;h5 id="windows">Windows:&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://ci.appveyor.com/api/projects/waleko/picturecrypt/artifacts/src/PictureCrypt-setup.exe" target="_blank" rel="noopener">&lt;strong>Exe with release&lt;/strong>&lt;/a> (~ 22 MB)&lt;/li>
+&lt;li>&lt;a href="https://ci.appveyor.com/api/projects/waleko/picturecrypt/artifacts/src/deploy/console.zip" target="_blank" rel="noopener">&lt;strong>Zip with console&lt;/strong>&lt;/a> (~ 21 MB)&lt;/li>
+&lt;li>&lt;a href="https://ci.appveyor.com/api/projects/waleko/picturecrypt/artifacts/src/PictureCrypt-console-setup.exe" target="_blank" rel="noopener">Exe with console&lt;/a> (~ 19 MB)&lt;/li>
+&lt;/ul>
+&lt;h5 id="linux">Linux:&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/waleko/PictureCrypt/raw/gh-pages/src/app/build/Release/PictureCrypt" target="_blank" rel="noopener">Binary of release&lt;/a> (&lt;strong>Qt not included&lt;/strong>) (~ 10 MB)&lt;/li>
+&lt;/ul>
+&lt;h2 id="console-use">Console use&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ picturecrypt -h
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Usage:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> picturecrypt encrypt &amp;lt;image&amp;gt; &amp;lt;input file&amp;gt; &amp;lt;key&amp;gt; &amp;lt;output&amp;gt; &lt;span class="o">[&lt;/span>options&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> picturecrypt decrypt &amp;lt;image&amp;gt; &amp;lt;key&amp;gt; &amp;lt;output&amp;gt; &lt;span class="o">[&lt;/span>options&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> picturecrypt &lt;span class="o">(&lt;/span>-h &lt;span class="p">|&lt;/span> --help&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> picturecrypt --version
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Options:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> -h --help Show this screen.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> --version Show version.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> -m --mode Mode of cryption.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> -b Encryption bitsUsed parameter.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ picturecrypt --version
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">1.4.1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ picturecrypt encrypt original.jpg data.txt somekey result.png
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ picturecrypt decrypt result.png somekey output.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="available-modes-of-encrypting">Available modes of encrypting&lt;/h2>
+&lt;ul>
+&lt;li>0 - Auto-detect, used for decryption, so it auto-detects (invalid at encryption as you must select the encryption type)&lt;/li>
+&lt;li>1 - v1.3, only available on versions 1.3+&lt;/li>
+&lt;li>&lt;strong>2&lt;/strong> - v1.4, advanced (default) encryption mode, available on versions v1.4+&lt;/li>
+&lt;/ul>
+&lt;h2 id="documentation">Documentation&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="docs">HTML documentation&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/waleko/PictureCrypt/raw/gh-pages/PictureCrypt-docs.pdf" target="_blank" rel="noopener">PDF documentation&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>Documentation generated by &lt;a href="http://doxygen.nl" target="_blank" rel="noopener">Doxygen&lt;/a>&lt;/p>
+&lt;h2 id="cicd">CI/CD&lt;/h2>
+&lt;p>Continuous integration is fulfilled via &lt;a href="https://travis-ci.com/waleko/PictureCrypt" target="_blank" rel="noopener">Travis CI&lt;/a> for Linux and &lt;a href="https://ci.appveyor.com/project/waleko/picturecrypt" target="_blank" rel="noopener">AppVeyor&lt;/a> for Windows.&lt;/p>
+&lt;h2 id="i18n">i18n&lt;/h2>
+&lt;p>This project is available in multiple languages thanks to the Qt Linguist Platform.&lt;/p>
+&lt;p>Available languages:&lt;/p>
+&lt;ul>
+&lt;li>English (default)&lt;/li>
+&lt;li>Russian&lt;/li>
+&lt;li>German&lt;/li>
+&lt;/ul>
+&lt;h2 id="works-of-other-people-used-in-this-project">Works of other people used in this project&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/bricke/Qt-AES" target="_blank" rel="noopener">QAESEncryption&lt;/a> by &lt;a href="https://github.com/bricke/" target="_blank" rel="noopener">bricke&lt;/a> (provided under &lt;a href="https://unlicense.org/" target="_blank" rel="noopener">unlicense&lt;/a>)&lt;/li>
+&lt;li>&amp;lsquo;Circle Icons&amp;rsquo; by Nick Roach provided under &lt;a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank" rel="noopener">GPL v3.0&lt;/a>.&lt;/li>
+&lt;li>&amp;lsquo;MS Shell Dlg 2&amp;rsquo; font used and &amp;lsquo;Montserrat&amp;rsquo; font used under the SIL Open Font License.&lt;/li>
+&lt;/ul>
+&lt;h2 id="license">License&lt;/h2>
+&lt;p>This software is &lt;a href="./LICENSE">MIT licensed&lt;/a>.&lt;/p></description></item></channel></rss>

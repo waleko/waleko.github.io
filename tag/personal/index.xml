@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Personal | Alexander Kovrigin</title><link>https://alexkovrigin.me/tag/personal/</link><atom:link href="https://alexkovrigin.me/tag/personal/index.xml" rel="self" type="application/rss+xml"/><description>Personal</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 29 Dec 2021 00:00:00 +0000</lastBuildDate><image><url>https://alexkovrigin.me/media/icon_huad89ef012113088e1f0c2075cb15810b_3109_512x512_fill_lanczos_center_3.png</url><title>Personal</title><link>https://alexkovrigin.me/tag/personal/</link></image><item><title>Wikirace</title><link>https://alexkovrigin.me/project/wikirace/</link><pubDate>Wed, 29 Dec 2021 00:00:00 +0000</pubDate><guid>https://alexkovrigin.me/project/wikirace/</guid><description>&lt;h2 id="what-is-wikirace">What is Wikirace&lt;/h2>
+&lt;p>Wikirace is a single-/multiplayer game about traversing links from one wikipedia page to another.&lt;/p>
+&lt;p>Players are given two wikipedia page titles. Their goal is to make their way from the one to the other by only clicking
+links on the wikipedia page they are on. The faster you get to the goal page, the more points you get!
+You can read more about rules &lt;a href="https://en.wikipedia.org/wiki/Wikipedia:Wiki_Game" target="_blank" rel="noopener">here&lt;/a>.&lt;/p>
+&lt;h2 id="features">Features&lt;/h2>
+&lt;ul>
+&lt;li>Both singleplayer and multiplayer supported&lt;/li>
+&lt;li>Automatic round generation&lt;/li>
+&lt;li>Persistence of state after page refresh&lt;/li>
+&lt;li>Asynchronous websockets&lt;/li>
+&lt;li>Postgresql and Redis databases&lt;/li>
+&lt;li>Automatic deploy and CI/CD&lt;/li>
+&lt;/ul>
+&lt;h2 id="goals-of-this-project">Goals of this project&lt;/h2>
+&lt;p>This website is a first year educational project for &lt;a class="mylink" href="https://spb.hse.ru/en/ba/appmath/">AMI at HSE SPb&lt;/a>.
+Therefore it&amp;rsquo;s main purpose is familiarizing myself with various technologies.&lt;/p>
+&lt;h2 id="work-of-other-people-used">Work of other people used&lt;/h2>
+&lt;p>&amp;lsquo;Circle Icons&amp;rsquo; by Nick Roach provided under &lt;a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank" rel="noopener">GPL v3.0&lt;/a>.&lt;/p>
+&lt;h2 id="license">License&lt;/h2>
+&lt;p>This project is &lt;a href="./LICENSE">MIT&lt;/a> licensed.&lt;/p></description></item><item><title>AlgorithmD</title><link>https://alexkovrigin.me/project/algorithmd/</link><pubDate>Mon, 19 Jul 2021 00:00:00 +0000</pubDate><guid>https://alexkovrigin.me/project/algorithmd/</guid><description>&lt;h2 id="what-is-algorithmd">What is AlgorithmD&lt;/h2>
+&lt;p>AlgorithmD is a website for sharing snippets of code.&lt;/p>
+&lt;p>It is named after Donald Knuth&amp;rsquo;s &amp;ldquo;Algorithm D&amp;rdquo;, that implements division of nonnegative integers (&lt;a href="https://skanthak.homepage.t-online.de/division.html" target="_blank" rel="noopener">learn more&lt;/a>).&lt;/p>
+&lt;p>You can even see an &lt;a href="https://algorithmd.wlko.me/view/fb792837-c2db-4f80-a002-d0b4801991df" target="_blank" rel="noopener">implementation&lt;/a> of Algorithm D on AlgorithmD!&lt;/p>
+&lt;h2 id="features">Features&lt;/h2>
+&lt;ul>
+&lt;li>Built-in code editor that supports all major languages&lt;/li>
+&lt;li>Drag-n-drop support&lt;/li>
+&lt;li>Snippet tags for grouping&lt;/li>
+&lt;li>Search of snippets by title, filename, tags, code or their parts&lt;/li>
+&lt;li>Publicly accessible URLs&lt;/li>
+&lt;li>Download and copy functionalities&lt;/li>
+&lt;/ul>
+&lt;h2 id="goals-of-this-project">Goals of this project&lt;/h2>
+&lt;p>The main goal of this project is educational, as countless other alternatives exist (&lt;a href="https://gist.github.com" target="_blank" rel="noopener">gist&lt;/a>, &lt;a href="https://pastebin.com" target="_blank" rel="noopener">pastebin&lt;/a> and many others). While creating this website I got to familiarize myself with such technologies as Angular, Ktor, Google App Engine, Firebase Realtime Database, Auth0 and much more.&lt;/p>
+&lt;h2 id="linked-repositories">Linked repositories&lt;/h2>
+&lt;ul>
+&lt;li>Frontend: &lt;a href="https://github.com/waleko/algorithmd" target="_blank" rel="noopener">waleko/algorithmd&lt;/a>. Built with Angular. Hosted on Cloudflare Pages.&lt;/li>
+&lt;li>Backend: &lt;a href="https://github.com/waleko/algorithmd-uploader" target="_blank" rel="noopener">waleko/algorithmd-uploader&lt;/a>. Written in Kotlin using Ktor. Hosted on Google App Engine.&lt;/li>
+&lt;/ul>
+&lt;h2 id="license">License&lt;/h2>
+&lt;p>AlgorithmD is &lt;a href="./LICENSE">Apache 2&lt;/a> licensed.&lt;/p></description></item><item><title>PictureCrypt</title><link>https://alexkovrigin.me/project/picturecrypt/</link><pubDate>Tue, 19 Feb 2019 00:00:00 +0000</pubDate><guid>https://alexkovrigin.me/project/picturecrypt/</guid><description>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Encryption
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">QByteArray&lt;/span> &lt;span class="nf">message&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;secret&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">QImage&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">image&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="n">QImage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;./images/sunset.jpg&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">QImage&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">image_to_send&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ModelPC&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">Encrypt&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">message&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">image&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;password1&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Decryption
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">QByteArray&lt;/span> &lt;span class="n">incoming_message&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ModelPC&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">Decrypt&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image_to_send&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;password1&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// &amp;#34;secret&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="what-is-picturecrypt">What is PictureCrypt&lt;/h2>
+&lt;p>PictureCrypt is a simple educational cross-platform steganography tool that hides data in images.
+This project is built on &lt;a href="https://qt.io" target="_blank" rel="noopener">Qt Platform&lt;/a> using the MVC pattern and features GUI and console interface.
+Project repository is available on &lt;a href="https://github.com/waleko/PictureCrypt" target="_blank" rel="noopener">GitHub&lt;/a>.&lt;/p>
+&lt;h2 id="download">Download&lt;/h2>
+&lt;p>Get stable binary files at &lt;a href="https://github.com/waleko/PictureCrypt/releases/latest" target="_blank" rel="noopener">latest release page&lt;/a>
+Or download latest &lt;strong>potentially unstable&lt;/strong> files:&lt;/p>
+&lt;h3 id="links">Links&lt;/h3>
+&lt;h5 id="windows">Windows:&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://ci.appveyor.com/api/projects/waleko/picturecrypt/artifacts/src/PictureCrypt-setup.exe" target="_blank" rel="noopener">&lt;strong>Exe with release&lt;/strong>&lt;/a> (~ 22 MB)&lt;/li>
+&lt;li>&lt;a href="https://ci.appveyor.com/api/projects/waleko/picturecrypt/artifacts/src/deploy/console.zip" target="_blank" rel="noopener">&lt;strong>Zip with console&lt;/strong>&lt;/a> (~ 21 MB)&lt;/li>
+&lt;li>&lt;a href="https://ci.appveyor.com/api/projects/waleko/picturecrypt/artifacts/src/PictureCrypt-console-setup.exe" target="_blank" rel="noopener">Exe with console&lt;/a> (~ 19 MB)&lt;/li>
+&lt;/ul>
+&lt;h5 id="linux">Linux:&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/waleko/PictureCrypt/raw/gh-pages/src/app/build/Release/PictureCrypt" target="_blank" rel="noopener">Binary of release&lt;/a> (&lt;strong>Qt not included&lt;/strong>) (~ 10 MB)&lt;/li>
+&lt;/ul>
+&lt;h2 id="console-use">Console use&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ picturecrypt -h
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Usage:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> picturecrypt encrypt &amp;lt;image&amp;gt; &amp;lt;input file&amp;gt; &amp;lt;key&amp;gt; &amp;lt;output&amp;gt; &lt;span class="o">[&lt;/span>options&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> picturecrypt decrypt &amp;lt;image&amp;gt; &amp;lt;key&amp;gt; &amp;lt;output&amp;gt; &lt;span class="o">[&lt;/span>options&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> picturecrypt &lt;span class="o">(&lt;/span>-h &lt;span class="p">|&lt;/span> --help&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> picturecrypt --version
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Options:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> -h --help Show this screen.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> --version Show version.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> -m --mode Mode of cryption.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> -b Encryption bitsUsed parameter.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ picturecrypt --version
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">1.4.1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ picturecrypt encrypt original.jpg data.txt somekey result.png
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ picturecrypt decrypt result.png somekey output.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="available-modes-of-encrypting">Available modes of encrypting&lt;/h2>
+&lt;ul>
+&lt;li>0 - Auto-detect, used for decryption, so it auto-detects (invalid at encryption as you must select the encryption type)&lt;/li>
+&lt;li>1 - v1.3, only available on versions 1.3+&lt;/li>
+&lt;li>&lt;strong>2&lt;/strong> - v1.4, advanced (default) encryption mode, available on versions v1.4+&lt;/li>
+&lt;/ul>
+&lt;h2 id="documentation">Documentation&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="docs">HTML documentation&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/waleko/PictureCrypt/raw/gh-pages/PictureCrypt-docs.pdf" target="_blank" rel="noopener">PDF documentation&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>Documentation generated by &lt;a href="http://doxygen.nl" target="_blank" rel="noopener">Doxygen&lt;/a>&lt;/p>
+&lt;h2 id="cicd">CI/CD&lt;/h2>
+&lt;p>Continuous integration is fulfilled via &lt;a href="https://travis-ci.com/waleko/PictureCrypt" target="_blank" rel="noopener">Travis CI&lt;/a> for Linux and &lt;a href="https://ci.appveyor.com/project/waleko/picturecrypt" target="_blank" rel="noopener">AppVeyor&lt;/a> for Windows.&lt;/p>
+&lt;h2 id="i18n">i18n&lt;/h2>
+&lt;p>This project is available in multiple languages thanks to the Qt Linguist Platform.&lt;/p>
+&lt;p>Available languages:&lt;/p>
+&lt;ul>
+&lt;li>English (default)&lt;/li>
+&lt;li>Russian&lt;/li>
+&lt;li>German&lt;/li>
+&lt;/ul>
+&lt;h2 id="works-of-other-people-used-in-this-project">Works of other people used in this project&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/bricke/Qt-AES" target="_blank" rel="noopener">QAESEncryption&lt;/a> by &lt;a href="https://github.com/bricke/" target="_blank" rel="noopener">bricke&lt;/a> (provided under &lt;a href="https://unlicense.org/" target="_blank" rel="noopener">unlicense&lt;/a>)&lt;/li>
+&lt;li>&amp;lsquo;Circle Icons&amp;rsquo; by Nick Roach provided under &lt;a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank" rel="noopener">GPL v3.0&lt;/a>.&lt;/li>
+&lt;li>&amp;lsquo;MS Shell Dlg 2&amp;rsquo; font used and &amp;lsquo;Montserrat&amp;rsquo; font used under the SIL Open Font License.&lt;/li>
+&lt;/ul>
+&lt;h2 id="license">License&lt;/h2>
+&lt;p>This software is &lt;a href="./LICENSE">MIT licensed&lt;/a>.&lt;/p></description></item></channel></rss>
