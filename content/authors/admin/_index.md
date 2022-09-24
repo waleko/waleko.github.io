@@ -27,7 +27,7 @@ education:
   courses:
     - course: BSc Computer Science
       institution: Jacobs University, Bremen, Germany
-      year: 2024
+      year: Expected 2024
 
 # Social/Academic Networking
 # For available icons, see: https://wowchemy.com/docs/getting-started/page-builder/#icons
@@ -67,8 +67,8 @@ email: ''
 highlight_name: true
 ---
 
-Hi, my name is Alexander Kovrigin. I am an undergraduate Computer Science student at Jacobs University Bremen. I like doing backend with C++, Kotlin and Python.
+Hi, my name is Alexander Kovrigin. I am an undergraduate Computer Science student at Jacobs University Bremen. I like doing backend with C++, Kotlin, and Python.
 
-At my high school I have picked up a hobby of doing pet projects in my free time. I really enjoy automating things that otherwise are done manually. Since high school I have been also competing in competitive programming and olympiad math competitions.
+Since high school, I have been competing in competitive programming and olympiad math competitions, as well as doing some pet projects in my free time.
 
 {{< icon name="download" pack="fas" >}} Download my {{< staticref "https://wlko.me/resume" "newtab" >}}resumé{{< /staticref >}}.
