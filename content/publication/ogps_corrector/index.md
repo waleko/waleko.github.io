@@ -1,5 +1,5 @@
 ---
-title: 'System for correcting the position of a participant in orienteering competitions using the Kalman filter on Kotlin'
+title: 'Development of a GPS-coordinates correction system for live broadcasting of orienteering competitions using the Kalman filter on Kotlin'
 
 # Authors
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
@@ -15,7 +15,7 @@ author_notes:
   - 'Equal contribution'
   - 'Scientific director'
 
-date: '2021-01-01T00:00:00Z'
+date: '2020-12-30T00:00:00Z'
 doi: ''
 
 # Schedule page publish date (NOT publication's date).
