@@ -10,8 +10,8 @@ role: Undergraduate CS Student
 
 # Organizations/Affiliations to show in About widget
 organizations:
-  - name: Jacobs University
-    url: https://jacobs-university.de
+  - name: Constructor University
+    url: https://constructor.university
 
 # Short bio (displayed in user profile at end of posts)
 bio: C++, Kotlin, Python Enthusiast
@@ -26,7 +26,7 @@ interests:
 education:
   courses:
     - course: BSc Computer Science
-      institution: Jacobs University, Bremen, Germany
+      institution: Constructor University, Bremen, Germany
       year: Expected 2024
 
 # Social/Academic Networking
@@ -67,7 +67,7 @@ email: ''
 highlight_name: true
 ---
 
-Hi, my name is Alexander Kovrigin. I am an undergraduate Computer Science student at Jacobs University Bremen. I like doing backend with C++, Kotlin, and Python.
+Hi, my name is Alexander Kovrigin. I am an undergraduate Computer Science student at Constructor University (formerly Jacobs University). I like doing backend with C++, Kotlin, and Python.
 
 Since high school, I have been competing in competitive programming and olympiad math competitions, as well as doing some pet projects in my free time.
 
