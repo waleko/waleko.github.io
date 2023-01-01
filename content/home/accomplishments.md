@@ -23,6 +23,14 @@ date_format: January 2, 2006
 #   Leave other parameters empty if not required.
 #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
 item:
+  - certificate_url: https://drive.google.com/file/d/1It0l8J3v14fyHl0viaWXkCH3z4nQO2tz/view?usp=share_link
+    date_end: '2022-11-25'
+    date_start: '2022-11-27'
+    description: 'Top 20% teams'
+    organization: ICPC Global
+    organization_url: 'https://icpc.global'
+    title: ICPC Northwestern Europe Regional Contest (NWERC)
+    url: 'https://2022.nwerc.eu/'
   - certificate_url: https://drive.google.com/file/d/1SnXPPYQeXSC4LQr2XTwAlyF-JbwMCLUM/view?usp=sharing
     date_end: '2022-08-04'
     date_start: '2022-08-03'
