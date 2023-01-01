@@ -26,7 +26,7 @@ item:
   - certificate_url: https://drive.google.com/file/d/1It0l8J3v14fyHl0viaWXkCH3z4nQO2tz/view?usp=share_link
     date_end: '2022-11-25'
     date_start: '2022-11-27'
-    description: 'Top 20% teams'
+    description: 'Got into the top 20% teams, solved 8/12 problems'
     organization: ICPC Global
     organization_url: 'https://icpc.global'
     title: ICPC Northwestern Europe Regional Contest (NWERC)
