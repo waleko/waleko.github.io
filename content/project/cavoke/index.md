@@ -25,7 +25,7 @@ links:
   
 url_code: ''
 url_pdf: ''
-url_slides: ''
+url_slides: 'Cavoke.pdf'
 url_video: ''
 
 # Slides (optional).
