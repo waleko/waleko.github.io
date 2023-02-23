@@ -14,12 +14,13 @@ organizations:
     url: https://constructor.university
 
 # Short bio (displayed in user profile at end of posts)
-bio: C++, Kotlin, Python Enthusiast
+bio:
 
 # Interests to show in About widget
 interests:
-  - C++
-  - Kotlin
+  - Software Engineering
+  - Machine Learning
+  - Mathematics
   - Competetive Programming
 
 # Education to show in About widget
@@ -67,8 +68,12 @@ email: ''
 highlight_name: true
 ---
 
-Hi, my name is Alexander Kovrigin. I am an undergraduate Computer Science student at Constructor University (formerly Jacobs University). I like doing backend with C++, Kotlin, and Python.
+Hi, my name is Alexander Kovrigin. I am a 2nd year Computer Science student at Constructor University, Bremen. I completed my high school education at the Physical-Technical High School in St. Petersburg, Russia. There, I was passionate about Physics, Mathematics, and Computer Science. I competed in national mathematics and informatics olympiads and took on pet projects during summer holidays.
 
-Since high school, I have been competing in competitive programming and olympiad math competitions, as well as doing some pet projects in my free time.
+After high school, I was admitted to the Higher School of Economics in St. Petersburg. I was top student of both semesters and completed coursework projects, including Cavoke -- a semester-long C++ project in a mentored team of three.
+
+In 2022, I transferred to Constructor University Bremen, a English-speaking, international-focused university located in Bremen, Germany. I continue to compete in international olympiads such as IMC and NWERC (ICPC semi-final), where I placed in the top 20% as part of a team. I am also currently involved in a machine learning research work in applying machine learning to material science.
+
+I am currently looking for an internship for summer 2023.
 
 {{< icon name="download" pack="fas" >}} Download my {{< staticref "https://wlko.me/resume" "newtab" >}}resumé{{< /staticref >}}.
