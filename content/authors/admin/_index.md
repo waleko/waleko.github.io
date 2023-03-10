@@ -72,7 +72,7 @@ Hi, my name is Alexander Kovrigin. I am a 2nd year Computer Science student at C
 
 After high school, I was admitted to the Higher School of Economics in St. Petersburg. I was top student of both semesters and completed coursework projects, including Cavoke -- a semester-long C++ project in a mentored team of three.
 
-In 2022, I transferred to Constructor University Bremen, a English-speaking, international-focused university located in Bremen, Germany. I continue to compete in international olympiads such as IMC and NWERC (ICPC semi-final), where I placed in the top 20% as part of a team. I am also currently involved in a machine learning research work in applying machine learning to material science.
+In 2022, I transferred to Constructor University Bremen, a English-speaking, international-focused university located in Bremen, Germany. I continue to compete in international olympiads such as IMC and NWERC (ICPC semi-final), where I placed in the top 20% as part of a team. I am also currently involved in a research work in applying machine learning methods to material science.
 
 I am currently looking for an internship for summer 2023.
 
