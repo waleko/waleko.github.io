@@ -1,4 +1,96 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tutorials | Alexander Kovrigin</title><link>https://alexkovrigin.me/category/tutorials/</link><atom:link href="https://alexkovrigin.me/category/tutorials/index.xml" rel="self" type="application/rss+xml"/><description>Tutorials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 25 Aug 2022 00:00:00 +0000</lastBuildDate><image><url>https://alexkovrigin.me/media/icon_huad89ef012113088e1f0c2075cb15810b_3109_512x512_fill_lanczos_center_3.png</url><title>Tutorials</title><link>https://alexkovrigin.me/category/tutorials/</link></image><item><title>Creating a Cavoke Game</title><link>https://alexkovrigin.me/post/cavoke-game-quick-start/</link><pubDate>Thu, 25 Aug 2022 00:00:00 +0000</pubDate><guid>https://alexkovrigin.me/post/cavoke-game-quick-start/</guid><description>&lt;h2 id="what-is-cavoke">What is Cavoke&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tutorials | Alexander Kovrigin</title><link>https://alexkovrigin.me/category/tutorials/</link><atom:link href="https://alexkovrigin.me/category/tutorials/index.xml" rel="self" type="application/rss+xml"/><description>Tutorials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 06 Mar 2023 00:00:00 +0000</lastBuildDate><image><url>https://alexkovrigin.me/media/icon_huad89ef012113088e1f0c2075cb15810b_3109_512x512_fill_lanczos_center_3.png</url><title>Tutorials</title><link>https://alexkovrigin.me/category/tutorials/</link></image><item><title>C++ ORM with Drogon</title><link>https://alexkovrigin.me/post/drogon-orm-demo/</link><pubDate>Mon, 06 Mar 2023 00:00:00 +0000</pubDate><guid>https://alexkovrigin.me/post/drogon-orm-demo/</guid><description>&lt;h2 id="exploring-object-relational-mapping-with-drogon-a-practical-example">Exploring Object-Relational Mapping with Drogon: A Practical Example&lt;/h2>
+&lt;p>Welcome to this blog post, where we delve into the fascinating realm of Object-Relational Mapping (ORM) using the robust Drogon C++ server framework. Our journey will unravel the mechanics of Drogon&amp;rsquo;s ORM, allowing us to seamlessly bridge the gap between objects and databases. Let&amp;rsquo;s begin!&lt;/p>
+&lt;h3 id="introducing-drogon">Introducing Drogon&lt;/h3>
+&lt;p>Drogon stands as a beacon of modernity in the realm of C++14/17-based HTTP application frameworks. With an impressive 8k stars on GitHub, Drogon boasts a plethora of advantages, including:&lt;/p>
+&lt;ul>
+&lt;li>Enabling a fully asynchronous programming paradigm.&lt;/li>
+&lt;li>Facilitating seamless integration with JSON format for requests and responses, a boon for Restful API development.&lt;/li>
+&lt;li>Providing support for file upload and download operations.&lt;/li>
+&lt;li>Harnessing non-blocking I/O for asynchronous database operations (with PostgreSQL and MySQL/MariaDB).&lt;/li>
+&lt;li>Offering a plugin system for effortless integration of additional features via configuration files.&lt;/li>
+&lt;li>Embracing C++ coroutines to simplify complex asynchronous code.&lt;/li>
+&lt;/ul>
+&lt;p>Of special interest to us is Drogon&amp;rsquo;s lightweight and intuitive ORM implementation. This ORM prowess forms the focal point of our exploration.&lt;/p>
+&lt;h3 id="setting-the-stage">Setting the Stage&lt;/h3>
+&lt;p>Let&amp;rsquo;s set the scene for our practical endeavor. Envision a world where interplanetary travel has become an everyday affair. In this context, our database will house the data of a pioneering space travel company. Our database schema comprises four essential entities:&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>Planets&lt;/strong>: Containing details such as &lt;code>id&lt;/code>, &lt;code>name&lt;/code>, and &lt;code>distance&lt;/code> from the sun (in millions of km).&lt;/li>
+&lt;li>&lt;strong>Spacecrafts&lt;/strong>: With attributes like &lt;code>id&lt;/code>, &lt;code>name&lt;/code>, and &lt;code>capacity&lt;/code>.&lt;/li>
+&lt;li>&lt;strong>Flights&lt;/strong>: Comprising &lt;code>num&lt;/code>, &lt;code>planet_id&lt;/code>, and &lt;code>spacecraft_id&lt;/code>.&lt;/li>
+&lt;li>&lt;strong>Tickets&lt;/strong>: Encompassing &lt;code>flight_num&lt;/code>, &lt;code>pax_name&lt;/code>, and &lt;code>price&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;p>Here&amp;rsquo;s a concrete example for each entity:&lt;/p>
+&lt;ul>
+&lt;li>Planet Example: &lt;code>(3, 'Earth', 150)&lt;/code>&lt;/li>
+&lt;li>Spacecraft Example: &lt;code>(5, 'Aurora', 10)&lt;/code>&lt;/li>
+&lt;li>Flight Example: &lt;code>(1300, 3, 5)&lt;/code>&lt;/li>
+&lt;li>Ticket Example: &lt;code>(1300, 'John', 100)&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>The visual representation of this model takes the form of an Entity Relationship Model (ERM):
+&lt;figure >
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >&lt;img src="https://github.com/waleko/demo_orm_drogon/blob/master/.github/diagram.png?raw=true" alt="Entity Relationship Model (ERM)" loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;/figure>
+&lt;/p>
+&lt;h2 id="the-power-of-drogon-orm">The Power of Drogon ORM&lt;/h2>
+&lt;h3 id="unveiling-drogon-orm">Unveiling Drogon ORM&lt;/h3>
+&lt;p>Drogon ORM&amp;rsquo;s capabilities are extensively documented &lt;a href="https://github.com/drogonframework/drogon/wiki/ENG-08-3-DataBase-ORM" target="_blank" rel="noopener">here&lt;/a>.&lt;/p>
+&lt;h3 id="code-generation-made-easy">Code Generation Made Easy&lt;/h3>
+&lt;p>Let&amp;rsquo;s dive into action. Unlike conventional ORMs that require manual entity configuration and database adaptation, Drogon ORM employs a unique approach. It dynamically generates entity classes based on the database schema. This approach is necessitated by C++&amp;rsquo;s current lack of a reflection mechanism.&lt;/p>
+&lt;p>Our database schema resides in the &lt;a href="resources/postgres-init.sql">&lt;code>resources/postgres-init.sql&lt;/code>&lt;/a> file. Once the database setup is complete, entity classes can be generated using &lt;code>drogon_ctl&lt;/code>. A simple command like &lt;code>drogon_ctl create model model&lt;/code> regenerates files within the &lt;code>./model&lt;/code> directory. Ensure the &lt;a href="model/model.json">&lt;code>model/model.json&lt;/code>&lt;/a> file contains accurate configuration if any connection issues arise.&lt;/p>
+&lt;h3 id="harnessing-entity-classes">Harnessing Entity Classes&lt;/h3>
+&lt;p>Let&amp;rsquo;s now witness the prowess of Drogon ORM through the &lt;a href="src/SimpleController.cc">&lt;code>src/SimpleController.cc&lt;/code>&lt;/a> file, housing a slew of handlers.&lt;/p>
+&lt;p>Our objective revolves around three methods:&lt;/p>
+&lt;ol>
+&lt;li>Fetching a list of all tickets.&lt;/li>
+&lt;li>Retrieving flight information, along with its corresponding destination planet and spacecraft, based on the flight number.&lt;/li>
+&lt;li>Adding a new spacecraft to the database.&lt;/li>
+&lt;/ol>
+&lt;h4 id="fetching-all-tickets">Fetching All Tickets&lt;/h4>
+&lt;p>Ordinarily, retrieving a simple query result involves considerable effort. For instance, a PostgreSQL query like &lt;code>select * from tickets;&lt;/code> must be executed, followed by the retrieval of results. Drogon ORM simplifies this process significantly:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-c++" data-lang="c++">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// ...
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="k">auto&lt;/span> &lt;span class="n">dbClient&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">drogon&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">app&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="n">getDbClient&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">auto&lt;/span> &lt;span class="n">ticketMapper&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Mapper&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Tickets&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">dbClient&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">std&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">vector&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Tickets&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">allTickets&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ticketMapper&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">findAll&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The result? A vector of tickets, precisely as desired!&lt;/p>
+&lt;h4 id="comprehensive-flight-information">Comprehensive Flight Information&lt;/h4>
+&lt;p>In scenarios involving complex queries, the burden intensifies. A task like retrieving flight details, associated destination planets, and used spacecrafts might entail multiple queries. For instance:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-postgresql" data-lang="postgresql">&lt;span class="line">&lt;span class="cl">&lt;span class="k">select&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="k">from&lt;/span> &lt;span class="n">flights&lt;/span> &lt;span class="k">where&lt;/span> &lt;span class="n">num&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">?&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">select&lt;/span> &lt;span class="n">s&lt;/span>&lt;span class="mf">.&lt;/span>&lt;span class="o">*&lt;/span> &lt;span class="k">from&lt;/span> &lt;span class="n">spacecrafts&lt;/span> &lt;span class="n">s&lt;/span> &lt;span class="k">join&lt;/span> &lt;span class="n">flights&lt;/span> &lt;span class="n">f&lt;/span> &lt;span class="k">on&lt;/span> &lt;span class="n">s&lt;/span>&lt;span class="mf">.&lt;/span>&lt;span class="n">id&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">f&lt;/span>&lt;span class="mf">.&lt;/span>&lt;span class="n">spacecraft_id&lt;/span> &lt;span class="k">where&lt;/span> &lt;span class="n">f&lt;/span>&lt;span class="mf">.&lt;/span>&lt;span class="n">num&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">?&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">select&lt;/span> &lt;span class="n">p&lt;/span>&lt;span class="mf">.&lt;/span>&lt;span class="o">*&lt;/span> &lt;span class="k">from&lt;/span> &lt;span class="n">planets&lt;/span> &lt;span class="n">p&lt;/span> &lt;span class="k">join&lt;/span> &lt;span class="n">flights&lt;/span> &lt;span class="n">f&lt;/span> &lt;span class="k">on&lt;/span> &lt;span class="n">p&lt;/span>&lt;span class="mf">.&lt;/span>&lt;span class="n">id&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">f&lt;/span>&lt;span class="mf">.&lt;/span>&lt;span class="n">planet_id&lt;/span> &lt;span class="k">where&lt;/span> &lt;span class="n">f&lt;/span>&lt;span class="mf">.&lt;/span>&lt;span class="n">num&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">?&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Drogon ORM&amp;rsquo;s elegance shines through in comparison:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-c++" data-lang="c++">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// ...
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="k">auto&lt;/span> &lt;span class="n">dbClient&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">drogon&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">app&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="n">getDbClient&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">auto&lt;/span> &lt;span class="n">flightMapper&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Mapper&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Flights&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">dbClient&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">auto&lt;/span> &lt;span class="n">flight&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">flightMapper&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">findByPrimaryKey&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">search_flight_num&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">flight&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">getSpacecrafts&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">dbClient&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="cm">/* callback */&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="cm">/* error handling */&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">flight&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">getPlanets&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">dbClient&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="cm">/* callback */&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="cm">/* error handling */&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>Note: &lt;code>getSpacecrafts&lt;/code> adopts plural form due to the &lt;code>spacecrafts&lt;/code> table name.&lt;/p>
+&lt;/blockquote>
+&lt;h4 id="adding-a-new-spacecraft">Adding a New Spacecraft&lt;/h4>
+&lt;p>The contrast remains palpable even when inserting new data. A conventional PostgreSQL &lt;code>insert&lt;/code> query:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-postgresql" data-lang="postgresql">&lt;span class="line">&lt;span class="cl">&lt;span class="k">insert&lt;/span> &lt;span class="k">into&lt;/span> &lt;span class="n">spacecrafts&lt;/span> &lt;span class="k">values&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">?&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">?&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">?&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In the ORM realm, Drogon offers a cleaner, more intuitive solution:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-c++" data-lang="c++">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// ...
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="k">auto&lt;/span> &lt;span class="n">dbClient&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">drogon&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">app&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="n">getDbClient&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">auto&lt;/span> &lt;span class="n">spacecraftMapper&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Mapper&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Spacecrafts&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">dbClient&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">spacecraftMapper&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">insert&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">spacecraftReq&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="cm">/* callback */&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="cm">/* error handling */&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="a-glimpse-of-the-rich-toolbox">A Glimpse of the Rich Toolbox&lt;/h3>
+&lt;p>Explore Drogon ORM&amp;rsquo;s complete array of methods:
+&lt;figure >
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >&lt;img src="https://github.com/drogonframework/drogon/wiki/images/mapper_method1_en.png" alt="Drogon ORM Methods - Part 1" loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;/figure>
+&lt;figure >
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >&lt;img src="https://github.com/drogonframework/drogon/wiki/images/mapper_method2_en.png" alt="Drogon ORM Methods - Part 2" loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;/figure>
+&lt;/p>
+&lt;p>In conclusion, Drogon&amp;rsquo;s ORM unlocks an avenue of efficiency, simplifying the interaction between objects and databases. As we&amp;rsquo;ve witnessed through our interplanetary travel database example, Drogon ORM&amp;rsquo;s code generation and entity mapping streamline database operations, granting developers more time to focus on innovation. Dive into Drogon ORM&amp;rsquo;s world – a bridge between the realms of C++ and databases, propelling your application development to new heights.&lt;/p></description></item><item><title>Creating a Cavoke Game</title><link>https://alexkovrigin.me/post/cavoke-game-quick-start/</link><pubDate>Thu, 25 Aug 2022 00:00:00 +0000</pubDate><guid>https://alexkovrigin.me/post/cavoke-game-quick-start/</guid><description>&lt;h2 id="what-is-cavoke">What is Cavoke&lt;/h2>
 &lt;p>Cavoke is a platform for creating and hosting multiplayer board games. It comes with built-in solutions to solve many common-found problems associated with developing a multiplayer game.&lt;/p>
 &lt;p>If you are new to &lt;a href="https://cavoke.wlko.me" target="_blank" rel="noopener">Cavoke&lt;/a>, I would advise you to consult the documentation&amp;rsquo;s &lt;a href="https://cavoke.wlko.me/_1_Introduction.html" target="_blank" rel="noopener">Introduction section&lt;/a>.&lt;/p>
 &lt;h2 id="quick-start">Quick Start&lt;/h2>
