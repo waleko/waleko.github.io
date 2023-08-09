@@ -3,7 +3,7 @@ title: C++ ORM with Drogon
 subtitle: Object-Relational Mapping with modern C++ and PostgreSQL
 
 # Summary for listings and search engines
-summary: In this post I explain how to use the Object-Relational Mapping (ORM) mechanism provided by the Drogon C++ server framework. Drogon is a C++ framework for developing HTTP applications. It provides an ORM system that maps database tables to C++ object classes. The post shows how to set up a database schema for a space travel company with tables for planets, spacecraft, flights, and tickets as an example.
+summary: Embark on a comprehensive exploration of Object-Relational Mapping (ORM) using Drogon, the cutting-edge C++ server framework. Discover how Drogon's dynamic entity class generation and intuitive mapping streamline complex database interactions, ushering in a new era of seamless integration between C++ applications and relational databases.
 
 # Link this post with a project
 projects: [cavoke]
@@ -12,10 +12,10 @@ projects: [cavoke]
 date: '2023-03-06T00:00:00Z'
 
 # Date updated
-lastmod: '2023-03-06T00:00:00Z'
+lastmod: '2023-08-09T00:00:00Z'
 
 # Is this an unpublished draft?
-draft: true
+draft: false
 
 # Show this page in the Featured widget?
 featured: false
@@ -34,104 +34,68 @@ categories:
   - Tutorials
 
 ---
-## Introduction
+## Exploring Object-Relational Mapping with Drogon: A Practical Example
 
-In this repository we shall try out
-the [Object-Relational Mapping](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping) (
-ORM) mechanism provided by
-the [Drogon](https://github.com/drogonframework/drogon) C++ server framework.
+Welcome to this blog post, where we delve into the fascinating realm of Object-Relational Mapping (ORM) using the robust Drogon C++ server framework. Our journey will unravel the mechanics of Drogon's ORM, allowing us to seamlessly bridge the gap between objects and databases. Let's begin!
 
-### What is Drogon
+### Introducing Drogon
 
-Drogon is a modern C++14/17-based HTTP application framework with 8k stars on GitHub. The main
-advantages include:
+Drogon stands as a beacon of modernity in the realm of C++14/17-based HTTP application frameworks. With an impressive 8k stars on GitHub, Drogon boasts a plethora of advantages, including:
 
-* Provide a completely asynchronous programming mode
-* Support JSON format request and response, very friendly to the Restful API application development
-* Support file download and upload
-* Support non-blocking I/O based asynchronously reading and writing database (PostgreSQL and MySQL(
-  MariaDB) database)
-* Support plugins which can be installed by the configuration file at load time
-* Support C++ coroutines
-* Provide a convenient lightweight ORM implementation that supports for regular object-to-database
-  bidirectional mapping
+- Enabling a fully asynchronous programming paradigm.
+- Facilitating seamless integration with JSON format for requests and responses, a boon for Restful API development.
+- Providing support for file upload and download operations.
+- Harnessing non-blocking I/O for asynchronous database operations (with PostgreSQL and MySQL/MariaDB).
+- Offering a plugin system for effortless integration of additional features via configuration files.
+- Embracing C++ coroutines to simplify complex asynchronous code.
 
-We are of course particularly interested in the last mentioned point.
+Of special interest to us is Drogon's lightweight and intuitive ORM implementation. This ORM prowess forms the focal point of our exploration.
 
-### Example setting
+### Setting the Stage
 
-Now let's define what we will try to implement for our demo.
+Let's set the scene for our practical endeavor. Envision a world where interplanetary travel has become an everyday affair. In this context, our database will house the data of a pioneering space travel company. Our database schema comprises four essential entities:
 
-Let's imagine we live in the (not so) distant future where interplanetary travel is common practice.
-Hence, our database will contain the information of one such space travel company.
+1. **Planets**: Containing details such as `id`, `name`, and `distance` from the sun (in millions of km).
+2. **Spacecrafts**: With attributes like `id`, `name`, and `capacity`.
+3. **Flights**: Comprising `num`, `planet_id`, and `spacecraft_id`.
+4. **Tickets**: Encompassing `flight_num`, `pax_name`, and `price`.
 
-We will have four entities:
+Here's a concrete example for each entity:
 
-* **Planets** with the following fields:
-  * Planet `id` in the database
-  * Planet `name`
-  * Planet `distance` from the sun (in millions of km)
+- Planet Example: `(3, 'Earth', 150)`
+- Spacecraft Example: `(5, 'Aurora', 10)`
+- Flight Example: `(1300, 3, 5)`
+- Ticket Example: `(1300, 'John', 100)`
 
-  Example: `(3, 'Earth', 150)`
-* **Spacecrafts** with the following fields:
-  * Spacecraft `id` in the database
-  * Spacecraft `name`
-  * Spacecraft `capacity`
+The visual representation of this model takes the form of an Entity Relationship Model (ERM):
+![Entity Relationship Model (ERM)](https://github.com/waleko/demo_orm_drogon/blob/master/.github/diagram.png?raw=true)
 
-  Example: `(5, 'Aurora', 10)`
-* **Flights** with the following fields:
-  * Flight number (`num`)
-  * Destination planet id (`planet_id`)
-  * Used spacecraft id (`spacecraft_id`)
+## The Power of Drogon ORM
 
-  Example: `(1300, 3, 5)`
-* **Tickets** with the following fields:
-  * Flight number (`flight_num`)
-  * Passenger name (`pax_name`)
-  * Ticket `price`
+### Unveiling Drogon ORM
 
-  Example: `(1300, 'John', 100)`
+Drogon ORM's capabilities are extensively documented [here](https://github.com/drogonframework/drogon/wiki/ENG-08-3-DataBase-ORM).
 
-This model can be expressed through the following Entity Relationship Model (ERM):
-![ERM](https://github.com/waleko/demo_orm_drogon/blob/master/.github/diagram.png?raw=true)
+### Code Generation Made Easy
 
-## ORM
+Let's dive into action. Unlike conventional ORMs that require manual entity configuration and database adaptation, Drogon ORM employs a unique approach. It dynamically generates entity classes based on the database schema. This approach is necessitated by C++'s current lack of a reflection mechanism.
 
-You can read about Drogon ORM in its [documentation](https://github.com/drogonframework/drogon/wiki/ENG-08-3-DataBase-ORM).
+Our database schema resides in the [`resources/postgres-init.sql`](resources/postgres-init.sql) file. Once the database setup is complete, entity classes can be generated using `drogon_ctl`. A simple command like `drogon_ctl create model model` regenerates files within the `./model` directory. Ensure the [`model/model.json`](model/model.json) file contains accurate configuration if any connection issues arise.
 
-### Code generation
+### Harnessing Entity Classes
 
-Now we are ready to start. The main particularity of the Drogon ORM is that instead of configuring
-entity layout in the code and adapting the database accordingly (like most ORMs like Django,
-Hibernate do), Drogon ORM generates **entity classes based on the database schema**.
-This is due to the fact that C++ currently has no reflection mechanism.
+Let's now witness the prowess of Drogon ORM through the [`src/SimpleController.cc`](src/SimpleController.cc) file, housing a slew of handlers.
 
-Therefore, our database schema can be found in
-the [`resources/postgres-init.sql`](resources/postgres-init.sql) file.
+Our objective revolves around three methods:
 
-Once we have set up the database, we can generate entities classes using `drogon_ctl`. Just
-run `drogon_ctl create model model`, this will regenerate all the files in the `./model` directory.
-If the tool can't connect to the database, check that correct configuration is in
-the [`model/modle.json`](model/model.json) file.
+1. Fetching a list of all tickets.
+2. Retrieving flight information, along with its corresponding destination planet and spacecraft, based on the flight number.
+3. Adding a new spacecraft to the database.
 
-### Using entities classes
+#### Fetching All Tickets
 
-Now we can see the power of ORM in the [`src/SimpleController.cc`](src/SimpleController.cc) file
-with all the handlers.
+Ordinarily, retrieving a simple query result involves considerable effort. For instance, a PostgreSQL query like `select * from tickets;` must be executed, followed by the retrieval of results. Drogon ORM simplifies this process significantly:
 
-Assume we want to implement three methods:
-
-1. Get the list of all tickets
-2. Get the information about a flight, its corresponding destination planet and used spacecraft
-   by the flight number.
-3. Add new spacecraft to the database
-
-#### All tickets
-Usually we would have to execute a simple query something like:
-```postgresql
-select * from tickets;
-```
-But then somehow retrieve the result. With an ORM we can do it easier:
 ```c++
 // ...
 auto dbClient = drogon::app().getDbClient();
@@ -139,18 +103,21 @@ auto ticketMapper = Mapper<Tickets>(dbClient);
 
 std::vector<Tickets> allTickets = ticketMapper.findAll();
 ```
-We now have a vector of tickets, exactly what we have wanted!
 
-#### Complete flight information
+The result? A vector of tickets, precisely as desired!
 
-This is not so fun doing with queries. You will have to use something like this:
+#### Comprehensive Flight Information
+
+In scenarios involving complex queries, the burden intensifies. A task like retrieving flight details, associated destination planets, and used spacecrafts might entail multiple queries. For instance:
+
 ```postgresql
 select * from flights where num = ?;
 select s.* from spacecrafts s join flights f on s.id = f.spacecraft_id where f.num = ?;
 select p.* from planets p join flights f on p.id = f.planet_id where f.num = ?;
 ```
 
-With an ORM we can write:
+Drogon ORM's elegance shines through in comparison:
+
 ```c++
 // ...
 auto dbClient = drogon::app().getDbClient();
@@ -161,24 +128,30 @@ flight.getSpacecrafts(dbClient, /* callback */, /* error handling */);
 flight.getPlanets(dbClient, /* callback */, /* error handling */);
 ```
 
-> Note: `getSpacecrafts` is in plural form, only because the table name is `spacecrafts`.
+> Note: `getSpacecrafts` adopts plural form due to the `spacecrafts` table name.
 
-#### Add new spacecraft
-Query version:
+#### Adding a New Spacecraft
+
+The contrast remains palpable even when inserting new data. A conventional PostgreSQL `insert` query:
+
 ```postgresql
 insert into spacecrafts values (?, ?, ?);
 ```
 
-ORM version:
+In the ORM realm, Drogon offers a cleaner, more intuitive solution:
+
 ```c++
 // ...
-
 auto dbClient = drogon::app().getDbClient();
 auto spacecraftMapper = Mapper<Spacecrafts>(dbClient);
 
 spacecraftMapper.insert(spacecraftReq, /* callback */, /* error handling */);
 ```
 
-### Full list of methods
-![drogon ORM full1](https://github.com/drogonframework/drogon/wiki/images/mapper_method1_en.png)
-![drogon ORM full2](https://github.com/drogonframework/drogon/wiki/images/mapper_method2_en.png)
+### A Glimpse of the Rich Toolbox
+
+Explore Drogon ORM's complete array of methods:
+![Drogon ORM Methods - Part 1](https://github.com/drogonframework/drogon/wiki/images/mapper_method1_en.png)
+![Drogon ORM Methods - Part 2](https://github.com/drogonframework/drogon/wiki/images/mapper_method2_en.png)
+
+In conclusion, Drogon's ORM unlocks an avenue of efficiency, simplifying the interaction between objects and databases. As we've witnessed through our interplanetary travel database example, Drogon ORM's code generation and entity mapping streamline database operations, granting developers more time to focus on innovation. Dive into Drogon ORM's world – a bridge between the realms of C++ and databases, propelling your application development to new heights.
