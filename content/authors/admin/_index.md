@@ -67,11 +67,16 @@ email: ''
 # Highlight the author in author lists? (true/false)
 highlight_name: true
 ---
+Hello, I'm Alexander Kovrigin, currently in my third year of Computer Science studies at Constructor University, Bremen. I'm originally from St. Petersburg and have had an interesting educational journey so far.
 
-Hi, my name is Alexander Kovrigin. I am a 2nd year Computer Science student at Constructor University, Bremen. I completed my high school education at the Physical-Technical High School in St. Petersburg. There, I was passionate about Physics, Mathematics, and Computer Science. I competed in national mathematics and informatics olympiads and took on pet projects during summer holidays.
+I attended the Physical-Technical High School in St. Petersburg, where I developed a strong interest in Physics, Mathematics, and Computer Science. Participating in national mathematics and informatics olympiads, along with working on personal projects during summers, became my way of embracing these subjects.
 
-After high school, I was admitted to the Higher School of Economics in St. Petersburg. I was top student of both semesters and completed coursework projects, including Cavoke -- a semester-long C++ project in a mentored team of three.
+After completing high school, I enrolled at the Higher School of Economics in St. Petersburg. I was fortunate to perform well academically, securing the top spot in both semesters. During this time, I also worked on coursework projects, notably contributing to a semester-long C++ project called Cavoke, which I completed alongside a dedicated team of three.
 
-In 2022, I transferred to Constructor University Bremen, an English-speaking, international-focused university located in Bremen, Germany. I continue to compete in international olympiads such as IMC and NWERC (ICPC semi-final), where I placed in the top 20% as part of a team. I am also currently involved in a research work in applying machine learning methods to material science.
+In 2022, I made the decision to transfer to Constructor University Bremen, where I could explore a more international and English-speaking environment. Continuing my academic journey, I participated in international olympiads like IMC, where I was honored with a First Prize award, and NWERC (ICPC semi-final), achieving a commendable place within the top 20% teams.
+
+Currently, my focus is on research that involves applying machine learning techniques to material science. This research showcases my dedication to expanding the practical applications of my knowledge.
+
+Thank you for visiting my website, and I look forward to sharing more about my journey in the world of Computer Science and beyond.
 
 {{< icon name="download" pack="fas" >}} Download my {{< staticref "https://wlko.me/resume" "newtab" >}}resumé{{< /staticref >}}.
