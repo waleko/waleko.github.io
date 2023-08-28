@@ -6,7 +6,7 @@ title: Alexander Kovrigin
 superuser: true
 
 # Role/position/tagline
-role: Undergraduate CS Student
+role: CS Student & ML Enthusiast
 
 # Organizations/Affiliations to show in About widget
 organizations:
@@ -14,12 +14,12 @@ organizations:
     url: https://constructor.university
 
 # Short bio (displayed in user profile at end of posts)
-bio:
+bio: 🌌 Exploring Tech Frontiers
 
 # Interests to show in About widget
 interests:
-  - Software Engineering
   - Machine Learning
+  - Software Engineering
   - Mathematics
   - Competetive Programming
 
@@ -67,15 +67,9 @@ email: ''
 # Highlight the author in author lists? (true/false)
 highlight_name: true
 ---
-Hello, I'm Alexander Kovrigin, currently in my third year of Computer Science studies at Constructor University, Bremen. I'm originally from St. Petersburg and have had an interesting educational journey so far.
+Hello, I'm Alexander Kovrigin, currently in my third year of Computer Science studies at Constructor University, Bremen. Currently, my focus is on research that involves applying machine learning techniques to material science.
 
-I attended the Physical-Technical High School in St. Petersburg, where I developed a strong interest in Physics, Mathematics, and Computer Science. Participating in national mathematics and informatics olympiads, along with working on personal projects during summers, became my way of embracing these subjects.
-
-After completing high school, I enrolled at the Higher School of Economics in St. Petersburg. I was fortunate to perform well academically, securing the top spot in both semesters. During this time, I also worked on coursework projects, notably contributing to a semester-long C++ project called Cavoke, which I completed alongside a dedicated team of three.
-
-In 2022, I made the decision to transfer to Constructor University Bremen, where I could explore a more international and English-speaking environment. Continuing my academic journey, I participated in international olympiads like IMC, where I was honored with a First Prize award, and NWERC (ICPC semi-final), achieving a commendable place within the top 20% teams.
-
-Currently, my focus is on research that involves applying machine learning techniques to material science. This research showcases my dedication to expanding the practical applications of my knowledge.
+I participate in international olympiads like IMC, where I was honored with a First Prize award, and NWERC (ICPC semi-final), achieving a commendable place within the top 20% teams.
 
 Thank you for visiting my website, and I look forward to sharing more about my journey in the world of Computer Science and beyond.
 
