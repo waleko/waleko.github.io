@@ -17,11 +17,12 @@ marketing:
   seo:
     site_type: Person
     local_business_type: ''
-    org_name: ''
+    org_name: 'Alexander Kovrigin'
     description: ''
     twitter: ''
   analytics:
     google_analytics: 'UA-53219795-2'
+    google_tag_manager: 'G-JQMPL65754'
     baidu_tongji: ''
   verification:
     google: ''
