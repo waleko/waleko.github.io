@@ -30,6 +30,7 @@ item:
     organization_url: 'https://icpc.global'
     title: 'NWERC: ICPC Northwestern Europe Regional Contest'
     url: 'https://2023.nwerc.eu/'
+    certificate_url: https://drive.google.com/file/d/1fBSFFeGSR8XG_pLvOqKcKRQzHpFjutoF/view?usp=sharing
   - certificate_url: https://drive.google.com/file/d/1qYI4OCmAW4fdGrMexCveGeh36lqHLVur/view?usp=sharing
     date_end: '2023-08-06'
     date_start: '2023-07-31'
