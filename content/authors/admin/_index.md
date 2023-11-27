@@ -67,10 +67,10 @@ email: ''
 # Highlight the author in author lists? (true/false)
 highlight_name: true
 ---
-Hello, I'm Alexander Kovrigin, currently in my third year of Computer Science studies at Constructor University, Bremen. Currently, my focus is on research that involves applying machine learning techniques to material science.
+Hello, I'm Alexander Kovrigin, a third-year Computer Science student at Constructor University, Bremen. Currently interning at the ML4SE lab, JetBrains Research, my focus involves developing ML solutions for code editing tasks.
 
-I participate in international olympiads like IMC, where I was honored with a First Prize award, and NWERC (ICPC semi-final), achieving a commendable place within the top 20% teams.
+I'm proud to have secured a silver medal at NWERC 2023, placing within the top 6 teams overall, marking a milestone in my competitive programming journey. Additionally, last summer's First Prize award at IMC stands as a testament to my dedication in mathematics olympiads.
 
-Thank you for visiting my website, and I look forward to sharing more about my journey in the world of Computer Science and beyond.
+Thank you for visiting my website. I'm excited to share more about my evolving journey in the world of Computer Science and beyond.
 
 {{< icon name="download" pack="fas" >}} Download my {{< staticref "https://wlko.me/resume" "newtab" >}}resumé{{< /staticref >}}.

@@ -23,30 +23,29 @@ date_format: January 2, 2006
 #   Leave other parameters empty if not required.
 #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
 item:
-  - certificate_url: https://drive.google.com/file/d/1It0l8J3v14fyHl0viaWXkCH3z4nQO2tz/view?usp=share_link
-    date_end: '2022-11-25'
-    date_start: '2022-11-27'
-    description: 'Got into the **top 20%** teams, solved 8/12 problems'
+  - date_end: '2023-11-24'
+    date_start: '2023-11-26'
+    description: 'Became **Silver Medalist**, 6th place out of 130 competitors'
     organization: ICPC Global
     organization_url: 'https://icpc.global'
-    title: ICPC Northwestern Europe Regional Contest (NWERC)
-    url: 'https://2022.nwerc.eu/'
+    title: 'NWERC: ICPC Northwestern Europe Regional Contest'
+    url: 'https://2023.nwerc.eu/'
   - certificate_url: https://drive.google.com/file/d/1qYI4OCmAW4fdGrMexCveGeh36lqHLVur/view?usp=sharing
     date_end: '2023-08-06'
     date_start: '2023-07-31'
     description: 'Received **First Prize** award in this international math olympiad'
     organization: International Mathematics Competition
     organization_url: 'https://www.imc-math.org.uk'
-    title: International Mathematics Competition for University Students 2022
+    title: International Mathematics Competition for University Students 2023
     url: 'https://www.imc-math.org.uk/?year=2023&item=info'
-  - certificate_url: https://drive.google.com/file/d/1s2RwSBAvx76eL0_h1K9GwX98p8YmD5bi/view?usp=sharing
-    date_end: '2017-12-15'
-    date_start: '2017-11-09'
-    description: Was named **Finalist** in this contest for my open-source contributions to KDE
-    organization: Google
-    organization_url: https://codein.withgoogle.com/archive/
-    title: Google Code-In
-    url: https://codein.withgoogle.com/archive/2018/
+  # - certificate_url: https://drive.google.com/file/d/1s2RwSBAvx76eL0_h1K9GwX98p8YmD5bi/view?usp=sharing
+  #   date_end: '2017-12-15'
+  #   date_start: '2017-11-09'
+  #   description: Was named **Finalist** in this contest for my open-source contributions to KDE
+  #   organization: Google
+  #   organization_url: https://codein.withgoogle.com/archive/
+  #   title: Google Code-In
+  #   url: https://codein.withgoogle.com/archive/2018/
   # - certificate_url: https://drive.google.com/file/d/1LP5j3QQoZ03NiTCZ7mrZ8I0_Yr5I86ll/view?usp=sharing
   #   date_end: ''
   #   date_start: '2021-03-11'
