@@ -9,18 +9,6 @@
 
 [![Website](https://img.shields.io/website?style=flat-square&url=https%3A%2F%2Falexkovrigin.me)](https://alexkovrigin.me)
 
-## How to Use
-
-Use [Hugo](https://gohugo.io/) to build this project:
-
-```console
-$ hugo --gc
-```
-
-## License
-
-[MIT](./LICENSE)
-
 ---
 
 > [@waleko](https://github.com/waleko)
