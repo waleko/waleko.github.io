@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Beyond dynamics: learning to discover conservation principles"
-date:   2023-01-21 22:21:59 +00:00
+date:   2024-01-21 22:21:59 +00:00
 image: /images/beyond-dynamics.png
 categories: research
 author: "Antonii Belyshev"
