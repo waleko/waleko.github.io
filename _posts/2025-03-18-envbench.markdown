@@ -1,0 +1,16 @@
+---
+layout: post
+title:  "EnvBench: A benchmark for automated development environment setup"
+date:   2025-03-18 22:21:59 +00:00
+image: /images/envbench.png
+categories: research
+author: "Aleksandra Eliseeva"
+authors: "Aleksandra Eliseeva, <strong>Alexander Kovrigin</strong>, Ilia Kholkin, Egor Bogomolov, Yaroslav Zharov"
+venue: "ICLR 2025 Third Workshop on Deep Learning for Code"
+# paper: https://iopscience.iop.org/article/10.1088/2632-2153/ad4a20
+arxiv: https://arxiv.org/abs/2503.14443
+code: https://github.com/JetBrains-Research/EnvBench
+# website: https://leonidk.github.io/modecfg
+# youtube: https://www.youtube.com/watch?v=r2426BR4r8o
+---
+We have collected the largest dataset to date for automated environment setup and introduced a robust framework for developing and evaluating LLM-based agents that tackle environment setup challenges. By benchmarking existing LLM agents, we identified a large gap in the quality between expert-produced and LLM-generated scripts.
