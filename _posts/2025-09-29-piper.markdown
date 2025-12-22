@@ -1,0 +1,16 @@
+---
+layout: post
+title:  "PIPer: On-Device Environment Setup via Online Reinforcement Learning"
+date:   2025-09-29 22:21:59 +00:00
+image: /images/piper.png
+categories: research
+author: "Alexander Kovrigin"
+authors: "<strong>Alexander Kovrigin</strong>, Aleksandra Eliseeva, Konstantin Grotov, Egor Bogomolov, Yaroslav Zharov"
+venue: "NeurIPS 2025 Fourth Workshop on Deep Learning for Code"
+paper: https://openreview.net/forum?id=9TsxdPdhSz
+arxiv: https://arxiv.org/abs/2509.25455
+code: https://github.com/JetBrains-Research/PIPer
+# website: https://leonidk.github.io/modecfg
+# youtube: https://www.youtube.com/watch?v=r2426BR4r8o
+---
+We develop a specialized LLM for automated environment setup by combining supervised fine-tuning with Reinforcement Learning with Verifiable Rewards. By evaluating on EnvBench-Python, we show that an 8B model reaches GPT-4o– and Qwen3-32B–level performance, demonstrating the effectiveness of SWE tasks training of consumer-scale models.
