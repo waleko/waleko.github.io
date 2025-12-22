@@ -7,9 +7,10 @@ categories: research
 author: "Alexander Kovrigin"
 authors: "<strong>Alexander Kovrigin</strong>, Aleksandra Eliseeva, Konstantin Grotov, Egor Bogomolov, Yaroslav Zharov"
 venue: "NeurIPS 2025 Fourth Workshop on Deep Learning for Code"
-paper: https://openreview.net/forum?id=9TsxdPdhSz
+# paper: https://openreview.net/forum?id=9TsxdPdhSz
 arxiv: https://arxiv.org/abs/2509.25455
 code: https://github.com/JetBrains-Research/PIPer
+hf: https://huggingface.co/JetBrains-Research/PIPer-8B
 # website: https://leonidk.github.io/modecfg
 # youtube: https://www.youtube.com/watch?v=r2426BR4r8o
 ---
