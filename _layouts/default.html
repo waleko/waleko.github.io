@@ -7,127 +7,105 @@
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
   <meta name="author" content="{{ site.name }}" />
+  <meta name="description" content="ML research engineer portfolio focused on LLMs for software engineering." />
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
-  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
-    type="text/css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap"
+    rel="stylesheet">
 
 </head>
 
 <body>
-  <table
-    style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-    <tr style="padding:0px">
-      <td style="padding:0px">
-        <table
-          style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-          <tr style="padding:0px">
-            <td style="padding:2.5%;width:60%;vertical-align:middle">
-              <h1>
-                Alexander Kovrigin
-              </h1>
-              <p>Hi! I am a Junior Researcher at <a href="https://jetbrains.com">JetBrains</a>, working on improving LLMs on SWE tasks using Reinforcement Learning.
-              I am pursuing a Master's degree in Data Science under the supervision of <a href="https://scholar.google.com/citations?user=7HU0UoUAAAAJ&hl=en">Prof. Dr. Dmitry Vetrov</a> at <a href="https://constructor.university">Constructor University</a> in Bremen, Germany.
-              </p>
-              <p>
-                <!-- I completed my Bachelor's in Computer Science at Constructor University, having transferred from <a href="https://spb.hse.ru/en/ba/appmath/">HSE University</a>. -->
-                I earned a silver medal at ICPC Northwestern Europe Regional Contest (<a href="https://2023.nwerc.eu/">NWERC 2023</a>) and received a first prize award at the International Mathematics Competition for University Students (<a href="https://www.imc-math.org.uk/?year=2023">IMC 2023</a>). During my Bachelor's studies, I worked in a research group under the supervision of <a href="https://scholar.google.com/citations?user=vfQf9SIAAAAJ">Andrey Ustyuzhanin</a>.
-              </p>
-              <p style="text-align:center">
-                <a href="mailto:inbox@alexkovrigin.me"> Email</a> &nbsp;/&nbsp;
-                <a href="https://github.com/waleko">GitHub</a> &nbsp;/&nbsp;
-                <a href="https://scholar.google.com/citations?user=-TlLyrMAAAAJ">Google Scholar</a> &nbsp;/&nbsp;
-                <a href="https://www.linkedin.com/in/waleko"> LinkedIn </a> &nbsp;/&nbsp;
-                <a href="https://acacia.s3.wlko.me/cv/Alexander%20Kovrigin.pdf">CV</a>
-              </p>
-            </td>
-            <td style="padding:2.5%;width:40%;max-width:40%">
-              <img style="width:100%;max-width:100%" alt="profile photo" src="images/avatar.png">
-            </td>
-          </tr>
-        </table>
+  <main class="page-shell">
+    <section class="hero card">
+      <div class="hero-copy">
+        <p class="eyebrow">ML Research Engineering</p>
+        <h1>Alexander Kovrigin</h1>
+        <p class="lead">
+          Junior Researcher at <a href="https://jetbrains.com">JetBrains</a>, building LLMs for software engineering with reinforcement learning and robust evaluation.
+        </p>
+        <p>
+          I am pursuing a Master's degree in Data Science under the supervision of <a href="https://scholar.google.com/citations?user=7HU0UoUAAAAJ&hl=en">Prof. Dr. Dmitry Vetrov</a> at <a href="https://constructor.university">Constructor University</a> in Bremen, Germany.
+        </p>
+        <div class="tag-row">
+          <span class="tag">LLMs for SWE</span>
+          <span class="tag">RL for language models</span>
+          <span class="tag">Benchmark design</span>
+        </div>
+        <div class="link-row">
+          <a href="mailto:inbox@alexkovrigin.me">Email</a>
+          <a href="https://github.com/waleko">GitHub</a>
+          <a href="https://scholar.google.com/citations?user=-TlLyrMAAAAJ">Google Scholar</a>
+          <a href="https://www.linkedin.com/in/waleko">LinkedIn</a>
+          <a href="https://acacia.s3.wlko.me/cv/Alexander%20Kovrigin.pdf">CV</a>
+        </div>
+      </div>
+      <div class="hero-avatar-wrap">
+        <img class="hero-avatar" alt="profile photo" src="{{ site.avatar }}">
+      </div>
+    </section>
 
-        <table
-          style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-          <tr>
-            <td style="padding:2.5%;width:100%;vertical-align:middle">
-              <h2>Research</h2>
-              <p>
-              </p>
-            </td>
-          </tr>
-        </table>
-        <table
-          style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+    <section class="highlights">
+      <article class="highlight-card card">
+        <h2>Current focus</h2>
+        <p>Scaling practical research loops for code-focused agents, from evaluation protocol design to on-device RL training.</p>
+      </article>
+      <article class="highlight-card card">
+        <h2>Awards</h2>
+        <p>Silver medalist at <a href="https://2023.nwerc.eu/">NWERC 2023</a> and first prize winner at <a href="https://www.imc-math.org.uk/?year=2023">IMC 2023</a>.</p>
+      </article>
+      <article class="highlight-card card">
+        <h2>Background</h2>
+        <p>Research group experience under <a href="https://scholar.google.com/citations?user=vfQf9SIAAAAJ">Andrey Ustyuzhanin</a> during undergraduate studies.</p>
+      </article>
+    </section>
 
-          {% for post in site.posts %}
-          {% for cat in post.categories %}
-          {% if cat == 'research' %}
-          <tr>
-            <td style="padding:2.5%;width:25%;vertical-align:middle;min-width:120px">
-              <img src="/tn{{post.image}}" alt="project image" style="width:auto; height:auto; max-width:100%;" />
-            </td>
-            <td style="padding:2.5%;width:75%;vertical-align:middle">
-              <h3>{{post.title}}</h3>
-              <br>
-              {{post.authors}}
+    <section class="research-section">
+      <div class="section-title-wrap">
+        <h2>Selected Research</h2>
+        <p>Publications and artifacts on LLM reliability, environment setup, and agentic software engineering.</p>
+      </div>
 
-              <br>
-              <em>{{post.venue}}</em>, {{ post.date | date: "%Y" }}
-              <br>
-              {% if post.arxiv %}
-              <a href="{{post.arxiv}}">arxiv</a> /
-              {% endif %}
-              {% if post.paper %}
-              <a href="{{post.paper}}">paper</a> /
-              {% endif %}
-              {% if post.video %}
-              <a href="{{post.video}}">video</a> /
-              {% endif %}
-              {% if post.code %}
-              <a href="{{post.code}}">code</a> /
-              {% endif %}
-              {% if post.poster %}
-              <a href="{{post.poster}}">poster</a> /
-              {% endif %}
-              {% if post.slides %}
-              <a href="{{post.slides}}">slides</a> /
-              {% endif %}
-              {% if post.website %}
-              <a href="{{post.website}}">website</a> /
-              {% endif %}
-              {% if post.youtube %}
-              <a href="{{post.youtube}}">youtube</a> /
-              {% endif %}
-              {% if post.hf %}
-              <a href="{{post.hf}}">hf</a> /
-              {% endif %}
-              <p></p>
-              {{ post.excerpt }}
-            </td>
-          </tr>
-          {% endif %}
-          {% endfor %}
-          {% endfor %}
-        </table>
+      <div class="research-grid">
+        {% for post in site.posts %}
+        {% for cat in post.categories %}
+        {% if cat == 'research' %}
+        <article class="research-card card">
+          <div class="research-thumb-wrap">
+            <img src="/tn{{post.image}}" alt="{{ post.title }} thumbnail" class="research-thumb" />
+          </div>
+          <div class="research-content">
+            <h3>{{post.title}}</h3>
+            <p class="authors">{{post.authors}}</p>
+            <p class="venue"><em>{{post.venue}}</em>, {{ post.date | date: "%Y" }}</p>
+            <div class="resource-links">
+              {% if post.arxiv %}<a href="{{post.arxiv}}">arXiv</a>{% endif %}
+              {% if post.paper %}<a href="{{post.paper}}">Paper</a>{% endif %}
+              {% if post.video %}<a href="{{post.video}}">Video</a>{% endif %}
+              {% if post.code %}<a href="{{post.code}}">Code</a>{% endif %}
+              {% if post.poster %}<a href="{{post.poster}}">Poster</a>{% endif %}
+              {% if post.slides %}<a href="{{post.slides}}">Slides</a>{% endif %}
+              {% if post.website %}<a href="{{post.website}}">Website</a>{% endif %}
+              {% if post.youtube %}<a href="{{post.youtube}}">YouTube</a>{% endif %}
+              {% if post.hf %}<a href="{{post.hf}}">Hugging Face</a>{% endif %}
+            </div>
+            <p class="excerpt">{{ post.excerpt }}</p>
+          </div>
+        </article>
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+      </div>
+    </section>
 
-        <table
-          style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-          <tr>
-            <td style="padding:0px">
-              <br>
-              <p style="text-align:center;font-size:small;">
-                Design and source code from <a style="font-size:small;" href="https://jonbarron.info">Jon Barron's
-                  website</a>
-              </p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
+    <footer class="site-footer">
+      Design and source code originally inspired by <a href="https://jonbarron.info">Jon Barron's website</a>.
+    </footer>
+  </main>
 </body>
 
 </html>
