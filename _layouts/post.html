@@ -1,3 +1,53 @@
 ---
 layout: default
 ---
+<div class="page-shell">
+  <main class="page-content">
+    <article class="section-card post-page">
+      <a class="back-link" href="{{ '/' | relative_url }}">Back to homepage</a>
+      <header class="post-header">
+        <p class="section-kicker">Research note</p>
+        <h1 class="post-title">{{ page.title }}</h1>
+        <p class="post-meta">
+          {% if page.authors %}{{ page.authors }}{% endif %}
+          {% if page.venue %}<span> · </span><em>{{ page.venue }}</em>{% endif %}
+          <span> · </span>{{ page.date | date: "%Y" }}
+        </p>
+      </header>
+
+      <div class="publication-links post-links">
+        {% if page.arxiv %}
+        <a href="{{ page.arxiv }}">arXiv</a>
+        {% endif %}
+        {% if page.paper %}
+        <a href="{{ page.paper }}">Paper</a>
+        {% endif %}
+        {% if page.video %}
+        <a href="{{ page.video }}">Video</a>
+        {% endif %}
+        {% if page.code %}
+        <a href="{{ page.code }}">Code</a>
+        {% endif %}
+        {% if page.poster %}
+        <a href="{{ page.poster }}">Poster</a>
+        {% endif %}
+        {% if page.slides %}
+        <a href="{{ page.slides }}">Slides</a>
+        {% endif %}
+        {% if page.website %}
+        <a href="{{ page.website }}">Website</a>
+        {% endif %}
+        {% if page.youtube %}
+        <a href="{{ page.youtube }}">YouTube</a>
+        {% endif %}
+        {% if page.hf %}
+        <a href="{{ page.hf }}">Hugging Face</a>
+        {% endif %}
+      </div>
+
+      <div class="post-content">
+        {{ content }}
+      </div>
+    </article>
+  </main>
+</div>

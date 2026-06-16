@@ -54,8 +54,7 @@ url: "https://alexkovrigin.me" # the base hostname & protocol for your site
 # !! You don't need to change any of the configuration flags below !!
 #
 
-#permalink: /:title/
-permalink: /
+permalink: /:title/
 
 
 # The release of Jekyll Now that you're using
