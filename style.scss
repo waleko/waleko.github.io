@@ -93,7 +93,8 @@ strong {
 }
 
 .page-shell {
-  width: min(1120px, calc(100% - 40px));
+  width: calc(100% - 40px);
+  max-width: 1120px;
   margin: 0 auto;
   padding: 52px 0;
 }
@@ -416,7 +417,8 @@ h3 {
 
 @media (max-width: 860px) {
   .page-shell {
-    width: min(100% - 28px, 720px);
+    width: calc(100% - 28px);
+    max-width: 720px;
     padding: 28px 0;
   }
 
@@ -455,7 +457,8 @@ h3 {
   }
 
   .page-shell {
-    width: min(100% - 20px, 520px);
+    width: calc(100% - 20px);
+    max-width: 520px;
   }
 
   .hero__content {
