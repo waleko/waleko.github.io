@@ -5,11 +5,27 @@
 # Name of your site (displayed in the header)
 name: Alexander Kovrigin
 
-# Short bio or description (displayed in the header)
-# description: the profile of an engineer, researcher and software developer
+# Tagline / role shown under the name in the hero section
+tagline: "Research Engineer · LLMs for Software Engineering"
+
+# Short bio or description (used for SEO / social previews)
+description: "Alexander Kovrigin — Research Engineer at JetBrains working on large language models for software engineering with reinforcement learning."
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
 avatar: images/avatar.png
+
+# Recent news / updates, shown in the News section (most recent first)
+news:
+  - date: "Sep 2025"
+    html: 'Our paper <strong>PIPer</strong> (on-device environment setup via online RL) was accepted at the <a href="https://dl4c.github.io/">NeurIPS 2025 Workshop on Deep Learning for Code</a>. <a href="https://arxiv.org/abs/2509.25455">Preprint</a> and <a href="https://huggingface.co/JetBrains-Research/PIPer-8B">model</a> are out.'
+  - date: "Mar 2025"
+    html: '<strong>EnvBench</strong>, our benchmark for automated development environment setup, was accepted at the <a href="https://dl4c.github.io/">ICLR 2025 Workshop on Deep Learning for Code</a>.'
+  - date: "Jun 2024"
+    html: 'Released <strong>Long Code Arena</strong>, a suite of long-context code benchmarks, with a public <a href="https://huggingface.co/spaces/JetBrains-Research/long-code-arena">leaderboard</a>.'
+  - date: "Nov 2023"
+    html: 'Won a silver medal at the ICPC Northwestern Europe Regional Contest (<a href="https://2023.nwerc.eu/">NWERC 2023</a>).'
+  - date: "Aug 2023"
+    html: 'Received a first prize at the International Mathematics Competition for University Students (<a href="https://www.imc-math.org.uk/?year=2023">IMC 2023</a>).'
 
 #
 # Flags below are optional

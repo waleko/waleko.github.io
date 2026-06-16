@@ -1,133 +1,226 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <title>{{ site.name }}</title>
-
-  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-
-  <meta name="author" content="{{ site.name }}" />
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
-  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
-  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
-    type="text/css">
+  <title>{{ site.name }}</title>
+  <meta name="author" content="{{ site.name }}">
+  <meta name="description" content="{{ site.description }}">
 
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+
+  <!-- Open Graph / social previews -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ site.name }}">
+  <meta property="og:description" content="{{ site.description }}">
+  <meta property="og:url" content="{{ site.url }}">
+  <meta property="og:image" content="{{ site.url }}/{{ site.avatar }}">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{{ site.name }}">
+  <meta name="twitter:description" content="{{ site.description }}">
+  <meta name="twitter:image" content="{{ site.url }}/{{ site.avatar }}">
+
+  <link rel="icon" href="{{ site.baseurl }}/favicon.ico">
+
+  <!-- Set the colour theme before paint to avoid a flash -->
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = stored || (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+
+  <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css">
 </head>
 
 <body>
-  <table
-    style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-    <tr style="padding:0px">
-      <td style="padding:0px">
-        <table
-          style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-          <tr style="padding:0px">
-            <td style="padding:2.5%;width:60%;vertical-align:middle">
-              <h1>
-                Alexander Kovrigin
-              </h1>
-              <p>Hi! I am a Junior Researcher at <a href="https://jetbrains.com">JetBrains</a>, working on improving LLMs on SWE tasks using Reinforcement Learning.
-              I am pursuing a Master's degree in Data Science under the supervision of <a href="https://scholar.google.com/citations?user=7HU0UoUAAAAJ&hl=en">Prof. Dr. Dmitry Vetrov</a> at <a href="https://constructor.university">Constructor University</a> in Bremen, Germany.
-              </p>
-              <p>
-                <!-- I completed my Bachelor's in Computer Science at Constructor University, having transferred from <a href="https://spb.hse.ru/en/ba/appmath/">HSE University</a>. -->
-                I earned a silver medal at ICPC Northwestern Europe Regional Contest (<a href="https://2023.nwerc.eu/">NWERC 2023</a>) and received a first prize award at the International Mathematics Competition for University Students (<a href="https://www.imc-math.org.uk/?year=2023">IMC 2023</a>). During my Bachelor's studies, I worked in a research group under the supervision of <a href="https://scholar.google.com/citations?user=vfQf9SIAAAAJ">Andrey Ustyuzhanin</a>.
-              </p>
-              <p style="text-align:center">
-                <a href="mailto:inbox@alexkovrigin.me"> Email</a> &nbsp;/&nbsp;
-                <a href="https://github.com/waleko">GitHub</a> &nbsp;/&nbsp;
-                <a href="https://scholar.google.com/citations?user=-TlLyrMAAAAJ">Google Scholar</a> &nbsp;/&nbsp;
-                <a href="https://www.linkedin.com/in/waleko"> LinkedIn </a> &nbsp;/&nbsp;
-                <a href="https://acacia.s3.wlko.me/cv/Alexander%20Kovrigin.pdf">CV</a>
-              </p>
-            </td>
-            <td style="padding:2.5%;width:40%;max-width:40%">
-              <img style="width:100%;max-width:100%" alt="profile photo" src="images/avatar.png">
-            </td>
-          </tr>
-        </table>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-        <table
-          style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-          <tr>
-            <td style="padding:2.5%;width:100%;vertical-align:middle">
-              <h2>Research</h2>
-              <p>
-              </p>
-            </td>
-          </tr>
-        </table>
-        <table
-          style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+  <header class="topbar">
+    <div class="topbar__inner">
+      <a class="topbar__brand" href="#top">{{ site.name }}</a>
+      <nav class="topbar__nav" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#news">News</a>
+        <a href="#research">Research</a>
+      </nav>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <svg class="icon icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+        </svg>
+        <svg class="icon icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
 
-          {% for post in site.posts %}
-          {% for cat in post.categories %}
-          {% if cat == 'research' %}
-          <tr>
-            <td style="padding:2.5%;width:25%;vertical-align:middle;min-width:120px">
-              <img src="/tn{{post.image}}" alt="project image" style="width:auto; height:auto; max-width:100%;" />
-            </td>
-            <td style="padding:2.5%;width:75%;vertical-align:middle">
-              <h3>{{post.title}}</h3>
-              <br>
-              {{post.authors}}
+  <main id="main" class="container">
+    <span id="top"></span>
 
-              <br>
-              <em>{{post.venue}}</em>, {{ post.date | date: "%Y" }}
-              <br>
-              {% if post.arxiv %}
-              <a href="{{post.arxiv}}">arxiv</a> /
-              {% endif %}
-              {% if post.paper %}
-              <a href="{{post.paper}}">paper</a> /
-              {% endif %}
-              {% if post.video %}
-              <a href="{{post.video}}">video</a> /
-              {% endif %}
-              {% if post.code %}
-              <a href="{{post.code}}">code</a> /
-              {% endif %}
-              {% if post.poster %}
-              <a href="{{post.poster}}">poster</a> /
-              {% endif %}
-              {% if post.slides %}
-              <a href="{{post.slides}}">slides</a> /
-              {% endif %}
-              {% if post.website %}
-              <a href="{{post.website}}">website</a> /
-              {% endif %}
-              {% if post.youtube %}
-              <a href="{{post.youtube}}">youtube</a> /
-              {% endif %}
-              {% if post.hf %}
-              <a href="{{post.hf}}">hf</a> /
-              {% endif %}
-              <p></p>
-              {{ post.excerpt }}
-            </td>
-          </tr>
-          {% endif %}
-          {% endfor %}
-          {% endfor %}
-        </table>
+    <!-- ===================== HERO / ABOUT ===================== -->
+    <section id="about" class="hero">
+      <div class="hero__photo">
+        <img src="{{ site.baseurl }}/{{ site.avatar }}" alt="Portrait of {{ site.name }}" width="360" height="360">
+      </div>
+      <div class="hero__intro">
+        <h1 class="hero__name">{{ site.name }}</h1>
+        <p class="hero__role">{{ site.tagline }}</p>
+        <p>
+          Hi! I am a Research Engineer at <a href="https://jetbrains.com">JetBrains Research</a>, where I work on improving
+          large language models for software-engineering tasks using reinforcement learning. I am also pursuing a
+          Master's degree in Data Science under the supervision of
+          <a href="https://scholar.google.com/citations?user=7HU0UoUAAAAJ&hl=en">Prof. Dr. Dmitry Vetrov</a>
+          at <a href="https://constructor.university">Constructor University</a> in Bremen, Germany.
+        </p>
+        <p>
+          I earned a silver medal at the ICPC Northwestern Europe Regional Contest
+          (<a href="https://2023.nwerc.eu/">NWERC 2023</a>) and a first prize at the International Mathematics
+          Competition for University Students (<a href="https://www.imc-math.org.uk/?year=2023">IMC 2023</a>). During my
+          Bachelor's I worked in a research group led by
+          <a href="https://scholar.google.com/citations?user=vfQf9SIAAAAJ">Andrey Ustyuzhanin</a>.
+        </p>
 
-        <table
-          style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-          <tr>
-            <td style="padding:0px">
-              <br>
-              <p style="text-align:center;font-size:small;">
-                Design and source code from <a style="font-size:small;" href="https://jonbarron.info">Jon Barron's
-                  website</a>
-              </p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
+        <ul class="social" aria-label="Profiles and contact">
+          <li>
+            <a href="mailto:inbox@alexkovrigin.me">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                <path d="m22 7-10 6L2 7"></path>
+              </svg>
+              <span>Email</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/waleko">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.3-1.7-1.3-1.7-1.05-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.27 3.4.97.1-.75.4-1.27.73-1.56-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.5 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.7 5.4-5.28 5.69.42.36.79 1.06.79 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"></path>
+              </svg>
+              <span>GitHub</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://scholar.google.com/citations?user=-TlLyrMAAAAJ">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 3 1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"></path>
+              </svg>
+              <span>Scholar</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/waleko">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.64h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21H9z"></path>
+              </svg>
+              <span>LinkedIn</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://acacia.s3.wlko.me/cv/Alexander%20Kovrigin.pdf">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"></path>
+              </svg>
+              <span>CV</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===================== NEWS ===================== -->
+    {% if site.news and site.news.size > 0 %}
+    <section id="news" class="section">
+      <h2 class="section__title">News</h2>
+      <ul class="news">
+        {% for item in site.news %}
+        <li class="news__item">
+          <span class="news__date">{{ item.date }}</span>
+          <span class="news__text">{{ item.html }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+
+    <!-- ===================== RESEARCH ===================== -->
+    <section id="research" class="section">
+      <h2 class="section__title">Research</h2>
+      <p class="section__lead">Selected publications on LLMs for code, agents, and machine learning for science.</p>
+
+      <div class="pubs">
+        {% for post in site.posts %}
+        {% for cat in post.categories %}
+        {% if cat == 'research' %}
+        <article class="pub">
+          <div class="pub__thumb">
+            <img src="{{ site.baseurl }}/tn{{ post.image }}" alt="Thumbnail for {{ post.title }}" loading="lazy">
+          </div>
+          <div class="pub__body">
+            <h3 class="pub__title">{{ post.title }}</h3>
+            <p class="pub__authors">{{ post.authors }}</p>
+            <p class="pub__venue"><span class="badge">{{ post.venue }}</span> {{ post.date | date: "%Y" }}</p>
+            <p class="pub__abstract">{{ post.excerpt }}</p>
+            <p class="pub__links">
+              {% if post.arxiv %}<a href="{{ post.arxiv }}">arXiv</a>{% endif %}
+              {% if post.paper %}<a href="{{ post.paper }}">Paper</a>{% endif %}
+              {% if post.video %}<a href="{{ post.video }}">Video</a>{% endif %}
+              {% if post.code %}<a href="{{ post.code }}">Code</a>{% endif %}
+              {% if post.poster %}<a href="{{ post.poster }}">Poster</a>{% endif %}
+              {% if post.slides %}<a href="{{ post.slides }}">Slides</a>{% endif %}
+              {% if post.website %}<a href="{{ post.website }}">Website</a>{% endif %}
+              {% if post.youtube %}<a href="{{ post.youtube }}">YouTube</a>{% endif %}
+              {% if post.hf %}<a href="{{ post.hf }}">HF</a>{% endif %}
+            </p>
+          </div>
+        </article>
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>&copy; {{ site.time | date: "%Y" }} {{ site.name }}.</p>
+      <p>Built with <a href="https://jekyllrb.com">Jekyll</a>. Layout inspired by
+        <a href="https://jonbarron.info">Jon Barron's website</a>.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var toggle = document.getElementById('theme-toggle');
+      function current() {
+        return root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      }
+      if (toggle) {
+        toggle.addEventListener('click', function () {
+          var next = current() === 'dark' ? 'light' : 'dark';
+          root.setAttribute('data-theme', next);
+          try { localStorage.setItem('theme', next); } catch (e) {}
+        });
+      }
+    })();
+  </script>
 </body>
 
 </html>
