@@ -1,105 +1,398 @@
 ---
 ---
 
-//
-// IMPORTS
-//
+/* ============================================================
+   Design tokens
+   ============================================================ */
+:root {
+  --bg: #ffffff;
+  --bg-elev: #f7f8fa;
+  --surface: #ffffff;
+  --border: #e7e9ee;
+  --text: #1c1e21;
+  --text-muted: #5a6270;
+  --text-faint: #868e9c;
+  --accent: #2f6fed;
+  --accent-hover: #1b54c9;
+  --accent-soft: rgba(47, 111, 237, 0.10);
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 4px 16px rgba(16, 24, 40, 0.06);
+  --shadow-hover: 0 4px 12px rgba(16, 24, 40, 0.08), 0 12px 32px rgba(16, 24, 40, 0.10);
+  --radius: 14px;
+  --radius-sm: 9px;
+  --maxw: 820px;
+}
 
-//@import "reset";
-//@import "variables";
-// Syntax highlighting @import is at the bottom of this file
+[data-theme="dark"] {
+  --bg: #0e1116;
+  --bg-elev: #161a22;
+  --surface: #161a22;
+  --border: #262c38;
+  --text: #e7e9ee;
+  --text-muted: #a9b1c0;
+  --text-faint: #7b8494;
+  --accent: #5b8dff;
+  --accent-hover: #87aaff;
+  --accent-soft: rgba(91, 141, 255, 0.14);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(0, 0, 0, 0.3);
+  --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.5), 0 12px 32px rgba(0, 0, 0, 0.45);
+}
 
-/**************/
-/* BASE RULES */
-/**************/
+/* ============================================================
+   Base
+   ============================================================ */
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
 a {
-  color: #1772d0;
+  color: var(--accent);
   text-decoration: none;
+  transition: color 0.15s ease;
 }
 
-a:focus,
-a:hover {
-  color: #f09228;
-  text-decoration: none;
+a:hover { color: var(--accent-hover); }
+
+h1, h2, h3 { line-height: 1.25; }
+
+img { display: block; }
+
+.container {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
-body,
-td,
-th,
-tr,
-p,
-a {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 14px;
-  font-display: auto;
+/* ============================================================
+   Header / nav
+   ============================================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--border);
 }
 
-strong {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 14px;
-  font-display: auto;
+.nav {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
 }
 
-h2 {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 22px;
-  font-display: auto;
-  font-weight: normal;
-  padding: 0px;
-  margin: 0px;
-  display:inline; 
-}
-
-h3 {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 14px;
+.nav-brand {
   font-weight: 700;
-  font-display: auto;
-  padding: 0px;
-  margin: 0px;
-  display:inline; 
+  font-size: 15px;
+  color: var(--text);
+  letter-spacing: -0.01em;
 }
 
-h1 {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 32px;
-  font-weight: normal;
-  font-display: auto;
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.nav-links a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.nav-links a:hover { color: var(--text); }
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.theme-toggle:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.theme-toggle .icon-moon { display: none; }
+[data-theme="dark"] .theme-toggle .icon-sun { display: none; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: block; }
+
+/* ============================================================
+   Hero
+   ============================================================ */
+.hero {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 64px 0 40px;
+}
+
+.hero-photo {
+  flex: 0 0 auto;
+}
+
+.hero-photo img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.hero-intro { flex: 1 1 auto; min-width: 0; }
+
+.hero-intro h1 {
+  margin: 0 0 4px;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.hero-tagline {
+  margin: 0 0 16px;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.hero-intro p {
+  margin: 0 0 14px;
+  color: var(--text);
+}
+
+/* Link pills */
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.link-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 15px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+.link-pill:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   Sections
+   ============================================================ */
+.section { padding: 28px 0; }
+
+.section-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-faint);
+  margin: 0 0 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ============================================================
+   News
+   ============================================================ */
+.news-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.news-item {
+  display: flex;
+  gap: 18px;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--border);
+}
+
+.news-item:last-child { border-bottom: none; }
+
+.news-date {
+  flex: 0 0 84px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 13px;
+  color: var(--text-faint);
+  padding-top: 2px;
+}
+
+.news-text { font-size: 15px; }
+
+.news-venue {
+  display: inline-block;
+  margin: 0 6px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ============================================================
+   Publications
+   ============================================================ */
+.pub-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.pub {
+  display: flex;
+  gap: 22px;
+  padding: 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.pub:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+}
+
+.pub-thumb {
+  flex: 0 0 150px;
+  align-self: center;
+}
+
+.pub-thumb img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+
+.pub-body { flex: 1 1 auto; min-width: 0; }
+
+.pub-title {
+  margin: 0 0 6px;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.pub-authors {
+  margin: 0 0 2px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.pub-authors strong { color: var(--text); }
+
+.pub-venue {
+  margin: 0 0 8px;
+  font-size: 14px;
+  color: var(--text-faint);
+}
+
+.pub-desc {
+  margin: 0 0 12px;
+  font-size: 14.5px;
+  color: var(--text);
+}
+
+.pub-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pub-links a {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 11px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--bg-elev);
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+.pub-links a:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.site-footer {
+  max-width: var(--maxw);
+  margin: 40px auto 0;
+  padding: 28px 24px 48px;
+  border-top: 1px solid var(--border);
   text-align: center;
-  padding: 0px;
-  margin-block-start: 14px;
-  margin-block-end: 14px;
-  margin-left: 0px;
-  margin-right: 0px;
-
+  color: var(--text-faint);
+  font-size: 13px;
 }
 
-.one {
-  width: 160px;
-  height: 160px;
-  position: relative;
+.site-footer p { margin: 4px 0; }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media screen and (max-width: 720px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    gap: 22px;
+    padding: 40px 0 28px;
+  }
+  .hero-photo img { width: 140px; height: 140px; }
+  .links { justify-content: center; }
+  .pub { flex-direction: column; gap: 16px; }
+  .pub-thumb { flex-basis: auto; max-width: 240px; align-self: center; }
+  .news-item { flex-direction: column; gap: 2px; }
+  .news-date { flex-basis: auto; }
+  .nav-links { gap: 16px; }
 }
 
-.two {
-  width: 160px;
-  height: 160px;
-  position: absolute;
-  transition: opacity .2s ease-in-out;
-  -moz-transition: opacity .2s ease-in-out;
-  -webkit-transition: opacity .2s ease-in-out;
+@media screen and (max-width: 420px) {
+  .nav-brand { font-size: 14px; }
+  .nav-links a { display: none; }
 }
-
-.fade {
-  transition: opacity .2s ease-in-out;
-  -moz-transition: opacity .2s ease-in-out;
-  -webkit-transition: opacity .2s ease-in-out;
-}
-
-span.highlight {
-  background-color: #ffffd0;
-}
-
-// Settled on moving the import of syntax highlighting to the bottom of the CSS
-// ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
-//@import "highlights";
-//@import "svg-icons";
