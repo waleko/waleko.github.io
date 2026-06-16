@@ -8,126 +8,143 @@
 
   <meta name="author" content="{{ site.name }}" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ site.description }}">
+  <meta name="theme-color" content="#0f172a">
 
   <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
-  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
-    type="text/css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
-  <table
-    style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-    <tr style="padding:0px">
-      <td style="padding:0px">
-        <table
-          style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-          <tr style="padding:0px">
-            <td style="padding:2.5%;width:60%;vertical-align:middle">
-              <h1>
-                Alexander Kovrigin
-              </h1>
-              <p>Hi! I am a Junior Researcher at <a href="https://jetbrains.com">JetBrains</a>, working on improving LLMs on SWE tasks using Reinforcement Learning.
-              I am pursuing a Master's degree in Data Science under the supervision of <a href="https://scholar.google.com/citations?user=7HU0UoUAAAAJ&hl=en">Prof. Dr. Dmitry Vetrov</a> at <a href="https://constructor.university">Constructor University</a> in Bremen, Germany.
-              </p>
-              <p>
-                <!-- I completed my Bachelor's in Computer Science at Constructor University, having transferred from <a href="https://spb.hse.ru/en/ba/appmath/">HSE University</a>. -->
-                I earned a silver medal at ICPC Northwestern Europe Regional Contest (<a href="https://2023.nwerc.eu/">NWERC 2023</a>) and received a first prize award at the International Mathematics Competition for University Students (<a href="https://www.imc-math.org.uk/?year=2023">IMC 2023</a>). During my Bachelor's studies, I worked in a research group under the supervision of <a href="https://scholar.google.com/citations?user=vfQf9SIAAAAJ">Andrey Ustyuzhanin</a>.
-              </p>
-              <p style="text-align:center">
-                <a href="mailto:inbox@alexkovrigin.me"> Email</a> &nbsp;/&nbsp;
-                <a href="https://github.com/waleko">GitHub</a> &nbsp;/&nbsp;
-                <a href="https://scholar.google.com/citations?user=-TlLyrMAAAAJ">Google Scholar</a> &nbsp;/&nbsp;
-                <a href="https://www.linkedin.com/in/waleko"> LinkedIn </a> &nbsp;/&nbsp;
-                <a href="https://acacia.s3.wlko.me/cv/Alexander%20Kovrigin.pdf">CV</a>
-              </p>
-            </td>
-            <td style="padding:2.5%;width:40%;max-width:40%">
-              <img style="width:100%;max-width:100%" alt="profile photo" src="images/avatar.png">
-            </td>
-          </tr>
-        </table>
+  <div class="page-shell">
+    <main class="site-shell">
+      <section class="hero-card">
+        <div class="hero-copy">
+          <p class="eyebrow">ML research x research engineering</p>
+          <h1>{{ site.name }}</h1>
+          <p class="hero-lead">
+            Junior Researcher at <a href="https://jetbrains.com">JetBrains</a> building LLM systems for software engineering with reinforcement learning, strong evaluation, and production-minded research workflows.
+          </p>
+          <p class="hero-body">
+            I am pursuing a Master's degree in Data Science under the supervision of <a href="https://scholar.google.com/citations?user=7HU0UoUAAAAJ&hl=en">Prof. Dr. Dmitry Vetrov</a> at <a href="https://constructor.university">Constructor University</a> in Bremen, Germany.
+          </p>
+          <p class="hero-body">
+            I earned a silver medal at ICPC Northwestern Europe Regional Contest (<a href="https://2023.nwerc.eu/">NWERC 2023</a>) and received a first prize award at the International Mathematics Competition for University Students (<a href="https://www.imc-math.org.uk/?year=2023">IMC 2023</a>). During my Bachelor's studies, I worked in a research group under the supervision of <a href="https://scholar.google.com/citations?user=vfQf9SIAAAAJ">Andrey Ustyuzhanin</a>.
+          </p>
+          <div class="tag-row">
+            <span>LLMs for SWE</span>
+            <span>RL for coding agents</span>
+            <span>Environment setup</span>
+            <span>Benchmarks and evals</span>
+          </div>
+          <div class="action-row">
+            <a class="action-link" href="mailto:inbox@alexkovrigin.me">Email</a>
+            <a class="action-link" href="https://github.com/waleko">GitHub</a>
+            <a class="action-link" href="https://scholar.google.com/citations?user=-TlLyrMAAAAJ">Google Scholar</a>
+            <a class="action-link" href="https://www.linkedin.com/in/waleko">LinkedIn</a>
+            <a class="action-link" href="https://acacia.s3.wlko.me/cv/Alexander%20Kovrigin.pdf">CV</a>
+          </div>
+          <dl class="signal-grid">
+            <div class="signal-card">
+              <dt>Current focus</dt>
+              <dd>Improving LLM performance on SWE tasks using reinforcement learning.</dd>
+            </div>
+            <div class="signal-card">
+              <dt>Research style</dt>
+              <dd>Benchmark-driven work across evaluation, tooling, and reproducible ML systems.</dd>
+            </div>
+            <div class="signal-card">
+              <dt>Competitive background</dt>
+              <dd>ICPC and mathematics competition experience shaping rigorous problem solving.</dd>
+            </div>
+          </dl>
+        </div>
+        <div class="hero-profile">
+          <div class="avatar-frame">
+            <img class="avatar-image" alt="{{ site.name }} profile photo" src="{{ site.avatar }}">
+          </div>
+          <div class="profile-note">
+            <p class="profile-note-label">Current research themes</p>
+            <ul class="profile-note-list">
+              <li>Agentic coding workflows</li>
+              <li>Training and evaluating code models</li>
+              <li>Reliable development environment setup</li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
-        <table
-          style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-          <tr>
-            <td style="padding:2.5%;width:100%;vertical-align:middle">
-              <h2>Research</h2>
-              <p>
-              </p>
-            </td>
-          </tr>
-        </table>
-        <table
-          style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+      <section class="section-header">
+        <div>
+          <p class="section-eyebrow">Selected work</p>
+          <h2>Research and engineering projects</h2>
+        </div>
+        <p class="section-copy">
+          Recent work on language models for software engineering, environment setup, and evaluation infrastructure.
+        </p>
+      </section>
 
-          {% for post in site.posts %}
-          {% for cat in post.categories %}
-          {% if cat == 'research' %}
-          <tr>
-            <td style="padding:2.5%;width:25%;vertical-align:middle;min-width:120px">
-              <img src="/tn{{post.image}}" alt="project image" style="width:auto; height:auto; max-width:100%;" />
-            </td>
-            <td style="padding:2.5%;width:75%;vertical-align:middle">
-              <h3>{{post.title}}</h3>
-              <br>
-              {{post.authors}}
-
-              <br>
-              <em>{{post.venue}}</em>, {{ post.date | date: "%Y" }}
-              <br>
+      <section class="research-list">
+        {% for post in site.posts %}
+        {% if post.categories contains 'research' %}
+        <article class="research-card">
+          <div class="research-visual">
+            <img src="{{ site.baseurl }}/tn{{post.image}}" alt="{{ post.title }} project image" loading="lazy" />
+          </div>
+          <div class="research-content">
+            <div class="research-meta">
+              <p class="research-year">{{ post.date | date: "%Y" }}</p>
+              <p class="research-venue">{{post.venue}}</p>
+            </div>
+            <h3>{{post.title}}</h3>
+            <p class="research-authors">{{post.authors}}</p>
+            <div class="resource-links">
               {% if post.arxiv %}
-              <a href="{{post.arxiv}}">arxiv</a> /
+              <a href="{{post.arxiv}}">arXiv</a>
               {% endif %}
               {% if post.paper %}
-              <a href="{{post.paper}}">paper</a> /
+              <a href="{{post.paper}}">Paper</a>
               {% endif %}
               {% if post.video %}
-              <a href="{{post.video}}">video</a> /
+              <a href="{{post.video}}">Video</a>
               {% endif %}
               {% if post.code %}
-              <a href="{{post.code}}">code</a> /
+              <a href="{{post.code}}">Code</a>
               {% endif %}
               {% if post.poster %}
-              <a href="{{post.poster}}">poster</a> /
+              <a href="{{post.poster}}">Poster</a>
               {% endif %}
               {% if post.slides %}
-              <a href="{{post.slides}}">slides</a> /
+              <a href="{{post.slides}}">Slides</a>
               {% endif %}
               {% if post.website %}
-              <a href="{{post.website}}">website</a> /
+              <a href="{{post.website}}">Website</a>
               {% endif %}
               {% if post.youtube %}
-              <a href="{{post.youtube}}">youtube</a> /
+              <a href="{{post.youtube}}">YouTube</a>
               {% endif %}
               {% if post.hf %}
-              <a href="{{post.hf}}">hf</a> /
+              <a href="{{post.hf}}">Hugging Face</a>
               {% endif %}
-              <p></p>
-              {{ post.excerpt }}
-            </td>
-          </tr>
-          {% endif %}
-          {% endfor %}
-          {% endfor %}
-        </table>
+            </div>
+            <p class="research-excerpt">{{ post.excerpt | strip_html | strip }}</p>
+          </div>
+        </article>
+        {% endif %}
+        {% endfor %}
+      </section>
 
-        <table
-          style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-          <tr>
-            <td style="padding:0px">
-              <br>
-              <p style="text-align:center;font-size:small;">
-                Design and source code from <a style="font-size:small;" href="https://jonbarron.info">Jon Barron's
-                  website</a>
-              </p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
+      <footer class="site-footer">
+        <p>
+          Design and source code originally adapted from <a href="https://jonbarron.info">Jon Barron's website</a>.
+        </p>
+      </footer>
+    </main>
+  </div>
 </body>
 
 </html>
