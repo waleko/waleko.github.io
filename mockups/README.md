@@ -55,6 +55,26 @@ it's easy to compare with and without it:
 - **Not used at all:** `v2`, `v3`, `v5`, `v6`, `v7`, `v8`, `v10` — these lean on system/serif/mono
   fonts only, for comparison.
 
+## v12 — faithful sarthakmangla.com take
+
+`v12-sarthak-faithful/` reproduces the real site closely: a 768px column on `#FCF6F1`, IBM Plex
+Sans 16/24 body, a Cormorant Garamond 600 name, dashed 1px link underlines with a `#dcfce7` hover
+highlight, a gray comma-separated footer, and the same canvas painter. The painter takes a photo,
+samples it down, and repaints it with gradient-aligned brush strokes over 4.5s. The hero is
+Alexander's own lighthouse photo (`hero-lighthouse.jpg`, cropped from IMG_6076).
+
+Hero options, switchable with `?hero=` or the pill in the bottom-right corner:
+
+- `paint` — Sarthak's original: deckled 3.5:1 rectangle, and hover scratches the paint away.
+- `blob` (default) — a dry-brush blob frame with a lavender wash, after the purple
+  "Try 3 when you can't decide" card. No hover.
+- `reveal` — blob; hover brushes away the paint to show the sharp photo.
+- `beam` — blob; hover lights the lamp and sweeps its beam horizontally.
+- `photo` — blob around the unpainted photo. No hover.
+
+The painter and deckle-mask logic is ported from sarthakmangla.com's client bundle. That is fine
+for a mockup, but rewrite it (or ask him) before shipping it on the live site.
+
 ## The 11 variants at a glance
 
 1. **`v1-journal-cream`** — faithful-to-inspo cream journal; generative painterly Alpine-lake hero
