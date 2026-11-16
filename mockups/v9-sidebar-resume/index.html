@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Alexander Kovrigin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Alexander Kovrigin — ML Researcher at JetBrains, Munich">
+<style>
+  @font-face{ font-family:'My Hand'; src:url('../assets/fonts/handwriting.woff2') format('woff2'); font-display:swap; }
+  :root{
+    --paper:#F2EAD8;
+    --panel:#EAE0C8;
+    --ink:#2a2820;
+    --muted:#827a63;
+    --green:#4d6a4a;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{ background:var(--paper); color:var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+  .layout{ max-width:960px; margin:0 auto; display:grid; grid-template-columns:260px 1fr; min-height:100vh; }
+  @media (max-width:760px){ .layout{ grid-template-columns:1fr; } .sidebar{ position:relative !important; height:auto !important; border-right:none !important; border-bottom:1px solid rgba(42,40,32,.15); } }
+
+  .sidebar{ background:var(--panel); padding:46px 28px; position:sticky; top:0; height:100vh; border-right:1px solid rgba(42,40,32,.1); display:flex; flex-direction:column; }
+  .avatar{ width:96px; height:96px; border-radius:50%; overflow:hidden; margin-bottom:18px; border:3px solid #fff; box-shadow:0 2px 8px rgba(0,0,0,.12); }
+  .avatar img{ width:100%; height:100%; object-fit:cover; filter: saturate(1.3) sepia(.18) contrast(1.08) brightness(1.02); }
+  .sidebar h1{ font-size:21px; margin:0 0 2px; font-family:Georgia, serif; }
+  .sig{ font-family:'My Hand',cursive; color:var(--green); font-size:16px; margin-bottom:18px; transform:rotate(-2deg); display:inline-block; }
+  .role{ font-size:13px; color:var(--muted); line-height:1.5; margin-bottom:28px; }
+
+  nav{ display:flex; flex-direction:column; gap:10px; margin-bottom:auto; }
+  nav a{ font-size:13.5px; color:var(--ink); text-decoration:none; padding:4px 0; border-bottom:1px solid transparent; }
+  nav a:hover{ color:var(--green); border-bottom-color:var(--green); }
+
+  .side-links{ display:flex; flex-direction:column; gap:7px; padding-top:28px; border-top:1px solid rgba(42,40,32,.12); margin-top:28px; }
+  .side-links a{ font-size:12.5px; color:var(--muted); text-decoration:underline; }
+  .side-links a:hover{ color:var(--ink); }
+
+  .content{ padding:56px 44px; }
+  .content p{ font-size:15.5px; line-height:1.72; margin:0 0 18px; max-width:62ch; }
+  .content a{ color:var(--ink); text-decoration:underline; text-decoration-color:var(--green); text-underline-offset:2px; }
+  .content a:hover{ color:var(--green); }
+
+  .section-label{ font-size:11px; text-transform:uppercase; letter-spacing:.14em; color:var(--muted); margin:42px 0 16px; }
+  .pub{ background:#fbf7ec; border:1px solid rgba(42,40,32,.1); border-radius:6px; padding:16px 18px; margin-bottom:12px; }
+  .pub .title{ font-weight:700; font-size:14.5px; color:var(--ink); text-decoration:none; }
+  .pub .title:hover{ color:var(--green); }
+  .pub .meta{ font-size:12.5px; color:var(--muted); margin-top:5px; }
+  .pub .meta a{ color:var(--muted); text-decoration:underline; }
+
+  @media (max-width:520px){ .content{ padding:36px 22px; } }
+</style>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="avatar"><img src="../assets/img/avatar.png" alt="Alexander Kovrigin"></div>
+    <h1>Alexander Kovrigin</h1>
+    <span class="sig">munich, germany</span>
+    <div class="role">ML Researcher at JetBrains, working on RL for coding agents.</div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#research">Research</a>
+      <a href="../index.html">← All mockups</a>
+    </nav>
+    <div class="side-links">
+      <a href="mailto:inbox@alexkovrigin.me">Email</a>
+      <a href="https://github.com/waleko">GitHub</a>
+      <a href="https://scholar.google.com/citations?user=-TlLyrMAAAAJ">Google Scholar</a>
+      <a href="https://www.linkedin.com/in/waleko">LinkedIn</a>
+      <a href="https://x.com/_waleko">X / Twitter</a>
+      <a href="https://acacia.s3.wlko.me/cv/Alexander%20Kovrigin.pdf">CV (PDF)</a>
+    </div>
+  </aside>
+
+  <main class="content">
+    <p>I'm an <a href="https://jetbrains.com">ML Researcher at JetBrains</a> in Munich, where I work on improving large language models for software‑engineering tasks with reinforcement learning.</p>
+    <p>I completed a Master's in Data Science under <a href="https://scholar.google.com/citations?user=7HU0UoUAAAAJ&hl=en">Prof. Dr. Dmitry Vetrov</a> at <a href="https://constructor.university">Constructor University</a> in Bremen, Germany. I earned a silver medal at the <a href="https://2023.nwerc.eu/">ICPC NWERC 2023</a> and a first prize at the <a href="https://www.imc-math.org.uk/?year=2023">IMC 2023</a>.</p>
+    <p>During my Bachelor's I worked in a research group led by <a href="https://scholar.google.com/citations?user=vfQf9SIAAAAJ">Andrey Ustyuzhanin</a>. My work since has spanned reinforcement learning for coding agents, environment‑setup automation, and long‑context benchmarks for code.</p>
+
+    <div class="section-label" id="research">Selected research</div>
+    <div class="pub"><a class="title" href="https://arxiv.org/abs/2509.25455">PIPer: On‑Device Environment Setup via Online Reinforcement Learning</a><div class="meta">NeurIPS 2025 WS on DL for Code · <a href="https://arxiv.org/abs/2509.25455">arxiv</a> / <a href="https://github.com/JetBrains-Research/PIPer">code</a> / <a href="https://huggingface.co/JetBrains-Research/PIPer-8B">hf</a></div></div>
+    <div class="pub"><a class="title" href="https://arxiv.org/abs/2503.14443">EnvBench: A Benchmark for Automated Development Environment Setup</a><div class="meta">ICLR 2025 WS on DL for Code · <a href="https://arxiv.org/abs/2503.14443">arxiv</a> / <a href="https://github.com/JetBrains-Research/EnvBench">code</a></div></div>
+    <div class="pub"><a class="title" href="https://arxiv.org/abs/2406.11612">Long Code Arena: a Set of Benchmarks for Long‑Context Code Models</a><div class="meta">arXiv 2024 · <a href="https://arxiv.org/abs/2406.11612">arxiv</a> / <a href="https://github.com/JetBrains-Research/lca-baselines">code</a> / <a href="https://huggingface.co/spaces/JetBrains-Research/long-code-arena">hf</a></div></div>
+    <div class="pub"><a class="title" href="https://arxiv.org/abs/2406.04464">On the Importance of Reasoning for Context Retrieval in Repository‑Level Code Editing</a><div class="meta">arXiv 2024 · <a href="https://arxiv.org/abs/2406.04464">arxiv</a> / <a href="https://github.com/JetBrains-Research/ai-agents-code-editing">code</a></div></div>
+    <div class="pub"><a class="title" href="https://iopscience.iop.org/article/10.1088/2632-2153/ad4a20">Beyond Dynamics: Learning to Discover Conservation Principles</a><div class="meta">Machine Learning: Science and Technology, 2024 · <a href="https://iopscience.iop.org/article/10.1088/2632-2153/ad4a20">paper</a></div></div>
+  </main>
+</div>
+</body>
+</html>
