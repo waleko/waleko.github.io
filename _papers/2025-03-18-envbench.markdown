@@ -1,12 +1,12 @@
 ---
-layout: post
-title:  "EnvBench: A benchmark for automated development environment setup"
+title:  "EnvBench: A Benchmark for Automated Development Environment Setup"
 date:   2025-03-18 22:21:59 +00:00
 image: /images/envbench.png
 categories: research
 author: "Aleksandra Eliseeva"
 authors: "Aleksandra Eliseeva, <strong>Alexander Kovrigin</strong>, Ilia Kholkin, Egor Bogomolov, Yaroslav Zharov"
-venue: "ICLR 2025 Third Workshop on Deep Learning for Code"
+venue: "ICLR 2025 Workshop on Deep Learning for Code"
+tldr: "The largest dataset to date for environment setup, with a framework for building and evaluating LLM agents on it."
 # paper: https://iopscience.iop.org/article/10.1088/2632-2153/ad4a20
 arxiv: https://arxiv.org/abs/2503.14443
 code: https://github.com/JetBrains-Research/EnvBench

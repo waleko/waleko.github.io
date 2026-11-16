@@ -1,12 +1,13 @@
 ---
-layout: post
 title:  "PIPer: On-Device Environment Setup via Online Reinforcement Learning"
 date:   2025-09-29 22:21:59 +00:00
 image: /images/piper.png
 categories: research
 author: "Alexander Kovrigin"
 authors: "<strong>Alexander Kovrigin</strong>, Aleksandra Eliseeva, Konstantin Grotov, Egor Bogomolov, Yaroslav Zharov"
-venue: "NeurIPS 2025 Fourth Workshop on Deep Learning for Code"
+venue: "NeurIPS 2025 Workshop on Deep Learning for Code"
+tldr: "An 8B model trained with SFT and RL from verifiable rewards that matches GPT-4o and Qwen3-32B at environment setup."
+hf_label: "model"
 # paper: https://openreview.net/forum?id=9TsxdPdhSz
 arxiv: https://arxiv.org/abs/2509.25455
 code: https://github.com/JetBrains-Research/PIPer

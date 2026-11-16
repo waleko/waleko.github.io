@@ -1,12 +1,12 @@
 ---
-layout: post
-title:  "Beyond dynamics: learning to discover conservation principles"
+title:  "Beyond Dynamics: Learning to Discover Conservation Principles"
 date:   2024-01-21 22:21:59 +00:00
 image: /images/beyond-dynamics.png
 categories: research
 author: "Antonii Belyshev"
 authors: "Antonii Belyshev, <strong>Alexander Kovrigin</strong>, Andrey Ustyuzhanin"
 venue: "Machine Learning: Science and Technology"
+tldr: "Representation learning and topology that recover conservation laws from data, including in quantum systems."
 paper: https://iopscience.iop.org/article/10.1088/2632-2153/ad4a20
 # arxiv: https://arxiv.org/abs/2303.07434
 # code: https://github.com/leonidk/modecfg

@@ -1,12 +1,13 @@
 ---
-layout: post
-title:  "Long Code Arena: a Set of Benchmarks for Long-Context Code Models"
+title:  "Long Code Arena: A Set of Benchmarks for Long-Context Code Models"
 date:   2024-06-17 22:21:59 +00:00
 image: /images/lca.png
 categories: research
 author: "Egor Bogomolov"
 authors: "Egor Bogomolov, Aleksandra Eliseeva, Timur Galimzyanov, Evgeniy Glukhov, Anton Shapkin, Maria Tigina, Yaroslav Golubev, <strong>Alexander Kovrigin</strong>, Arie van Deursen, Maliheh Izadi, Timofey Bryksin"
-venue: "arXiv"
+venue: "arXiv preprint"
+tldr: "Six benchmarks for code models whose context spans a whole repository."
+hf_label: "leaderboard"
 arxiv: https://arxiv.org/abs/2406.11612
 code: https://github.com/JetBrains-Research/lca-baselines
 hf: https://huggingface.co/spaces/JetBrains-Research/long-code-arena
