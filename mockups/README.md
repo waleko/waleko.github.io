@@ -61,12 +61,21 @@ it's easy to compare with and without it:
 Sans 16/24 body, a Cormorant Garamond 600 name, dashed 1px link underlines with a `#dcfce7` hover
 highlight, a gray comma-separated footer, and the same canvas painter. The painter takes a photo,
 samples it down, and repaints it with gradient-aligned brush strokes over 4.5s. The hero is
-Alexander's own lighthouse photo (`hero-lighthouse.jpg`, cropped from IMG_6076).
+Alexander's own lighthouse photo: `hero-lighthouse.jpg` (cropped from IMG_6076) and his restructured version `hero-lighthouse-beam.jpg`.
 
 Hero options, switchable with `?hero=` or the pill in the bottom-right corner:
 
+- `oil-blob` (default) and `oil` — real-time oil-paint stylization in WebGL (`oil.js`), using the
+  restructured photo (`hero-lighthouse-beam.jpg`). A one-time GPU pipeline grades the photo,
+  computes a stroke direction per pixel from its structure tensor, flattens colours with an
+  anisotropic Kuwahara filter (Kyprianidis et al.), then smears colour and a stroke/bristle height
+  map along that direction. Each frame lights the height map as impasto and reveals strokes
+  sky-first. Hover turns the light into a point light at the cursor. `oil` uses Sarthak's deckled
+  frame; `oil-blob` uses the dry-brush blob. Without WebGL2 and float render targets it falls back
+  to the 2D painter.
+
 - `paint` — Sarthak's original: deckled 3.5:1 rectangle, and hover scratches the paint away.
-- `blob` (default) — a dry-brush blob frame with a lavender wash, after the purple
+- `blob` — a dry-brush blob frame with a lavender wash, after the purple
   "Try 3 when you can't decide" card. No hover.
 - `reveal` — blob; hover brushes away the paint to show the sharp photo.
 - `beam` — blob; hover lights the lamp and sweeps its beam horizontally.

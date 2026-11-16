@@ -91,6 +91,8 @@
 
 <nav class="switcher" aria-label="Hero options">
   <span class="hint">hero:</span>
+  <a href="?hero=oil">oil</a>
+  <a href="?hero=oil-blob">oil blob</a>
   <a href="?hero=paint">paint</a>
   <a href="?hero=blob">blob</a>
   <a href="?hero=reveal">reveal</a>
@@ -98,31 +100,35 @@
   <a href="?hero=photo">photo</a>
 </nav>
 
+<script src="oil.js"></script>
 <script>
 (() => {
   const MODES = {
+    // WebGL oil-paint stylization (oil.js): strokes paint in, hover moves the light over the impasto.
+    oil:        { aspect: 3.5, focusY: 0.17, frame: 'deckle', oil: true, src: 'hero-lighthouse-beam.jpg' },
+    'oil-blob': { aspect: 2.3, focusY: 0.25, frame: 'blob',   oil: true, src: 'hero-lighthouse-beam.jpg' },
     // Sarthak's original: deckled rectangle, painted in, hover scratches paint away.
-    paint:  { aspect: 3.5, focusY: 0.38, frame: 'deckle', painted: true,  hover: 'erase' },
+    paint:  { aspect: 3.5, focusY: 0.17, frame: 'deckle', painted: true,  hover: 'erase', src: 'hero-lighthouse-beam.jpg' },
     // Dry-brush blob frame, painted in once, no hover.
-    blob:   { aspect: 2.3, focusY: 0.5,  frame: 'blob',   painted: true,  hover: null },
+    blob:   { aspect: 2.3, focusY: 0.25, frame: 'blob',   painted: true,  hover: null, src: 'hero-lighthouse-beam.jpg' },
     // Blob frame; hover brushes away the paint to show the real photo underneath.
-    reveal: { aspect: 2.3, focusY: 0.5,  frame: 'blob',   painted: true,  hover: 'reveal' },
+    reveal: { aspect: 2.3, focusY: 0.25, frame: 'blob',   painted: true,  hover: 'reveal', src: 'hero-lighthouse-beam.jpg' },
     // Blob frame; hover switches the lighthouse on and its beam sweeps.
-    beam:   { aspect: 2.3, focusY: 0.5,  frame: 'blob',   painted: true,  hover: 'beam' },
+    beam:   { aspect: 2.3, focusY: 0.5,  frame: 'blob',   painted: true,  hover: 'beam', src: 'hero-lighthouse.jpg' },
     // Blob frame around the untouched photo.
-    photo:  { aspect: 2.3, focusY: 0.5,  frame: 'blob',   painted: false, hover: null },
+    photo:  { aspect: 2.3, focusY: 0.25, frame: 'blob',   painted: false, hover: null, src: 'hero-lighthouse-beam.jpg' },
   };
   const LAMP = { x: 0.222, y: 0.365 }; // lamp position in hero-lighthouse.jpg, as fractions
   const WASH = 'rgba(205, 196, 232, 0.45)';
 
   const params = new URLSearchParams(location.search);
-  const modeName = MODES[params.get('hero')] ? params.get('hero') : 'blob';
-  const mode = MODES[modeName];
+  const modeName = MODES[params.get('hero')] ? params.get('hero') : 'oil-blob';
+  let mode = MODES[modeName];
   document.querySelectorAll('.switcher a').forEach(a => {
     if (a.getAttribute('href') === '?hero=' + modeName) a.setAttribute('aria-current', 'page');
   });
 
-  const canvas = document.getElementById('hero');
+  let canvas = document.getElementById('hero');
   canvas.style.aspectRatio = String(mode.aspect);
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
@@ -253,6 +259,38 @@
   }
 
   let teardown = () => {};
+
+  function initOil(img) {
+    teardown();
+    const w = Math.max(200, canvas.parentElement.clientWidth), h = Math.round(w / mode.aspect);
+    const stop = window.createOilHero && window.createOilHero(canvas, img, { aspect: mode.aspect, focusY: mode.focusY });
+    if (!stop) {
+      // No WebGL2 / float render targets: fall back to the 2D stroke painter on a fresh canvas.
+      const fresh = canvas.cloneNode(true);
+      canvas.replaceWith(fresh); canvas = fresh;
+      mode = { ...MODES[mode.frame === 'blob' ? 'blob' : 'paint'], aspect: mode.aspect, focusY: mode.focusY };
+      init(img);
+      return;
+    }
+    const hero = canvas.parentElement;
+    if (mode.frame === 'blob') {
+      const inset = Math.max(18, w * 0.045);
+      const mask = dryBrushBlob(w, h, { inset, scratches: 0 });
+      const wash = dryBrushBlob(w, h, { inset: inset * 0.35, color: WASH, scratches: 1.6, shift: [inset * 0.3, inset * 0.25] });
+      setMask(mask);
+      hero.style.backgroundImage = `url(${wash.toDataURL()})`;
+      hero.style.backgroundSize = '100% 100%';
+    } else {
+      setMask(deckleMask(w, h));
+    }
+    teardown = stop;
+  }
+
+  function setMask(maskCanvas) {
+    const url = `url(${maskCanvas.toDataURL()})`;
+    for (const p of ['maskImage', 'webkitMaskImage']) canvas.style[p] = url;
+    for (const p of ['maskSize', 'webkitMaskSize']) canvas.style[p] = '100% 100%';
+  }
 
   function init(img) {
     teardown();
@@ -401,18 +439,19 @@
   }
 
   const img = new Image();
+  const start = (im) => (mode.oil ? initOil : init)(im);
   img.onload = () => {
-    init(img);
+    start(img);
     let lastWidth = canvas.parentElement.clientWidth, timer = 0;
     addEventListener('resize', () => {
       clearTimeout(timer);
       timer = setTimeout(() => {
         const nw = canvas.parentElement.clientWidth;
-        if (Math.abs(nw - lastWidth) > 40) { lastWidth = nw; init(img); }
+        if (Math.abs(nw - lastWidth) > 40) { lastWidth = nw; start(img); }
       }, 200);
     });
   };
-  img.src = 'hero-lighthouse.jpg';
+  img.src = mode.src;
 })();
 </script>
 </body>
