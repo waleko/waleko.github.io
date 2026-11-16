@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Alexander Kovrigin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Alexander Kovrigin — ML Researcher at JetBrains, Munich">
+<style>
+  @font-face {
+    font-family: 'My Hand';
+    src: url('../assets/fonts/handwriting.woff2') format('woff2'),
+         url('../assets/fonts/handwriting.otf') format('opentype');
+    font-display: swap;
+  }
+  :root{
+    --paper:#FBF6E9;
+    --ink:#2c2a22;
+    --muted:#9a9177;
+    --accent:#c75c3f;
+    --rule: rgba(44,42,34,.08);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      repeating-linear-gradient(var(--paper) 0 35px, var(--rule) 35px 36px),
+      var(--paper);
+    color:var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .page{ max-width:920px; margin:0 auto; padding:46px 20px 100px; position:relative; }
+  .grid{ display:grid; grid-template-columns: 1fr 190px; gap:30px; }
+  @media (max-width:780px){ .grid{grid-template-columns:1fr;} .margin{display:none;} }
+
+  nav{ display:flex; gap:20px; margin-bottom:28px; }
+  nav a{ font-family:'My Hand',cursive; font-size:20px; color:var(--ink); text-decoration:none; position:relative; }
+  nav a::after{ content:''; position:absolute; left:-2px; right:-2px; bottom:-3px; height:6px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='8'%3E%3Cpath d='M0,4 Q8,0 16,4 T32,4 T48,4 T64,4' stroke='%23c75c3f' stroke-width='2' fill='none'/%3E%3C/svg%3E") repeat-x;
+    opacity:0; transition:opacity .2s; }
+  nav a:hover::after{ opacity:1; }
+
+  .hero-frame{ border:2px solid var(--ink); border-radius:6px; padding:0; margin-bottom:6px; background:#fffdf6; overflow:hidden; cursor:pointer; position:relative; }
+  .hero-frame svg{ width:100%; height:auto; display:block; }
+  .hero-caption{ font-family:'My Hand',cursive; font-size:17px; color:var(--accent); margin:6px 0 0 6px; transform:rotate(-1deg); display:inline-block; }
+  .hero-wrap{ margin-bottom:40px; }
+
+  h1{ font-size:40px; font-weight:800; margin:4px 0 2px; letter-spacing:-.01em; }
+  .scribble-underline{ position:relative; display:inline-block; }
+  .tag{ font-family:'My Hand',cursive; color:var(--accent); font-size:20px; margin-left:8px; }
+
+  .role{ font-family:'My Hand',cursive; font-size:19px; color:var(--ink); margin:2px 0 22px; }
+  p{ font-size:15.5px; line-height:1.72; margin:0 0 18px; position:relative; }
+  mark{ background:#ffe9a8; padding:0 2px; border-radius:2px; }
+  a{ color:var(--ink); text-decoration-color: var(--accent); text-decoration-thickness:2px; text-underline-offset:3px; }
+  a:hover{ color:var(--accent); }
+
+  .margin{ padding-top:10px; }
+  .note{ font-family:'My Hand',cursive; font-size:17px; color:var(--accent); line-height:1.25; margin-bottom:90px; transform:rotate(-2deg); position:relative; }
+  .note:nth-child(even){ transform:rotate(1.5deg); }
+  .note svg{ position:absolute; top:-14px; left:-34px; width:30px; height:30px; }
+
+  .section-label{ font-family:'My Hand',cursive; font-size:24px; color:var(--ink); margin:40px 0 14px; }
+  .pubs{ display:flex; flex-direction:column; gap:10px; }
+  .pub{ background:#fffdf6; border:1.5px solid rgba(44,42,34,.5); border-radius:4px; padding:12px 14px; position:relative; box-shadow:3px 3px 0 rgba(44,42,34,.08); }
+  .pub .title{ font-weight:700; font-size:14.5px; color:var(--ink); text-decoration:none; }
+  .pub .title:hover{ color:var(--accent); }
+  .pub .meta{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  .pub .meta a{ color:var(--muted); text-decoration:underline; }
+  .pub .pin{ position:absolute; top:-7px; right:16px; font-size:16px; }
+
+  footer{ margin-top:56px; text-align:center; }
+  .sig{ font-family:'My Hand',cursive; font-size:34px; color:var(--ink); margin-bottom:10px; }
+  .links{ font-size:13px; color:var(--muted); }
+  .links a{ color:var(--muted); text-decoration:underline; }
+  .links a:hover{ color:var(--accent); }
+
+  @media (max-width:520px){ .page{padding:30px 16px 70px;} h1{font-size:32px;} }
+</style>
+</head>
+<body>
+<div class="page">
+  <nav>
+    <a href="#">home</a>
+    <a href="#research">research</a>
+    <a href="../index.html">all mockups</a>
+  </nav>
+
+  <div class="grid">
+    <div>
+      <div class="hero-wrap">
+        <div class="hero-frame" id="heroFrame">
+          <svg viewBox="0 0 760 260">
+            <defs>
+              <filter id="sketchy"><feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="6"/></filter>
+              <pattern id="hatch" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+                <line x1="0" y1="0" x2="0" y2="7" stroke="#2c2a22" stroke-width="1.3"/>
+              </pattern>
+            </defs>
+            <g filter="url(#sketchy)" stroke="#2c2a22" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M30,210 L150,70 L230,170 L300,40 L400,210" />
+              <path d="M330,210 L470,60 L560,160 L630,90 L730,210" />
+              <path id="sunPath" d="M0,0" />
+            </g>
+            <circle id="sun" cx="640" cy="60" r="26" fill="none" stroke="#c75c3f" stroke-width="3"/>
+            <g id="hatchFill" opacity="0">
+              <path d="M30,210 L150,70 L230,170 L300,40 L400,210 Z" fill="url(#hatch)"/>
+              <path d="M330,210 L470,60 L560,160 L630,90 L730,210 Z" fill="url(#hatch)"/>
+            </g>
+            <text id="label1" x="150" y="245" font-family="My Hand, cursive" font-size="20" fill="#c75c3f" opacity="0" transform="rotate(-2 150 245)">the alps, roughly ↑</text>
+            <text id="label2" x="480" y="245" font-family="My Hand, cursive" font-size="20" fill="#c75c3f" opacity="0" transform="rotate(1 480 245)">(munich is down there somewhere)</text>
+          </svg>
+        </div>
+        <span class="hero-caption">↑ tap/hover — i drew this myself, promise</span>
+      </div>
+
+      <h1>Alexander Kovrigin<span class="tag">hi! ✌</span></h1>
+      <div class="role">ml researcher @ jetbrains, munich</div>
+
+      <p>I'm an <a href="https://jetbrains.com">ML Researcher at JetBrains</a> in Munich, where I work on improving large language models for software‑engineering tasks with <mark>reinforcement learning</mark>.</p>
+      <p>I completed a Master's in Data Science under <a href="https://scholar.google.com/citations?user=7HU0UoUAAAAJ&hl=en">Prof. Dr. Dmitry Vetrov</a> at <a href="https://constructor.university">Constructor University</a> in Bremen, Germany. I earned a silver medal at the <a href="https://2023.nwerc.eu/">ICPC NWERC 2023</a> and a first prize at the <a href="https://www.imc-math.org.uk/?year=2023">IMC 2023</a>.</p>
+      <p>During my Bachelor's I worked in a research group led by <a href="https://scholar.google.com/citations?user=vfQf9SIAAAAJ">Andrey Ustyuzhanin</a>. My work since has spanned RL for coding agents, environment‑setup automation, and long‑context benchmarks for code.</p>
+
+      <div class="section-label" id="research">a few papers →</div>
+      <div class="pubs">
+        <div class="pub"><span class="pin">📌</span><a class="title" href="https://arxiv.org/abs/2509.25455">PIPer: On‑Device Environment Setup via Online Reinforcement Learning</a><div class="meta">NeurIPS 2025 WS on DL for Code · <a href="https://arxiv.org/abs/2509.25455">arxiv</a> / <a href="https://github.com/JetBrains-Research/PIPer">code</a> / <a href="https://huggingface.co/JetBrains-Research/PIPer-8B">hf</a></div></div>
+        <div class="pub"><a class="title" href="https://arxiv.org/abs/2503.14443">EnvBench: A Benchmark for Automated Development Environment Setup</a><div class="meta">ICLR 2025 WS on DL for Code · <a href="https://arxiv.org/abs/2503.14443">arxiv</a> / <a href="https://github.com/JetBrains-Research/EnvBench">code</a></div></div>
+        <div class="pub"><a class="title" href="https://arxiv.org/abs/2406.11612">Long Code Arena: a Set of Benchmarks for Long‑Context Code Models</a><div class="meta">arXiv 2024 · <a href="https://arxiv.org/abs/2406.11612">arxiv</a> / <a href="https://github.com/JetBrains-Research/lca-baselines">code</a> / <a href="https://huggingface.co/spaces/JetBrains-Research/long-code-arena">hf</a></div></div>
+        <div class="pub"><a class="title" href="https://arxiv.org/abs/2406.04464">On the Importance of Reasoning for Context Retrieval in Repository‑Level Code Editing</a><div class="meta">arXiv 2024 · <a href="https://arxiv.org/abs/2406.04464">arxiv</a> / <a href="https://github.com/JetBrains-Research/ai-agents-code-editing">code</a></div></div>
+        <div class="pub"><a class="title" href="https://iopscience.iop.org/article/10.1088/2632-2153/ad4a20">Beyond Dynamics: Learning to Discover Conservation Principles</a><div class="meta">Machine Learning: Science and Technology, 2024 · <a href="https://iopscience.iop.org/article/10.1088/2632-2153/ad4a20">paper</a></div></div>
+      </div>
+
+      <footer>
+        <div class="sig">Alexander Kovrigin</div>
+        <div class="links">
+          <a href="https://github.com/waleko">github</a> ·
+          <a href="https://x.com/_waleko">x</a> ·
+          <a href="https://scholar.google.com/citations?user=-TlLyrMAAAAJ">scholar</a> ·
+          <a href="https://www.linkedin.com/in/waleko">linkedin</a> ·
+          <a href="https://acacia.s3.wlko.me/cv/Alexander%20Kovrigin.pdf">cv</a> ·
+          <a href="mailto:inbox@alexkovrigin.me">email</a>
+        </div>
+      </footer>
+    </div>
+
+    <div class="margin">
+      <div class="note">hover the<br>mountains! →<svg viewBox="0 0 30 30"><path d="M2,28 Q10,2 28,8" stroke="#c75c3f" stroke-width="2" fill="none" marker-end="url(#ah)"/><defs><marker id="ah" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#c75c3f"/></marker></defs></svg></div>
+      <div class="note">this is the fun part of the redesign</div>
+      <div class="note">(yes that's a real medal)</div>
+      <div class="note">new papers every few months lately!</div>
+    </div>
+  </div>
+</div>
+<script>
+  var hf = document.getElementById('heroFrame');
+  var hatch = document.getElementById('hatchFill');
+  var l1 = document.getElementById('label1');
+  var l2 = document.getElementById('label2');
+  var sun = document.getElementById('sun');
+  var on = false;
+  function enter(){
+    on = true;
+    hatch.style.transition='opacity .9s ease';
+    hatch.style.opacity = 0.55;
+    l1.style.transition='opacity .6s ease .3s';
+    l2.style.transition='opacity .6s ease .5s';
+    l1.style.opacity = 1;
+    l2.style.opacity = 1;
+    sun.style.transition='transform 1.1s ease';
+    sun.style.transform = 'translateY(-10px) scale(1.08)';
+    sun.style.transformOrigin = '640px 60px';
+  }
+  function leave(){
+    on = false;
+    hatch.style.opacity = 0;
+    l1.style.opacity = 0;
+    l2.style.opacity = 0;
+    sun.style.transform = 'none';
+  }
+  hf.addEventListener('mouseenter', enter);
+  hf.addEventListener('mouseleave', leave);
+  hf.addEventListener('click', function(){ on ? leave() : enter(); });
+</script>
+</body>
+</html>
