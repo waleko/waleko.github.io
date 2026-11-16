@@ -50,6 +50,16 @@ section a {
 }
 section a:hover, section a:focus-visible { text-decoration-color: currentColor; }
 
+/* Bio links: a 1px dashed underline; a faint warm tint fades in on hover. */
+.bio a {
+  text-decoration-style: dashed;
+  text-decoration-color: currentColor;
+  text-underline-offset: 2px;
+  font-weight: 400;
+  transition: background-color .5s cubic-bezier(0, 0, .2, 1);
+}
+.bio a:hover, .bio a:focus-visible { background-color: rgba(214, 150, 90, .16); }
+
 .name {
   font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 600;
   font-size: clamp(28px, 2.5vw + 18px, 36px); line-height: 1.15; letter-spacing: -.005em;
