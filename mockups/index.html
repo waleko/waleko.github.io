@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Redesign mockups — Alexander Kovrigin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{
+    --bg:#F7F5F0;
+    --ink:#262420;
+    --muted:#827c6e;
+    --card:#ffffff;
+    --accent:#b4593a;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{ max-width:1180px; margin:0 auto; padding:56px 26px 90px; }
+  header{ margin-bottom:46px; max-width:720px; }
+  .kicker{ font-size:12px; text-transform:uppercase; letter-spacing:.14em; color:var(--accent); margin-bottom:10px; }
+  h1{ font-family: Georgia, serif; font-size:38px; font-weight:400; margin:0 0 16px; }
+  header p{ font-size:16px; line-height:1.65; color:#4a473f; margin:0 0 10px; }
+  header a{ color:var(--ink); text-decoration-color:var(--accent); }
+  .meta-links{ margin-top:18px; font-size:13.5px; color:var(--muted); }
+  .meta-links a{ color:var(--ink); text-decoration:underline; text-decoration-color: var(--accent); margin-right:14px; }
+
+  .grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap:26px;
+  }
+  .card{
+    background:var(--card);
+    border-radius:10px;
+    overflow:hidden;
+    border:1px solid rgba(38,36,32,.08);
+    box-shadow: 0 10px 28px -20px rgba(40,30,20,.35);
+    display:flex;
+    flex-direction:column;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .card:hover{ transform: translateY(-3px); box-shadow: 0 16px 34px -18px rgba(40,30,20,.4); }
+  .thumb{
+    position:relative;
+    width:100%;
+    aspect-ratio: 4/3;
+    overflow:hidden;
+    background:#eee;
+  }
+  .thumb img{
+    width:100%; height:100%;
+    object-fit:cover;
+    object-position: top;
+    display:block;
+  }
+  .thumb .badge{
+    position:absolute; top:10px; left:10px;
+    background:rgba(20,18,15,.72);
+    color:#fff;
+    font-size:10.5px;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    padding:3px 8px;
+    border-radius:4px;
+  }
+  .thumb .num{
+    position:absolute; top:10px; right:10px;
+    background:rgba(255,255,255,.85);
+    color:#262420;
+    font-size:11px;
+    font-weight:700;
+    padding:3px 8px;
+    border-radius:4px;
+  }
+  .card-body{ padding:16px 18px 18px; display:flex; flex-direction:column; gap:8px; flex:1; }
+  .card-body h2{ font-size:16px; margin:0; font-family: Georgia, serif; font-weight:700; }
+  .card-body .tagline{ font-size:13px; color:#55524a; line-height:1.5; flex:1; }
+  .card-body .tags{ display:flex; flex-wrap:wrap; gap:6px; margin-top:4px; }
+  .tag{ font-size:10.5px; letter-spacing:.03em; text-transform:uppercase; color:var(--muted); background:#f1efe8; border:1px solid rgba(38,36,32,.08); padding:2px 7px; border-radius:20px; }
+  .card-body .open{ margin-top:8px; font-size:13px; font-weight:600; color:var(--accent); text-decoration:none; }
+  .card-body .open:hover{ text-decoration:underline; }
+  .card a.wrapper-link{ color:inherit; text-decoration:none; display:flex; flex-direction:column; height:100%; }
+
+  footer{ margin-top:60px; font-size:13px; color:var(--muted); text-align:center; }
+  footer a{ color:var(--muted); }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="kicker">Redesign exploration · mockups folder</div>
+    <h1>Pick a direction</h1>
+    <p>11 standalone, self-contained mockups for <a href="https://alexkovrigin.me">alexkovrigin.me</a>, all built from the real bio, publications, and links already on the live site. Several swap in a different interactive, hover-reactive hero in place of a static photo — in the spirit of <a href="https://x.com/msarthak29/status/2122150994897518721">Sarthak Mangla's refreshed site</a> (see <code>README.md</code> for the full reference list). Open any card to try the live interaction; nothing here touches the deployed site.</p>
+    <div class="meta-links">
+      <a href="README.md">references &amp; inspiration notes →</a>
+      <a href="../_layouts/default.html">current live layout (for comparison) →</a>
+    </div>
+  </header>
+
+  <div class="grid">
+
+    <div class="card">
+      <a class="wrapper-link" href="v1-journal-cream/index.html">
+        <div class="thumb"><span class="num">01</span><span class="badge">hover hero</span><img src="screenshots/v1-journal-cream-desktop.png" alt="v1 journal cream thumbnail"></div>
+        <div class="card-body">
+          <h2>Journal / Cream</h2>
+          <p class="tagline">The faithful-to-inspo take: narrow cream column, serif heading, and a generative painterly Alpine‑lake hero that ripples when you hover it.</p>
+          <div class="tags"><span class="tag">faithful to inspo</span><span class="tag">canvas painting</span><span class="tag">handwriting accent</span></div>
+          <span class="open">Open mockup →</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="card">
+      <a class="wrapper-link" href="v2-shader-waves-dark/index.html">
+        <div class="thumb"><span class="num">02</span><span class="badge">hover hero</span><img src="screenshots/v2-shader-waves-dark-desktop.png" alt="v2 shader waves dark thumbnail"></div>
+        <div class="card-body">
+          <h2>Shader Waves (Dark)</h2>
+          <p class="tagline">Dark-mode take with a live WebGL fragment shader — a teal aurora-like current that blooms and swirls toward your cursor in real time.</p>
+          <div class="tags"><span class="tag">dark mode</span><span class="tag">webgl shader</span></div>
+          <span class="open">Open mockup →</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="card">
+      <a class="wrapper-link" href="v3-ink-brush-munich/index.html">
+        <div class="thumb"><span class="num">03</span><span class="badge">hover hero</span><img src="screenshots/v3-ink-brush-munich-desktop.png" alt="v3 ink brush munich thumbnail"></div>
+        <div class="card-body">
+          <h2>Ink &amp; Brush Munich</h2>
+          <p class="tagline">A minimal ink line-study of the Munich skyline (Frauenkirche towers included) that draws itself in on hover, with the sun rising behind it.</p>
+          <div class="tags"><span class="tag">munich</span><span class="tag">svg line-draw</span><span class="tag">no font</span></div>
+          <span class="open">Open mockup →</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="card">
+      <a class="wrapper-link" href="v4-handwritten-margins/index.html">
+        <div class="thumb"><span class="num">04</span><span class="badge">hover hero</span><img src="screenshots/v4-handwritten-margins-desktop.png" alt="v4 handwritten margins thumbnail"></div>
+        <div class="card-body">
+          <h2>Handwritten Margins</h2>
+          <p class="tagline">The playful, most hand-drawn option — notebook-ruled paper, the handwriting font throughout, margin annotations, and a doodled mountain that hatches in on hover.</p>
+          <div class="tags"><span class="tag">playful</span><span class="tag">handwriting font heavy</span></div>
+          <span class="open">Open mockup →</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="card">
+      <a class="wrapper-link" href="v5-typographic-academic/index.html">
+        <div class="thumb"><span class="num">05</span><img src="screenshots/v5-typographic-academic-desktop.png" alt="v5 typographic academic thumbnail"></div>
+        <div class="card-body">
+          <h2>Typographic / Academic</h2>
+          <p class="tagline">No hero image at all — a dense, confident CV-style grid with a publications table, numbered sections, and monospace metadata.</p>
+          <div class="tags"><span class="tag">no hero</span><span class="tag">cv style</span><span class="tag">no font</span></div>
+          <span class="open">Open mockup →</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="card">
+      <a class="wrapper-link" href="v6-alpine-parallax/index.html">
+        <div class="thumb"><span class="num">06</span><span class="badge">mouse-move hero</span><img src="screenshots/v6-alpine-parallax-desktop.png" alt="v6 alpine parallax thumbnail"></div>
+        <div class="card-body">
+          <h2>Alpine Parallax</h2>
+          <p class="tagline">A flat-illustrated alpenglow mountain range in parallax layers — the ridgeline shifts and the sky drifts from day to dusk as you move the cursor.</p>
+          <div class="tags"><span class="tag">alps</span><span class="tag">parallax svg</span><span class="tag">warm palette</span></div>
+          <span class="open">Open mockup →</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="card">
+      <a class="wrapper-link" href="v7-flow-field-optimizer/index.html">
+        <div class="thumb"><span class="num">07</span><span class="badge">hover hero</span><img src="screenshots/v7-flow-field-optimizer-desktop.png" alt="v7 flow field optimizer thumbnail"></div>
+        <div class="card-body">
+          <h2>Flow Field / Optimizer</h2>
+          <p class="tagline">A tiny generative "optimization landscape": ~900 particles drifting a curl-noise field that converge toward wherever you place the cursor — a nod to his research.</p>
+          <div class="tags"><span class="tag">generative canvas</span><span class="tag">ml-themed</span><span class="tag">no font</span></div>
+          <span class="open">Open mockup →</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="card">
+      <a class="wrapper-link" href="v8-node-graph-dark/index.html">
+        <div class="thumb"><span class="num">08</span><span class="badge">hover hero</span><img src="screenshots/v8-node-graph-dark-desktop.png" alt="v8 node graph dark thumbnail"></div>
+        <div class="card-body">
+          <h2>Node Graph (Dark)</h2>
+          <p class="tagline">A dark, monospace, terminal-flavored layout with a drifting neural-graph hero that lights up and clusters around your cursor like an attention map.</p>
+          <div class="tags"><span class="tag">dark mode</span><span class="tag">canvas graph</span><span class="tag">monospace</span></div>
+          <span class="open">Open mockup →</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="card">
+      <a class="wrapper-link" href="v9-sidebar-resume/index.html">
+        <div class="thumb"><span class="num">09</span><img src="screenshots/v9-sidebar-resume-desktop.png" alt="v9 sidebar resume thumbnail"></div>
+        <div class="card-body">
+          <h2>Sidebar Resume</h2>
+          <p class="tagline">A two-column resume layout — sticky sidebar with a softly duotone photo and links, publications as cards in the main column.</p>
+          <div class="tags"><span class="tag">two-column</span><span class="tag">static</span><span class="tag">handwriting accent</span></div>
+          <span class="open">Open mockup →</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="card">
+      <a class="wrapper-link" href="v10-terminal-mono/index.html">
+        <div class="thumb"><span class="num">10</span><span class="badge">hover hero</span><img src="screenshots/v10-terminal-mono-desktop.png" alt="v10 terminal mono thumbnail"></div>
+        <div class="card-body">
+          <h2>Terminal / Mono</h2>
+          <p class="tagline">A phosphor-green terminal window with the bio as shell output, publications as a <code>ls -la</code> listing, and an ASCII-art Munich skyline that types itself in on hover.</p>
+          <div class="tags"><span class="tag">geeky</span><span class="tag">ascii art</span><span class="tag">dark mode</span></div>
+          <span class="open">Open mockup →</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="card">
+      <a class="wrapper-link" href="v11-washi-ma/index.html">
+        <div class="thumb"><span class="num">11</span><span class="badge">hover hero</span><img src="screenshots/v11-washi-ma-desktop.png" alt="v11 washi ma thumbnail"></div>
+        <div class="card-body">
+          <h2>Washi / Ma</h2>
+          <p class="tagline">The quietest option — almost all negative space, centered type, and a single ink ensō circle that draws itself in on hover. A handwritten seal stands in for a signature.</p>
+          <div class="tags"><span class="tag">minimal zen</span><span class="tag">svg ink draw</span><span class="tag">handwriting seal</span></div>
+          <span class="open">Open mockup →</span>
+        </div>
+      </a>
+    </div>
+
+  </div>
+
+  <footer>
+    Built for exploration only — none of this replaces <code>index.html</code> / <code>_layouts/default.html</code> or touches the deployed site. See <a href="README.md">README.md</a> for inspiration sources.
+  </footer>
+</div>
+</body>
+</html>
