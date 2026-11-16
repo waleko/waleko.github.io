@@ -91,6 +91,9 @@
 
 <nav class="switcher" aria-label="Hero options">
   <span class="hint">hero:</span>
+  <a href="?hero=diffuse">diffuse</a>
+  <a href="?hero=dots">dots</a>
+  <a href="?hero=drops">drops</a>
   <a href="?hero=appear">appear</a>
   <a href="?hero=paint">paint</a>
   <a href="?hero=loose">loose</a>
@@ -104,6 +107,10 @@
 <script>
 (() => {
   const MODES = {
+    // Appear experiments: same finished painting, different emergence.
+    diffuse: { aspect: 3.5, focusY: 0.17, frame: 'deckle', reveal: 'diffuse', src: 'hero-lighthouse-beam.jpg' },
+    dots:    { aspect: 3.5, focusY: 0.17, frame: 'deckle', reveal: 'dots',    src: 'hero-lighthouse-beam.jpg' },
+    drops:   { aspect: 3.5, focusY: 0.17, frame: 'deckle', reveal: 'drops',   src: 'hero-lighthouse-beam.jpg' },
     // Sarthak's original: deckled rectangle, painted in, hover scratches paint away.
     paint:  { aspect: 3.5, focusY: 0.17, frame: 'deckle', painted: true,  hover: 'erase', src: 'hero-lighthouse-beam.jpg' },
     // Sarthak's painter and frame, no hover; the scene is swept in like a brush blocking it in, then refined.
@@ -125,7 +132,7 @@
   const WASH = 'rgba(205, 196, 232, 0.45)';
 
   const params = new URLSearchParams(location.search);
-  const modeName = MODES[params.get('hero')] ? params.get('hero') : 'appear';
+  const modeName = MODES[params.get('hero')] ? params.get('hero') : 'diffuse';
   const mode = MODES[modeName];
   document.querySelectorAll('.switcher a').forEach(a => {
     if (a.getAttribute('href') === '?hero=' + modeName) a.setAttribute('aria-current', 'page');
@@ -285,6 +292,154 @@
   }
 
   let teardown = () => {};
+
+  // The finished painting is rendered offscreen first; only its appearance is animated.
+  function initReveal(img) {
+    teardown();
+    const w = Math.max(200, canvas.parentElement.clientWidth), h = Math.round(w / mode.aspect);
+    const W = Math.round(w * dpr), H = Math.round(h * dpr);
+    canvas.width = W; canvas.height = H;
+    const ctx = canvas.getContext('2d');
+    const cw = Math.min(img.naturalWidth, img.naturalHeight * mode.aspect), ch = cw / mode.aspect;
+    const crop = { x: (img.naturalWidth - cw) / 2, y: (img.naturalHeight - ch) * mode.focusY, w: cw, h: ch };
+    const mask = deckleMask(w, h);
+    const paint = makeCanvas(W, H);
+    const work = makeCanvas(W, H), wg = work.getContext('2d');
+    const layer = makeCanvas(W, H), lg = layer.getContext('2d');
+    let dead = false, raf = 0, stopPaint = () => {};
+
+    function present(drawContent) {
+      wg.globalCompositeOperation = 'source-over'; wg.globalAlpha = 1;
+      wg.clearRect(0, 0, W, H);
+      drawContent();
+      wg.globalCompositeOperation = 'destination-in'; wg.globalAlpha = 1;
+      wg.drawImage(mask, 0, 0);
+      ctx.clearRect(0, 0, W, H);
+      ctx.drawImage(work, 0, 0);
+    }
+
+    function begin() {
+      if (dead) return;
+      if (reduceMotion.matches) { present(() => wg.drawImage(paint, 0, 0)); return; }
+
+      // Halving chain = cheap, smooth blur at any level.
+      const mips = [paint];
+      for (let c = paint; c.width > 24;) {
+        const n = makeCanvas(Math.max(1, c.width >> 1), Math.max(1, c.height >> 1));
+        const g = n.getContext('2d'); g.imageSmoothingQuality = 'high';
+        g.drawImage(c, 0, 0, n.width, n.height);
+        mips.push(n); c = n;
+      }
+      const top = mips.length - 1;
+      const drawBlur = (g, level, alpha = 1) => {
+        level = Math.max(0, Math.min(top, level));
+        const k = Math.floor(level), f = level - k;
+        g.imageSmoothingEnabled = true; g.imageSmoothingQuality = 'high';
+        g.globalAlpha = alpha;
+        g.drawImage(mips[Math.min(top, k + 1)], 0, 0, W, H);
+        g.globalAlpha = alpha * (1 - f);
+        g.drawImage(mips[k], 0, 0, W, H);
+        g.globalAlpha = 1;
+      };
+
+      const kind = mode.reveal;
+      const duration = { diffuse: 2800, dots: 3200, drops: 3400 }[kind];
+      const smooth = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
+
+      // diffuse: soft colour grain that is re-rolled in discrete "denoising steps".
+      let grain = null, grainStep = -1, gx = 0, gy = 0;
+      if (kind === 'diffuse') {
+        grain = makeCanvas(Math.ceil(W / 3), Math.ceil(H / 3));
+        const gctx = grain.getContext('2d'), id = gctx.createImageData(grain.width, grain.height);
+        for (let i = 0; i < id.data.length; i += 4) {
+          const base = 128 + (rand() + rand() + rand() - 1.5) * 120;
+          id.data[i] = base + (rand() - 0.5) * 40; id.data[i + 1] = base + (rand() - 0.5) * 40; id.data[i + 2] = base + (rand() - 0.5) * 40;
+          id.data[i + 3] = 255;
+        }
+        gctx.putImageData(id, 0, 0);
+      }
+
+      // dots: colours sampled from a quarter-res copy of the painting.
+      const sample = mips[Math.min(2, top)], sctx = sample.getContext('2d');
+      const spx = sctx.getImageData(0, 0, sample.width, sample.height).data;
+      const colorAt = (x, y) => {
+        const sx = Math.min(sample.width - 1, (x / W * sample.width) | 0), sy = Math.min(sample.height - 1, (y / H * sample.height) | 0);
+        const k = (sy * sample.width + sx) * 4;
+        return `rgb(${spx[k]},${spx[k + 1]},${spx[k + 2]})`;
+      };
+
+      // drops: soft circles that open at random times and spots.
+      const drops = Array.from({ length: Math.round((w * h) / 2200) }, () => ({
+        x: rand() * W, y: rand() * H, t0: Math.pow(rand(), 1.3) * 0.6, r: (45 + rand() * 80) * dpr,
+      }));
+
+      const start = performance.now() + 150;
+      let prev = start;
+      const frame = (now) => {
+        raf = 0;
+        if (dead) return;
+        if (now < start) { raf = requestAnimationFrame(frame); return; }
+        const p = Math.min(1, (now - start) / duration), dt = now - prev; prev = now;
+
+        if (kind === 'diffuse') {
+          const level = top * Math.pow(1 - p, 1.6);
+          const noise = Math.pow(1 - p, 1.4) * 0.7;
+          const step = Math.floor(p * 26);
+          if (step !== grainStep) { grainStep = step; gx = -rand() * W * 0.5; gy = -rand() * H * 0.5; }
+          present(() => {
+            wg.globalAlpha = smooth(0, 0.18, p);
+            drawBlur(wg, level, smooth(0, 0.18, p));
+            if (noise > 0.01) {
+              wg.globalCompositeOperation = 'overlay';
+              wg.globalAlpha = noise * smooth(0, 0.18, p);
+              wg.drawImage(grain, gx, gy, W * 1.5, H * 1.5);
+              wg.globalCompositeOperation = 'source-over';
+            }
+          });
+        } else if (kind === 'dots') {
+          const q = Math.min(1, p / 0.8);
+          const r = lerp(20, 2.5, Math.pow(q, 0.6)) * dpr;
+          const n = Math.min(1400, Math.ceil((W * H) / (Math.PI * r * r) * 0.07 * (dt / 16.7)));
+          if (q < 1) for (let i = 0; i < n; i++) {
+            const x = rand() * W, y = rand() * H, rr = r * (0.6 + 0.8 * rand());
+            lg.fillStyle = colorAt(x, y); lg.globalAlpha = 0.9;
+            lg.beginPath(); lg.arc(x, y, rr, 0, Math.PI * 2); lg.fill();
+          }
+          present(() => {
+            drawBlur(wg, top * 0.8, smooth(0, 0.25, p) * 0.85);
+            wg.drawImage(layer, 0, 0);
+            wg.globalAlpha = smooth(0.55, 1, p);
+            wg.drawImage(paint, 0, 0);
+          });
+        } else {
+          lg.globalCompositeOperation = 'source-over';
+          lg.clearRect(0, 0, W, H);
+          for (const d of drops) {
+            const age = (p - d.t0) / 0.45;
+            if (age <= 0) continue;
+            const e = 1 - Math.pow(1 - Math.min(1, age), 3), r = d.r * e;
+            const g = lg.createRadialGradient(d.x, d.y, 0, d.x, d.y, r);
+            g.addColorStop(0, 'rgba(0,0,0,1)'); g.addColorStop(0.55, 'rgba(0,0,0,0.9)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+            lg.fillStyle = g; lg.beginPath(); lg.arc(d.x, d.y, r, 0, Math.PI * 2); lg.fill();
+          }
+          const fill = smooth(0.7, 1, p);
+          if (fill > 0) { lg.fillStyle = `rgba(0,0,0,${fill})`; lg.fillRect(0, 0, W, H); }
+          present(() => {
+            drawBlur(wg, top * 0.75 * Math.pow(1 - p, 1.5));
+            wg.globalCompositeOperation = 'destination-in';
+            wg.drawImage(layer, 0, 0);
+          });
+        }
+
+        if (p < 1) raf = requestAnimationFrame(frame);
+        else present(() => wg.drawImage(paint, 0, 0));
+      };
+      raf = requestAnimationFrame(frame);
+    }
+
+    teardown = () => { dead = true; stopPaint(); cancelAnimationFrame(raf); };
+    stopPaint = paintImage(paint, img, w, h, { crop, density: 1.3, detail: 2, duration: 350, onDone: begin }).stop;
+  }
 
   function init(img) {
     teardown();
@@ -459,14 +614,15 @@
   }
 
   const img = new Image();
+  const start = (im) => (mode.reveal ? initReveal : init)(im);
   img.onload = () => {
-    init(img);
+    start(img);
     let lastWidth = canvas.parentElement.clientWidth, timer = 0;
     addEventListener('resize', () => {
       clearTimeout(timer);
       timer = setTimeout(() => {
         const nw = canvas.parentElement.clientWidth;
-        if (Math.abs(nw - lastWidth) > 40) { lastWidth = nw; init(img); }
+        if (Math.abs(nw - lastWidth) > 40) { lastWidth = nw; start(img); }
       }, 200);
     });
   };
