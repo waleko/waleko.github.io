@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Alexander Kovrigin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Alexander Kovrigin — ML Researcher at JetBrains, Munich">
+<style>
+  :root{
+    --bg:#FBFBF9;
+    --ink:#111111;
+    --muted:#6b6b66;
+    --accent:#9a3324;
+    --rule:#111111;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family: "Helvetica Neue", Arial, sans-serif;
+  }
+  .wrap{ max-width:980px; margin:0 auto; padding:0 28px; }
+
+  .masthead{ display:flex; justify-content:space-between; align-items:flex-end; border-bottom:3px solid var(--rule); padding:34px 0 14px; }
+  .masthead .kicker{ font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); }
+  .masthead nav{ display:flex; gap:22px; }
+  .masthead nav a{ font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink); text-decoration:none; }
+  .masthead nav a:hover{ color:var(--accent); }
+
+  .hero{ display:grid; grid-template-columns: 2fr 1fr; gap:40px; padding:36px 0 30px; border-bottom:1px solid #dcdad3; }
+  h1{ font-family: Georgia, 'Times New Roman', serif; font-size:56px; line-height:1.0; margin:0 0 10px; letter-spacing:-.01em; }
+  .role{ font-family: 'Courier New', monospace; font-size:13px; color:var(--accent); text-transform:uppercase; letter-spacing:.06em; margin-bottom:22px; }
+  p{ font-size:15px; line-height:1.68; margin:0 0 16px; max-width:56ch; }
+  a{ color:var(--ink); text-decoration:underline; text-decoration-color:#bbb; text-underline-offset:2px; }
+  a:hover{ color:var(--accent); text-decoration-color:var(--accent); }
+
+  .sidebar{ border-left:1px solid #dcdad3; padding-left:28px; }
+  .sidebar img{ width:96px; height:96px; object-fit:cover; border-radius:2px; filter: grayscale(1) contrast(1.08); margin-bottom:16px; }
+  .fact{ font-family:'Courier New', monospace; font-size:12px; color:var(--muted); margin-bottom:10px; line-height:1.5; }
+  .fact b{ color:var(--ink); display:block; font-size:11px; text-transform:uppercase; letter-spacing:.08em; }
+  .sidebar .links{ margin-top:18px; display:flex; flex-direction:column; gap:6px; font-size:12.5px; }
+
+  .section{ padding:34px 0; border-bottom:1px solid #dcdad3; }
+  .section-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:22px; }
+  .section-num{ font-family: 'Courier New', monospace; font-size:13px; color:var(--accent); }
+  .section-title{ font-family: Georgia, serif; font-size:22px; }
+
+  table.pubs{ width:100%; border-collapse:collapse; font-size:13.5px; }
+  table.pubs tr{ border-bottom:1px solid #e6e4dd; }
+  table.pubs td{ padding:14px 10px 14px 0; vertical-align:top; }
+  table.pubs td.yr{ font-family:'Courier New', monospace; color:var(--muted); width:50px; }
+  table.pubs td.ti a{ font-weight:600; color:var(--ink); text-decoration:none; }
+  table.pubs td.ti a:hover{ color:var(--accent); }
+  table.pubs td.ti .ve{ color:var(--muted); font-size:12px; display:block; margin-top:3px; }
+  table.pubs td.ve-links{ font-family:'Courier New', monospace; font-size:11.5px; color:var(--muted); white-space:nowrap; text-align:right; }
+  table.pubs td.ve-links a{ color:var(--muted); }
+
+  footer{ padding:30px 0 60px; display:flex; justify-content:space-between; font-size:11px; color:var(--muted); letter-spacing:.04em;}
+  footer a{ color:var(--muted); }
+
+  @media (max-width:760px){
+    .hero{ grid-template-columns:1fr; }
+    .sidebar{ border-left:none; border-top:1px solid #dcdad3; padding-left:0; padding-top:20px; display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap; }
+    h1{ font-size:40px; }
+    table.pubs td.ve-links{ display:none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="masthead">
+    <div class="kicker">Alexander Kovrigin — curriculum</div>
+    <nav>
+      <a href="#research">research</a>
+      <a href="../index.html">mockups</a>
+    </nav>
+  </div>
+
+  <div class="hero">
+    <div>
+      <h1>Alexander<br>Kovrigin</h1>
+      <div class="role">ML Researcher — JetBrains, Munich</div>
+      <p>I'm an <a href="https://jetbrains.com">ML Researcher at JetBrains</a> in Munich, where I work on improving large language models for software‑engineering tasks with reinforcement learning.</p>
+      <p>I completed a Master's in Data Science under <a href="https://scholar.google.com/citations?user=7HU0UoUAAAAJ&hl=en">Prof. Dr. Dmitry Vetrov</a> at <a href="https://constructor.university">Constructor University</a>, Bremen. During my Bachelor's I worked in a research group led by <a href="https://scholar.google.com/citations?user=vfQf9SIAAAAJ">Andrey Ustyuzhanin</a>.</p>
+    </div>
+    <div class="sidebar">
+      <img src="../assets/img/avatar.png" alt="Alexander Kovrigin">
+      <div class="fact"><b>Honors</b>ICPC NWERC 2023 — silver medal<br>IMC 2023 — first prize</div>
+      <div class="fact"><b>Focus</b>RL for coding agents<br>environment setup<br>long‑context benchmarks</div>
+      <div class="links">
+        <a href="mailto:inbox@alexkovrigin.me">email →</a>
+        <a href="https://github.com/waleko">github →</a>
+        <a href="https://scholar.google.com/citations?user=-TlLyrMAAAAJ">scholar →</a>
+        <a href="https://www.linkedin.com/in/waleko">linkedin →</a>
+        <a href="https://x.com/_waleko">x →</a>
+        <a href="https://acacia.s3.wlko.me/cv/Alexander%20Kovrigin.pdf">cv (pdf) →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="research">
+    <div class="section-head"><span class="section-num">01</span><span class="section-title">Publications</span></div>
+    <table class="pubs">
+      <tr>
+        <td class="yr">2025</td>
+        <td class="ti"><a href="https://arxiv.org/abs/2509.25455">PIPer: On‑Device Environment Setup via Online Reinforcement Learning</a><span class="ve">A. Kovrigin, A. Eliseeva, K. Grotov, E. Bogomolov, Y. Zharov — NeurIPS 2025 WS on DL for Code</span></td>
+        <td class="ve-links"><a href="https://arxiv.org/abs/2509.25455">arxiv</a> · <a href="https://github.com/JetBrains-Research/PIPer">code</a> · <a href="https://huggingface.co/JetBrains-Research/PIPer-8B">hf</a></td>
+      </tr>
+      <tr>
+        <td class="yr">2025</td>
+        <td class="ti"><a href="https://arxiv.org/abs/2503.14443">EnvBench: A Benchmark for Automated Development Environment Setup</a><span class="ve">A. Eliseeva, A. Kovrigin, I. Kholkin, E. Bogomolov, Y. Zharov — ICLR 2025 WS on DL for Code</span></td>
+        <td class="ve-links"><a href="https://arxiv.org/abs/2503.14443">arxiv</a> · <a href="https://github.com/JetBrains-Research/EnvBench">code</a></td>
+      </tr>
+      <tr>
+        <td class="yr">2024</td>
+        <td class="ti"><a href="https://arxiv.org/abs/2406.11612">Long Code Arena: a Set of Benchmarks for Long‑Context Code Models</a><span class="ve">E. Bogomolov et al., incl. A. Kovrigin — arXiv</span></td>
+        <td class="ve-links"><a href="https://arxiv.org/abs/2406.11612">arxiv</a> · <a href="https://github.com/JetBrains-Research/lca-baselines">code</a> · <a href="https://huggingface.co/spaces/JetBrains-Research/long-code-arena">hf</a></td>
+      </tr>
+      <tr>
+        <td class="yr">2024</td>
+        <td class="ti"><a href="https://arxiv.org/abs/2406.04464">On the Importance of Reasoning for Context Retrieval in Repository‑Level Code Editing</a><span class="ve">A. Kovrigin, A. Eliseeva, Y. Zharov, T. Bryksin — arXiv</span></td>
+        <td class="ve-links"><a href="https://arxiv.org/abs/2406.04464">arxiv</a> · <a href="https://github.com/JetBrains-Research/ai-agents-code-editing">code</a></td>
+      </tr>
+      <tr>
+        <td class="yr">2024</td>
+        <td class="ti"><a href="https://iopscience.iop.org/article/10.1088/2632-2153/ad4a20">Beyond Dynamics: Learning to Discover Conservation Principles</a><span class="ve">A. Belyshev, A. Kovrigin, A. Ustyuzhanin — Machine Learning: Science and Technology</span></td>
+        <td class="ve-links"><a href="https://iopscience.iop.org/article/10.1088/2632-2153/ad4a20">paper</a></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><span class="section-num">02</span><span class="section-title">Education &amp; honors</span></div>
+    <p>M.S., Data Science — Constructor University, Bremen (advisor: Prof. Dr. Dmitry Vetrov). Research group of Andrey Ustyuzhanin during Bachelor's studies. Silver medal, ICPC NWERC 2023. First prize, IMC 2023.</p>
+  </div>
+
+  <footer>
+    <span>© Alexander Kovrigin</span>
+    <span><a href="mailto:inbox@alexkovrigin.me">inbox@alexkovrigin.me</a> — munich, de</span>
+  </footer>
+</div>
+</body>
+</html>
