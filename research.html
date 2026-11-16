@@ -1,0 +1,36 @@
+---
+layout: default
+title: Research
+description: Research by Alexander Kovrigin on RL post-training, environment setup, and evaluation of coding agents.
+permalink: /research
+---
+  <section class="papers figs">
+    <h1 class="sr-only">Research</h1>
+    <h2 class="name">Papers</h2>
+    <ol class="pubs">
+{%- assign papers = site.papers | sort: "date" | reverse %}
+{%- for p in papers %}
+{%- assign url = p.arxiv | default: p.paper %}
+      <li>
+        <a class="fig" href="{{ url }}" tabindex="-1" aria-hidden="true"><img src="/tn{{ p.image }}" alt="" width="200" height="140"{% if forloop.index > 2 %} loading="lazy"{% endif %}></a>
+        <div>
+          <a class="title" href="{{ url }}">{{ p.title }}</a>
+          <div class="authors">{{ p.authors | replace: " ", "&nbsp;" | replace: ",&nbsp;", ", " }}</div>
+          <div class="venue"><em>{{ p.venue }}</em></div>
+          <p class="tldr">{{ p.tldr | default: p.excerpt | strip_html | strip }}</p>
+          <div class="links">
+            {%- capture links -%}
+            {%- if p.arxiv %}<a href="{{ p.arxiv }}">arxiv</a>|{% endif -%}
+            {%- if p.paper %}<a href="{{ p.paper }}">paper</a>|{% endif -%}
+            {%- if p.code %}<a href="{{ p.code }}">code</a>|{% endif -%}
+            {%- if p.hf %}<a href="{{ p.hf }}">{{ p.hf_label | default: "hf" }}</a>|{% endif -%}
+            {%- if p.website %}<a href="{{ p.website }}">website</a>|{% endif -%}
+            {%- endcapture -%}
+            {{ links | split: "|" | join: ' <span aria-hidden="true">/</span> ' }}
+          </div>
+        </div>
+      </li>
+{%- endfor %}
+    </ol>
+  </section>
+

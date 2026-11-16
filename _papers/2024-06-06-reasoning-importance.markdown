@@ -1,12 +1,12 @@
 ---
-layout: post
-title:  "On The Importance of Reasoning for Context Retrieval in Repository-Level Code Editing"
+title:  "On the Importance of Reasoning for Context Retrieval in Repository-Level Code Editing"
 date:   2024-06-06 22:21:59 +00:00
 image: /images/reasoning-importance.png
 categories: research
 author: "Alexander Kovrigin"
 authors: "<strong>Alexander Kovrigin</strong>, Aleksandra Eliseeva, Yaroslav Zharov, Timofey Bryksin"
-venue: "arXiv"
+venue: "arXiv preprint"
+tldr: "More deliberate reasoning helps coding agents find the code that matters, though not decide when they have found enough."
 arxiv: https://arxiv.org/abs/2406.04464
 code: https://github.com/JetBrains-Research/ai-agents-code-editing
 # website: https://leonidk.github.io/fmb-plus
