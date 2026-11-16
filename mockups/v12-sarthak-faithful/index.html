@@ -91,24 +91,27 @@
 
 <nav class="switcher" aria-label="Hero options">
   <span class="hint">hero:</span>
-  <a href="?hero=oil">oil</a>
-  <a href="?hero=oil-blob">oil blob</a>
+  <a href="?hero=appear">appear</a>
   <a href="?hero=paint">paint</a>
+  <a href="?hero=loose">loose</a>
+  <a href="?hero=retouch">retouch</a>
   <a href="?hero=blob">blob</a>
   <a href="?hero=reveal">reveal</a>
   <a href="?hero=beam">beam</a>
   <a href="?hero=photo">photo</a>
 </nav>
 
-<script src="oil.js"></script>
 <script>
 (() => {
   const MODES = {
-    // WebGL oil-paint stylization (oil.js): strokes paint in, hover moves the light over the impasto.
-    oil:        { aspect: 3.5, focusY: 0.17, frame: 'deckle', oil: true, src: 'hero-lighthouse-beam.jpg' },
-    'oil-blob': { aspect: 2.3, focusY: 0.25, frame: 'blob',   oil: true, src: 'hero-lighthouse-beam.jpg' },
     // Sarthak's original: deckled rectangle, painted in, hover scratches paint away.
     paint:  { aspect: 3.5, focusY: 0.17, frame: 'deckle', painted: true,  hover: 'erase', src: 'hero-lighthouse-beam.jpg' },
+    // Sarthak's painter and frame, no hover; the scene is swept in like a brush blocking it in, then refined.
+    appear: { aspect: 3.5, focusY: 0.17, frame: 'deckle', painted: true, hover: null, sweep: true, src: 'hero-lighthouse-beam.jpg' },
+    // Hover passes a brush over the painting: coarse wet strokes that dry back in a few seconds.
+    retouch: { aspect: 3.5, focusY: 0.17, frame: 'deckle', painted: true, hover: 'retouch', src: 'hero-lighthouse-beam.jpg' },
+    // Same frame and hover, coarser brush: fewer, bigger strokes.
+    loose:  { aspect: 3.5, focusY: 0.17, frame: 'deckle', painted: true,  hover: 'erase', src: 'hero-lighthouse-beam.jpg', density: 0.9, detail: 1.15 },
     // Dry-brush blob frame, painted in once, no hover.
     blob:   { aspect: 2.3, focusY: 0.25, frame: 'blob',   painted: true,  hover: null, src: 'hero-lighthouse-beam.jpg' },
     // Blob frame; hover brushes away the paint to show the real photo underneath.
@@ -122,13 +125,13 @@
   const WASH = 'rgba(205, 196, 232, 0.45)';
 
   const params = new URLSearchParams(location.search);
-  const modeName = MODES[params.get('hero')] ? params.get('hero') : 'oil-blob';
-  let mode = MODES[modeName];
+  const modeName = MODES[params.get('hero')] ? params.get('hero') : 'appear';
+  const mode = MODES[modeName];
   document.querySelectorAll('.switcher a').forEach(a => {
     if (a.getAttribute('href') === '?hero=' + modeName) a.setAttribute('aria-current', 'page');
   });
 
-  let canvas = document.getElementById('hero');
+  const canvas = document.getElementById('hero');
   canvas.style.aspectRatio = String(mode.aspect);
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
@@ -138,7 +141,7 @@
   const makeCanvas = (w, h) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
 
   // Progressive brush-stroke painting of an image, strokes aligned to luminance gradient.
-  function paintImage(target, img, w, h, { duration = 4500, density = 1, detail = 1, crop, onDone } = {}) {
+  function paintImage(target, img, w, h, { duration = 4500, density = 1, detail = 1, crop, onDone, sweep = false, delay = 0 } = {}) {
     let raf = 0, cancelled = false;
     target.width = Math.round(w * dpr); target.height = Math.round(h * dpr);
     const scale = w / 300, sizeScale = scale ** 0.7;
@@ -154,8 +157,7 @@
     for (let i = 0; i < sw * sh; i++) lum[i] = 0.299 * px[4 * i] + 0.587 * px[4 * i + 1] + 0.114 * px[4 * i + 2];
     const L = (x, y) => lum[Math.min(sh - 1, Math.max(0, y)) * sw + Math.min(sw - 1, Math.max(0, x))];
 
-    const stroke = (t) => {
-      const u = rand(), v = rand();
+    const stroke = (t, u = rand(), v = rand(), ctx = g) => {
       const ix = Math.min(sw - 1, Math.floor(u * sw)), iy = Math.min(sh - 1, Math.floor(v * sh));
       const k = (iy * sw + ix) * 4, jitter = (rand() - 0.5) * 8;
       const r = px[k] + jitter, gg = px[k + 1] + jitter, b = px[k + 2] + jitter;
@@ -165,24 +167,48 @@
       const len = lerp(16, 4, t) * sizeScale * (0.6 + 0.8 * rand()) / fine;
       const width = lerp(6, 1.6, t) * sizeScale * (0.7 + 0.6 * rand()) / fine;
       const x = u * w, y = v * h, dx = Math.cos(angle) * len / 2, dy = Math.sin(angle) * len / 2;
-      g.strokeStyle = `rgba(${r | 0},${gg | 0},${b | 0},${lerp(0.55, 0.85, t)})`;
-      g.lineWidth = width;
-      g.beginPath(); g.moveTo(x - dx, y - dy);
-      g.quadraticCurveTo(x + (rand() - 0.5) * 2, y + (rand() - 0.5) * 2, x + dx, y + dy);
-      g.stroke();
+      ctx.strokeStyle = `rgba(${r | 0},${gg | 0},${b | 0},${lerp(0.55, 0.85, t)})`;
+      ctx.lineWidth = width;
+      ctx.beginPath(); ctx.moveTo(x - dx, y - dy);
+      ctx.quadraticCurveTo(x + (rand() - 0.5) * 2, y + (rand() - 0.5) * 2, x + dx, y + dy);
+      ctx.stroke();
+    };
+    // Lay a few strokes of the source around (cx, cy) in CSS px onto another context.
+    const dab = (ctx, cx, cy, radius, count, t) => {
+      for (let i = 0; i < count; i++) {
+        const a = rand() * Math.PI * 2, r = radius * Math.sqrt(rand());
+        const u = (cx + Math.cos(a) * r) / w, v = (cy + Math.sin(a) * r) / h;
+        if (u >= 0 && u < 1 && v >= 0 && v < 1) stroke(t, u, v, ctx);
+      }
     };
 
-    if (reduceMotion.matches) { for (let i = 0; i < total; i++) stroke(i / total); onDone && onDone(); return () => {}; }
-    let drawn = 0; const start = performance.now();
+    if (reduceMotion.matches) { for (let i = 0; i < total; i++) stroke(i / total); onDone && onDone(); return { stop: () => {}, dab }; }
+    // Sweep: the first ~55% of strokes (the coarse ones) follow a diagonal front from the
+    // top-left, so a brush visibly lays in the scene; the rest refine detail everywhere.
+    const blockIn = 0.55;
+    const sweepStroke = (i) => {
+      const t = i / total;
+      if (t >= blockIn) return stroke(t);
+      const front = (t / blockIn) * 1.25;
+      for (let tries = 0; tries < 6; tries++) {
+        const d = front - Math.abs(rand() + rand() - 1) * 0.22;
+        const u = rand(), v = (d - 0.55 * u) / 0.45;
+        if (v >= 0 && v < 1) return stroke(t * 0.8, u, v);
+      }
+    };
+    const draw = sweep ? sweepStroke : (i) => stroke(i / total);
+    let drawn = 0; const start = performance.now() + delay;
+    const ease = sweep ? (p) => (p < 0.5 ? 2 * p * p : 1 - (-2 * p + 2) ** 2 / 2) : (p) => 1 - (1 - p) ** 2;
     const step = (now) => {
       if (cancelled) return;
+      if (now < start) { raf = requestAnimationFrame(step); return; }
       const p = Math.min(1, (now - start) / duration);
-      const goal = Math.floor(total * (1 - (1 - p) ** 2));
-      for (; drawn < goal; drawn++) stroke(drawn / total);
+      const goal = Math.floor(total * ease(p));
+      for (; drawn < goal; drawn++) draw(drawn);
       if (p < 1) raf = requestAnimationFrame(step); else onDone && onDone();
     };
     raf = requestAnimationFrame(step);
-    return () => { cancelled = true; cancelAnimationFrame(raf); };
+    return { stop: () => { cancelled = true; cancelAnimationFrame(raf); }, dab };
   }
 
   // Rectangle with ragged, brushed edges (Sarthak's frame).
@@ -260,38 +286,6 @@
 
   let teardown = () => {};
 
-  function initOil(img) {
-    teardown();
-    const w = Math.max(200, canvas.parentElement.clientWidth), h = Math.round(w / mode.aspect);
-    const stop = window.createOilHero && window.createOilHero(canvas, img, { aspect: mode.aspect, focusY: mode.focusY });
-    if (!stop) {
-      // No WebGL2 / float render targets: fall back to the 2D stroke painter on a fresh canvas.
-      const fresh = canvas.cloneNode(true);
-      canvas.replaceWith(fresh); canvas = fresh;
-      mode = { ...MODES[mode.frame === 'blob' ? 'blob' : 'paint'], aspect: mode.aspect, focusY: mode.focusY };
-      init(img);
-      return;
-    }
-    const hero = canvas.parentElement;
-    if (mode.frame === 'blob') {
-      const inset = Math.max(18, w * 0.045);
-      const mask = dryBrushBlob(w, h, { inset, scratches: 0 });
-      const wash = dryBrushBlob(w, h, { inset: inset * 0.35, color: WASH, scratches: 1.6, shift: [inset * 0.3, inset * 0.25] });
-      setMask(mask);
-      hero.style.backgroundImage = `url(${wash.toDataURL()})`;
-      hero.style.backgroundSize = '100% 100%';
-    } else {
-      setMask(deckleMask(w, h));
-    }
-    teardown = stop;
-  }
-
-  function setMask(maskCanvas) {
-    const url = `url(${maskCanvas.toDataURL()})`;
-    for (const p of ['maskImage', 'webkitMaskImage']) canvas.style[p] = url;
-    for (const p of ['maskSize', 'webkitMaskSize']) canvas.style[p] = '100% 100%';
-  }
-
   function init(img) {
     teardown();
     const w = Math.max(200, canvas.parentElement.clientWidth), h = Math.round(w / mode.aspect);
@@ -312,9 +306,14 @@
 
     const paint = makeCanvas(W, H);
     let painting = mode.painted;
-    const stopPaint = mode.painted
-      ? paintImage(paint, img, w, h, { crop, density: 1.3, detail: 2, onDone: () => { painting = false; } })
-      : () => {};
+    const painter = mode.painted
+      ? paintImage(paint, img, w, h, { crop, density: mode.density ?? 1.3, detail: mode.detail ?? 2, sweep: !!mode.sweep, delay: mode.sweep ? 350 : 0, duration: mode.sweep ? 4200 : 4500, onDone: () => { painting = false; } })
+      : null;
+    const stopPaint = painter ? painter.stop : () => {};
+    // Retouch: hover lays coarse wet strokes on their own layer, which then dry back into the painting.
+    const wet = makeCanvas(W, H), wetG = wet.getContext('2d');
+    wetG.setTransform(dpr, 0, 0, dpr, 0, 0); wetG.lineCap = 'round';
+    let lastDab = -1e9;
 
     const work = makeCanvas(W, H), wg = work.getContext('2d');
     const holes = makeCanvas(W, H), hg = holes.getContext('2d');
@@ -383,6 +382,14 @@
       } else {
         wg.drawImage(paint, 0, 0);
         if (mode.hover === 'erase') drawMarks(wg, now);
+        if (mode.hover === 'retouch') {
+          wetG.save(); wetG.setTransform(1, 0, 0, 1, 0, 0);
+          wetG.globalCompositeOperation = 'destination-out';
+          wetG.fillStyle = `rgba(0,0,0,${Math.min(1, dt / 900)})`;
+          wetG.fillRect(0, 0, W, H);
+          wetG.restore();
+          wg.drawImage(wet, 0, 0);
+        }
       }
 
       if (mode.hover === 'beam') {
@@ -399,7 +406,8 @@
       ctx.drawImage(work, 0, 0);
 
       const beamBusy = mode.hover === 'beam' && (beamTarget > 0 || beam > 0.003);
-      if (painting || marks.length || beamBusy) raf = requestAnimationFrame(frame);
+      const wetBusy = mode.hover === 'retouch' && now - lastDab < 3000;
+      if (painting || marks.length || beamBusy || wetBusy) raf = requestAnimationFrame(frame);
     }
     const kick = () => { if (!raf) raf = requestAnimationFrame(frame); };
 
@@ -408,6 +416,18 @@
       if (e.pointerType === 'touch' || !allowHover()) return;
       if (mode.hover === 'beam') { beamTarget = 1; kick(); return; }
       if (painting && mode.hover === 'reveal') return;
+      if (mode.hover === 'retouch') {
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left, y = e.clientY - rect.top;
+        const from = last || { x, y };
+        const steps = Math.min(12, Math.max(1, Math.ceil(Math.hypot(x - from.x, y - from.y) / 10)));
+        for (let i = 1; i <= steps; i++) {
+          painter.dab(wetG, from.x + (x - from.x) * i / steps, from.y + (y - from.y) * i / steps, 16, 3, 0.15);
+        }
+        last = { x, y }; lastDab = performance.now();
+        kick();
+        return;
+      }
       const rect = canvas.getBoundingClientRect(), s = W / rect.width;
       const x = (e.clientX - rect.left) * s, y = (e.clientY - rect.top) * H / rect.height;
       const from = last || { x, y };
@@ -439,15 +459,14 @@
   }
 
   const img = new Image();
-  const start = (im) => (mode.oil ? initOil : init)(im);
   img.onload = () => {
-    start(img);
+    init(img);
     let lastWidth = canvas.parentElement.clientWidth, timer = 0;
     addEventListener('resize', () => {
       clearTimeout(timer);
       timer = setTimeout(() => {
         const nw = canvas.parentElement.clientWidth;
-        if (Math.abs(nw - lastWidth) > 40) { lastWidth = nw; start(img); }
+        if (Math.abs(nw - lastWidth) > 40) { lastWidth = nw; init(img); }
       }, 200);
     });
   };

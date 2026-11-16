@@ -65,16 +65,11 @@ Alexander's own lighthouse photo: `hero-lighthouse.jpg` (cropped from IMG_6076) 
 
 Hero options, switchable with `?hero=` or the pill in the bottom-right corner:
 
-- `oil-blob` (default) and `oil` — real-time oil-paint stylization in WebGL (`oil.js`), using the
-  restructured photo (`hero-lighthouse-beam.jpg`). A one-time GPU pipeline grades the photo,
-  computes a stroke direction per pixel from its structure tensor, flattens colours with an
-  anisotropic Kuwahara filter (Kyprianidis et al.), then smears colour and a stroke/bristle height
-  map along that direction. Each frame lights the height map as impasto and reveals strokes
-  sky-first. Hover turns the light into a point light at the cursor. `oil` uses Sarthak's deckled
-  frame; `oil-blob` uses the dry-brush blob. Without WebGL2 and float render targets it falls back
-  to the 2D painter.
-
+- `appear` (default) — no hover. After a short delay, the coarse strokes follow a diagonal front
+  from the top-left (sky first, cliff last), then fine strokes refine everywhere.
+- `retouch` — optional hover: the cursor lays coarse strokes on a separate layer that dries back.
 - `paint` — Sarthak's original: deckled 3.5:1 rectangle, and hover scratches the paint away.
+- `loose` — same, with fewer, bigger strokes.
 - `blob` — a dry-brush blob frame with a lavender wash, after the purple
   "Try 3 when you can't decide" card. No hover.
 - `reveal` — blob; hover brushes away the paint to show the sharp photo.
