@@ -4,7 +4,7 @@
 // The ragged border is made by the strokes themselves.
 (() => {
   const SRC = '/images/hero-lighthouse.webp', FOCUS_X = 0.15, FOCUS_Y = 0.17, BLEED = 14;
-  const DURATION = 4500, TAIL = 800, FRAME_BUDGET = 10, READ_EVERY = 300;
+  const DURATION = 6000, TAIL = 800, FRAME_BUDGET = 10, READ_EVERY = 300;
   const canvas = document.getElementById('hero');
   if (!canvas) return;
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -54,7 +54,7 @@
     return out;
   }
 
-  function paint(g, img, w, h, crop) {
+  function paint(g, img, w, h, crop, instant) {
     const W = Math.round(w), H = Math.round(h), n = W * H;
     const mk = () => { const c = document.createElement('canvas'); c.width = W; c.height = H; return c.getContext('2d', { willReadFrequently: true }); };
     const src = mk();
@@ -172,7 +172,7 @@
     };
     const fill = (i) => { if (cur[4 * i + 3] < 230) put(makeStroke(build(sharpest), sharpest.r, 4, i % W, (i / W) | 0, 0.9)); };
 
-    if (reduceMotion) {
+    if (instant) {
       for (let i = 0; i < total; i++) propose(i / total);
       for (const i of gaps()) fill(i);
       return () => {};
@@ -204,25 +204,25 @@
   }
 
   let stop = () => {};
-  function init(img) {
+  function init(img, instant) {
     stop();
     const w = Math.max(200, canvas.parentElement.clientWidth), aspect = cssAspect(), h = Math.round(w / aspect);
     canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
     const ctx = canvas.getContext('2d');
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     const cw = Math.min(img.naturalWidth, img.naturalHeight * aspect), ch = cw / aspect;
-    stop = paint(ctx, img, w, h, { x: (img.naturalWidth - cw) * FOCUS_X, y: (img.naturalHeight - ch) * FOCUS_Y, w: cw, h: ch });
+    stop = paint(ctx, img, w, h, { x: (img.naturalWidth - cw) * FOCUS_X, y: (img.naturalHeight - ch) * FOCUS_Y, w: cw, h: ch }, instant);
   }
 
   const img = new Image();
   img.onload = () => {
-    init(img);
+    init(img, reduceMotion);
     let lastWidth = canvas.parentElement.clientWidth, lastAspect = cssAspect(), timer = 0;
     addEventListener('resize', () => {
       clearTimeout(timer);
       timer = setTimeout(() => {
         const nw = canvas.parentElement.clientWidth, na = cssAspect();
-        if (Math.abs(nw - lastWidth) > 40 || na !== lastAspect) { lastWidth = nw; lastAspect = na; init(img); }
+        if (Math.abs(nw - lastWidth) > 40 || na !== lastAspect) { lastWidth = nw; lastAspect = na; init(img, true); }
       }, 200);
     });
   };
