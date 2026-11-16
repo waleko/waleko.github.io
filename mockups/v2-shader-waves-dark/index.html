@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Alexander Kovrigin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Alexander Kovrigin — ML Researcher at JetBrains, Munich">
+<style>
+  :root{
+    --bg:#0b0d10;
+    --panel:#101318;
+    --ink:#eceae2;
+    --muted:#8d9299;
+    --accent:#7fd8c9;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{ max-width:680px; margin:0 auto; padding:52px 24px 90px; }
+  nav{ display:flex; gap:22px; font-size:13px; letter-spacing:.03em; text-transform:lowercase; margin-bottom:36px; color:var(--muted);}
+  nav a{ color:var(--muted); text-decoration:none; border-bottom:1px solid transparent; padding-bottom:2px;}
+  nav a:hover{ color:var(--ink); border-bottom-color: rgba(255,255,255,.3); }
+
+  .hero-frame{
+    width:100%; aspect-ratio: 16/7.2; border-radius:4px; overflow:hidden; position:relative;
+    margin-bottom:14px; background:#000; cursor:crosshair;
+  }
+  .hero-frame canvas{ width:100%; height:100%; display:block; }
+  .hero-caption{ font-size:11px; color:var(--muted); letter-spacing:.03em; margin:0 0 40px; text-align:right; }
+
+  h1{
+    font-family: Georgia, 'Iowan Old Style', serif;
+    font-size:32px; font-weight:400; margin:0 0 18px; color:var(--ink);
+  }
+  .role{ color: var(--accent); font-size:14px; letter-spacing:.04em; text-transform:uppercase; margin: -10px 0 22px; }
+  p{ font-size:15.5px; line-height:1.7; margin:0 0 18px; color:#c7c6c0; }
+  a{ color:var(--accent); text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:2px;}
+  a:hover{ color:#b6f0e4; }
+
+  .section-label{ font-size:11px; text-transform:uppercase; letter-spacing:.14em; color:var(--muted); margin:46px 0 16px; }
+  .pub{ display:grid; grid-template-columns: 46px 1fr; gap:14px; padding:16px 0; border-top:1px solid #1c2026; font-size:14px; line-height:1.55;}
+  .pub:last-child{ border-bottom:1px solid #1c2026;}
+  .pub .year{ color:var(--muted); font-size:12.5px; }
+  .pub .title{ color:var(--ink); font-weight:600; text-decoration:none; }
+  .pub .title:hover{ color:var(--accent); }
+  .pub .meta{ color:var(--muted); font-size:12.5px; }
+  .pub .meta a{ font-size:12.5px; }
+
+  footer{ margin-top:56px; font-size:13px; text-transform:lowercase; color:var(--muted);}
+  footer a{ color:var(--muted); text-decoration:underline;}
+  footer a:hover{ color:var(--accent); }
+
+  @media (max-width:520px){ .wrap{padding:34px 18px 60px;} h1{font-size:26px;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a href="#" style="color:var(--ink); border-bottom:1px solid rgba(255,255,255,.4);">home</a>
+    <a href="#research">research</a>
+    <a href="../index.html">← all mockups</a>
+  </nav>
+
+  <div class="hero-frame">
+    <canvas id="gl"></canvas>
+  </div>
+  <div class="hero-caption">live WebGL fragment shader — move your cursor through the current</div>
+
+  <h1>Alexander Kovrigin</h1>
+  <div class="role">ML Researcher · JetBrains · Munich</div>
+
+  <p>I'm an <a href="https://jetbrains.com">ML Researcher at JetBrains</a> in Munich, where I work on improving large language models for software‑engineering tasks with reinforcement learning.</p>
+  <p>I completed a Master's in Data Science under <a href="https://scholar.google.com/citations?user=7HU0UoUAAAAJ&hl=en">Prof. Dr. Dmitry Vetrov</a> at <a href="https://constructor.university">Constructor University</a> in Bremen, Germany. I earned a silver medal at the <a href="https://2023.nwerc.eu/">ICPC NWERC 2023</a> and a first prize at the <a href="https://www.imc-math.org.uk/?year=2023">IMC 2023</a>.</p>
+  <p>During my Bachelor's I worked in a research group led by <a href="https://scholar.google.com/citations?user=vfQf9SIAAAAJ">Andrey Ustyuzhanin</a>. My work since has spanned reinforcement learning for coding agents, environment‑setup automation, and long‑context benchmarks for code.</p>
+
+  <div class="section-label" id="research">selected research</div>
+  <div class="pub"><div class="year">2025</div><div><a class="title" href="https://arxiv.org/abs/2509.25455">PIPer: On‑Device Environment Setup via Online Reinforcement Learning</a><br><span class="meta">NeurIPS 2025 WS on DL for Code · <a href="https://arxiv.org/abs/2509.25455">arxiv</a> / <a href="https://github.com/JetBrains-Research/PIPer">code</a> / <a href="https://huggingface.co/JetBrains-Research/PIPer-8B">hf</a></span></div></div>
+  <div class="pub"><div class="year">2025</div><div><a class="title" href="https://arxiv.org/abs/2503.14443">EnvBench: A Benchmark for Automated Development Environment Setup</a><br><span class="meta">ICLR 2025 WS on DL for Code · <a href="https://arxiv.org/abs/2503.14443">arxiv</a> / <a href="https://github.com/JetBrains-Research/EnvBench">code</a></span></div></div>
+  <div class="pub"><div class="year">2024</div><div><a class="title" href="https://arxiv.org/abs/2406.11612">Long Code Arena: a Set of Benchmarks for Long‑Context Code Models</a><br><span class="meta">arXiv · <a href="https://arxiv.org/abs/2406.11612">arxiv</a> / <a href="https://github.com/JetBrains-Research/lca-baselines">code</a> / <a href="https://huggingface.co/spaces/JetBrains-Research/long-code-arena">hf</a></span></div></div>
+  <div class="pub"><div class="year">2024</div><div><a class="title" href="https://arxiv.org/abs/2406.04464">On the Importance of Reasoning for Context Retrieval in Repository‑Level Code Editing</a><br><span class="meta">arXiv · <a href="https://arxiv.org/abs/2406.04464">arxiv</a> / <a href="https://github.com/JetBrains-Research/ai-agents-code-editing">code</a></span></div></div>
+  <div class="pub"><div class="year">2024</div><div><a class="title" href="https://iopscience.iop.org/article/10.1088/2632-2153/ad4a20">Beyond Dynamics: Learning to Discover Conservation Principles</a><br><span class="meta">Machine Learning: Science and Technology · <a href="https://iopscience.iop.org/article/10.1088/2632-2153/ad4a20">paper</a></span></div></div>
+
+  <footer>
+    <a href="https://github.com/waleko">github</a>,
+    <a href="https://x.com/_waleko">x</a>,
+    <a href="https://scholar.google.com/citations?user=-TlLyrMAAAAJ">scholar</a>,
+    <a href="https://www.linkedin.com/in/waleko">linkedin</a>,
+    <a href="https://acacia.s3.wlko.me/cv/Alexander%20Kovrigin.pdf">cv</a>,
+    <a href="mailto:inbox@alexkovrigin.me">email</a>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var canvas = document.getElementById('gl');
+  var frame = canvas.closest('.hero-frame');
+  var gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if(!gl){ frame.style.background = '#111'; return; }
+
+  var vsSrc = 'attribute vec2 p; void main(){ gl_Position = vec4(p,0.0,1.0); }';
+  var fsSrc = [
+  'precision highp float;',
+  'uniform vec2 uRes;',
+  'uniform float uTime;',
+  'uniform vec2 uMouse;',
+  'uniform float uHover;',
+  '',
+  'float hash(vec2 p){ return fract(sin(dot(p, vec2(41.3,289.1)))*43758.5453); }',
+  'float noise(vec2 p){',
+  '  vec2 i = floor(p); vec2 f = fract(p);',
+  '  float a = hash(i), b = hash(i+vec2(1.0,0.0));',
+  '  float c = hash(i+vec2(0.0,1.0)), d = hash(i+vec2(1.0,1.0));',
+  '  vec2 u = f*f*(3.0-2.0*f);',
+  '  return mix(a,b,u.x) + (c-a)*u.y*(1.0-u.x) + (d-b)*u.x*u.y;',
+  '}',
+  'float fbm(vec2 p){',
+  '  float v = 0.0; float amp = 0.5;',
+  '  for(int i=0;i<5;i++){ v += amp*noise(p); p *= 2.02; amp *= 0.55; }',
+  '  return v;',
+  '}',
+  'void main(){',
+  '  vec2 uv = gl_FragCoord.xy / uRes.xy;',
+  '  vec2 p = uv; p.x *= uRes.x/uRes.y;',
+  '  vec2 m = uMouse; m.x *= uRes.x/uRes.y;',
+  '  float d = distance(p, m);',
+  '  float influence = uHover * smoothstep(0.9, 0.0, d);',
+  '  vec2 flow = p*2.4 + vec2(uTime*0.035, -uTime*0.05);',
+  '  flow += influence * 0.6 * normalize(p - m + 0.0001) * 1.4;',
+  '  float n1 = fbm(flow);',
+  '  float n2 = fbm(flow*1.9 + 4.2 + influence*1.5);',
+  '  float waves = sin((p.x*3.0 + n1*2.2 + uTime*0.22))*0.5+0.5;',
+  '  float bands = fbm(vec2(p.x*1.4, p.y*4.0 + n2*1.5 - uTime*0.12));',
+  '  float field = mix(waves, bands, 0.55);',
+  '  field += influence*0.25*(1.0-d);',
+  '',
+  '  vec3 deep = vec3(0.035,0.047,0.07);',
+  '  vec3 teal = vec3(0.10,0.42,0.42);',
+  '  vec3 aqua = vec3(0.30,0.80,0.74);',
+  '  vec3 glow = vec3(0.55,0.95,0.86);',
+  '',
+  '  vec3 col = mix(deep, teal, smoothstep(0.15,0.55,field));',
+  '  col = mix(col, aqua, smoothstep(0.55,0.82,field));',
+  '  col = mix(col, glow, smoothstep(0.82,1.05,field) * (0.5+0.5*influence));',
+  '  col += influence * 0.18 * smoothstep(0.6,0.0,d) * vec3(0.4,0.9,0.85);',
+  '',
+  '  float vig = smoothstep(1.05, 0.25, length(uv-0.5)*1.3);',
+  '  col *= mix(0.55, 1.0, vig);',
+  '  gl_FragColor = vec4(col, 1.0);',
+  '}'
+  ].join('\n');
+
+  function compile(type, src){
+    var s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if(!gl.getShaderParameter(s, gl.COMPILE_STATUS)) console.error(gl.getShaderInfoLog(s));
+    return s;
+  }
+  var prog = gl.createProgram();
+  gl.attachShader(prog, compile(gl.VERTEX_SHADER, vsSrc));
+  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fsSrc));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+
+  var buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, -1,1, 1,-1, 1,1]), gl.STATIC_DRAW);
+  var loc = gl.getAttribLocation(prog, 'p');
+  gl.enableVertexAttribArray(loc);
+  gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+  var uRes = gl.getUniformLocation(prog,'uRes');
+  var uTime = gl.getUniformLocation(prog,'uTime');
+  var uMouse = gl.getUniformLocation(prog,'uMouse');
+  var uHover = gl.getUniformLocation(prog,'uHover');
+
+  var mouse = {x:0.5,y:0.5}, targetHover = 0, hover = 0;
+
+  function resize(){
+    var rect = frame.getBoundingClientRect();
+    var dpr = Math.min(window.devicePixelRatio||1, 2);
+    canvas.width = rect.width*dpr;
+    canvas.height = rect.height*dpr;
+    gl.viewport(0,0,canvas.width,canvas.height);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  function setMouse(e){
+    var r = canvas.getBoundingClientRect();
+    var cx = (e.touches? e.touches[0].clientX : e.clientX) - r.left;
+    var cy = (e.touches? e.touches[0].clientY : e.clientY) - r.top;
+    mouse.x = cx / r.width;
+    mouse.y = 1.0 - (cy / r.height);
+  }
+  frame.addEventListener('mousemove', function(e){ targetHover = 1; setMouse(e); });
+  frame.addEventListener('mouseenter', function(e){ targetHover = 1; setMouse(e); });
+  frame.addEventListener('mouseleave', function(){ targetHover = 0; });
+  frame.addEventListener('touchmove', function(e){ targetHover = 1; setMouse(e); }, {passive:true});
+  frame.addEventListener('touchend', function(){ targetHover = 0; });
+
+  var t0 = performance.now();
+  function render(){
+    var t = (performance.now()-t0)/1000;
+    hover += (targetHover-hover)*0.06;
+    gl.uniform2f(uRes, canvas.width, canvas.height);
+    gl.uniform1f(uTime, t);
+    gl.uniform2f(uMouse, mouse.x, mouse.y);
+    gl.uniform1f(uHover, hover);
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+    requestAnimationFrame(render);
+  }
+  render();
+})();
+</script>
+</body>
+</html>
