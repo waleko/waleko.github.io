@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Alexander Kovrigin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Alexander Kovrigin — ML Researcher at JetBrains, Munich">
+<style>
+  :root{
+    --bg:#0c0d0a;
+    --term:#101210;
+    --fg:#b9f5c0;
+    --fg-dim:#5f8f66;
+    --amber:#f2c16b;
+    --muted:#4d5950;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--fg);
+    font-family: 'SF Mono','Menlo','Consolas','Courier New',monospace;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{ max-width:720px; margin:0 auto; padding:50px 20px 90px; }
+
+  .term-window{ border-radius:8px; overflow:hidden; border:1px solid #22281f; box-shadow:0 20px 50px -24px rgba(0,0,0,.7); }
+  .term-bar{ background:#161a14; padding:9px 12px; display:flex; gap:7px; align-items:center; }
+  .term-bar span{ width:11px; height:11px; border-radius:50%; display:inline-block; }
+  .term-bar .r{background:#e0605a;} .term-bar .y{background:#e3b341;} .term-bar .g{background:#52c467;}
+  .term-bar .title{ margin-left:10px; color:#5c685a; font-size:12px; }
+  .term-body{
+    background:
+      repeating-linear-gradient(rgba(0,0,0,0) 0 2px, rgba(0,0,0,.08) 2px 3px),
+      var(--term);
+    padding:22px 20px 26px;
+    font-size:13.5px;
+    line-height:1.7;
+  }
+  .prompt{ color:var(--amber); }
+  .cmd{ color:var(--fg); }
+  .out{ color:#9fd6a6; margin:2px 0 14px; white-space:pre-wrap; }
+  .comment{ color:var(--muted); }
+  a{ color:var(--amber); text-decoration:underline; }
+  a:hover{ color:#ffd98a; }
+
+  .ascii-frame{ cursor:pointer; margin:4px 0 18px; border:1px dashed #2a3327; border-radius:4px; padding:10px 14px; min-height:150px; position:relative; overflow:hidden; }
+  .ascii-frame pre{ margin:0; color:#7fd98c; font-size:11.5px; line-height:1.25; white-space:pre; }
+  .ascii-hint{ position:absolute; right:10px; bottom:8px; color:var(--muted); font-size:11px; }
+  .cursor-blink{ display:inline-block; width:8px; height:15px; background:var(--fg); margin-left:2px; animation: blink 1s steps(1) infinite; vertical-align:-2px; }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  ul.filelist{ list-style:none; margin:2px 0 16px; padding:0; }
+  ul.filelist li{ margin-bottom:9px; }
+  ul.filelist .fname{ color:var(--fg); }
+  ul.filelist .fmeta{ color:var(--muted); font-size:12px; }
+  ul.filelist a{ text-decoration:none; border-bottom:1px solid rgba(242,193,107,.35); }
+  ul.filelist a:hover{ border-bottom-color:#f2c16b; }
+
+  footer{ margin-top:30px; color:var(--muted); font-size:12.5px; }
+  .outer-note{ text-align:center; margin-top:18px; }
+  .outer-note a{ color:var(--muted); text-decoration:underline; font-size:12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="term-window">
+    <div class="term-bar"><span class="r"></span><span class="y"></span><span class="g"></span><span class="title">waleko@munich: ~</span></div>
+    <div class="term-body">
+      <div><span class="prompt">waleko@munich</span><span class="comment">:~$</span> <span class="cmd">whoami</span></div>
+      <div class="out">Alexander Kovrigin — ML Researcher, JetBrains, Munich</div>
+
+      <div><span class="prompt">waleko@munich</span><span class="comment">:~$</span> <span class="cmd">cat skyline.ascii</span> <span class="comment"># hover to render</span></div>
+      <div class="ascii-frame" id="asciiFrame">
+        <pre id="asciiArt"></pre>
+        <span class="ascii-hint">hover / tap</span>
+      </div>
+
+      <div><span class="prompt">waleko@munich</span><span class="comment">:~$</span> <span class="cmd">cat about.txt</span></div>
+      <div class="out">I'm an <a href="https://jetbrains.com">ML Researcher at JetBrains</a> in Munich, where I work on improving
+large language models for software-engineering tasks with reinforcement learning.
+
+I completed a Master's in Data Science under <a href="https://scholar.google.com/citations?user=7HU0UoUAAAAJ&hl=en">Prof. Dr. Dmitry Vetrov</a> at
+<a href="https://constructor.university">Constructor University</a> in Bremen, Germany. Silver medal, <a href="https://2023.nwerc.eu/">ICPC NWERC 2023</a>.
+First prize, <a href="https://www.imc-math.org.uk/?year=2023">IMC 2023</a>. Research group of <a href="https://scholar.google.com/citations?user=vfQf9SIAAAAJ">Andrey Ustyuzhanin</a> during my Bachelor's.</div>
+
+      <div><span class="prompt">waleko@munich</span><span class="comment">:~$</span> <span class="cmd">ls -la research/</span></div>
+      <ul class="filelist">
+        <li><span class="fname">piper.pdf</span> <span class="fmeta">— PIPer: On-Device Environment Setup via Online RL · NeurIPS'25 WS · <a href="https://arxiv.org/abs/2509.25455">arxiv</a> <a href="https://github.com/JetBrains-Research/PIPer">code</a> <a href="https://huggingface.co/JetBrains-Research/PIPer-8B">hf</a></span></li>
+        <li><span class="fname">envbench.pdf</span> <span class="fmeta">— EnvBench: Automated Dev Environment Setup · ICLR'25 WS · <a href="https://arxiv.org/abs/2503.14443">arxiv</a> <a href="https://github.com/JetBrains-Research/EnvBench">code</a></span></li>
+        <li><span class="fname">long-code-arena.pdf</span> <span class="fmeta">— Benchmarks for Long-Context Code Models · arXiv'24 · <a href="https://arxiv.org/abs/2406.11612">arxiv</a> <a href="https://github.com/JetBrains-Research/lca-baselines">code</a> <a href="https://huggingface.co/spaces/JetBrains-Research/long-code-arena">hf</a></span></li>
+        <li><span class="fname">reasoning-retrieval.pdf</span> <span class="fmeta">— Importance of Reasoning for Context Retrieval · arXiv'24 · <a href="https://arxiv.org/abs/2406.04464">arxiv</a> <a href="https://github.com/JetBrains-Research/ai-agents-code-editing">code</a></span></li>
+        <li><span class="fname">beyond-dynamics.pdf</span> <span class="fmeta">— Learning to Discover Conservation Principles · ML:S&amp;T'24 · <a href="https://iopscience.iop.org/article/10.1088/2632-2153/ad4a20">paper</a></span></li>
+      </ul>
+
+      <div><span class="prompt">waleko@munich</span><span class="comment">:~$</span> <span class="cmd">cat links.txt</span></div>
+      <div class="out"><a href="https://github.com/waleko">github.com/waleko</a> · <a href="https://x.com/_waleko">x.com/_waleko</a> · <a href="https://scholar.google.com/citations?user=-TlLyrMAAAAJ">scholar</a> · <a href="https://www.linkedin.com/in/waleko">linkedin/waleko</a> · <a href="https://acacia.s3.wlko.me/cv/Alexander%20Kovrigin.pdf">cv.pdf</a> · <a href="mailto:inbox@alexkovrigin.me">inbox@alexkovrigin.me</a></div>
+
+      <div><span class="prompt">waleko@munich</span><span class="comment">:~$</span> <span class="cursor-blink"></span></div>
+    </div>
+  </div>
+  <div class="outer-note"><a href="../index.html">← back to all mockups</a></div>
+</div>
+
+<script>
+(function(){
+  var art = [
+'                    /\\\\                                  ',
+'                   /  \\\\            /\\\\                  ',
+'            /\\\\    /    \\\\     /\\\\  /  \\\\     /\\\\         ',
+'           /  \\\\  /      \\\\   /  \\\\/    \\\\   /  \\\\        ',
+'     /\\\\   /    \\\\/        \\\\_/          \\\\_/    \\\\   /\\\\ ',
+'____/  \\\\_/                                        \\\\_/  \\\\_',
+'   M U E N C H E N  ·  48.137N 11.576E  ·  isar valley     '
+  ].join('\n').replace(/\\\\/g,'\\');
+
+  var box = document.getElementById('asciiFrame');
+  var pre = document.getElementById('asciiArt');
+  var rendered = false, timer = null;
+
+  function typeOut(){
+    if(rendered) return;
+    rendered = true;
+    var i = 0;
+    pre.textContent = '';
+    clearInterval(timer);
+    timer = setInterval(function(){
+      pre.textContent = art.slice(0, i);
+      i += 6;
+      if(i > art.length){ pre.textContent = art; clearInterval(timer); }
+    }, 6);
+  }
+  function reset(){
+    rendered = false;
+    clearInterval(timer);
+    pre.textContent = '';
+  }
+  box.addEventListener('mouseenter', typeOut);
+  box.addEventListener('mouseleave', reset);
+  box.addEventListener('click', function(){ rendered ? reset() : typeOut(); });
+})();
+</script>
+</body>
+</html>
