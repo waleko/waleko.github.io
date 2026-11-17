@@ -7,9 +7,9 @@
 (() => {
   const SRC = '/images/hero-lighthouse.webp', LAYERS = '/images/hero-layers.webp', FOCUS_X = 0.15, FOCUS_Y = 0.17, BLEED = 14;
   const FRAME_BUDGET = 10, READ_EVERY = 300;
-  // How strictly the layers keep their order: at 0 they all paint at once (plain random strokes), at 1 one after
-  // another in SLOTS, each layer's [start, end] in ms.
-  const ORDER = 0.5, SLOTS = [[0, 1600], [1600, 3800], [3800, 6000]];
+  // How strictly the layers keep their order: at 0 they all paint at once (plain random strokes), at 1 each keeps
+  // its slot in SLOTS, [start, end] in ms; the sky and the hill share one.
+  const ORDER = 0.5, SLOTS = [[0, 3800], [0, 3800], [3800, 6000]];
   const canvas = document.getElementById('hero');
   if (!canvas) return;
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -222,7 +222,7 @@
     const progress = (st) => (st.count ? st.made / st.count : 0);
     // A layer: `count` strokes from size t0 to t1; `item` may override how each stroke is placed.
     const layer = (k, count, t0, t1, item) => ({
-      ...slot(k), ease: k ? layerEase : easeOut, prep: () => Math.round(count * (instant ? 0.6 : 1)), item: (j, c) => item(lerp(t0, t1, j / c)),
+      ...slot(k), ease: k === 2 ? layerEase : easeOut, prep: () => Math.round(count * (instant ? 0.6 : 1)), item: (j, c) => item(lerp(t0, t1, j / c)),
     });
     // Touch-up: small sharp strokes on pixels still showing paper, or (within `px`) the layer underneath.
     const touchUp = (set, px, start, dur) => {
