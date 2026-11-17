@@ -1,11 +1,15 @@
 // Hero painting, inspired by the painted hero on Sarthak Mangla's site (sarthakmangla.com).
-// It is painted back to front: sky and sea over the whole canvas, then the hill, the lighthouse and its light,
-// each layer over the last. Within a layer strokes land at random and shrink over time; each one is a curve
-// that follows the image's contours (Hertzmann '98) and samples a reference that sharpens as strokes shrink.
+// It is painted roughly back to front, the layers overlapping in time: sky and sea over the whole canvas, the hill,
+// then the lighthouse and its light, each over the last. Within a layer strokes land at random and shrink over time;
+// each one is a curve that follows the image's contours (Hertzmann '98) and samples a reference that sharpens as
+// strokes shrink.
 // The ragged border is made by the strokes themselves.
 (() => {
   const SRC = '/images/hero-lighthouse.webp', LAYERS = '/images/hero-layers.webp', FOCUS_X = 0.15, FOCUS_Y = 0.17, BLEED = 14;
   const FRAME_BUDGET = 10, READ_EVERY = 300;
+  // How strictly the layers keep their order: at 0 they all paint at once (plain random strokes), at 1 one after
+  // another in SLOTS, each layer's [start, end] in ms.
+  const ORDER = 0.5, SLOTS = [[0, 1600], [1600, 3800], [3800, 6000]];
   const canvas = document.getElementById('hero');
   if (!canvas) return;
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -65,7 +69,7 @@
       return c.getImageData(0, 0, W, H).data;
     };
     const orig = pixels(img);
-    // Layer masks share the image's crop: red is the hill, green the lighthouse, blue the light.
+    // Layer masks share the image's crop: red is the hill, green the lighthouse, blue its light and beam.
     const lay = layers && pixels(layers);
     // Strokes are mirrored onto a 1x offscreen canvas so coverage can be read back cheaply.
     const plan = mk();
@@ -205,18 +209,23 @@
       if (lay) for (let i = 0; i < n; i++) if (lay[4 * i + c] >= min) out.push(i);
       return out;
     };
-    const hill = region(0, 128), tower = region(1, 100), light = region(2, 60);
+    const hill = region(0, 128), tower = [...new Set([...region(1, 100), ...region(2, 60)])];
+    const inHill = (x, y) => lay && lay[4 * at(x, y)] >= 128, inTower = (x, y) => lay && Math.max(lay[4 * at(x, y) + 1], lay[4 * at(x, y) + 2]) >= 60;
     const anywhere = () => [rand() * W, rand() * H];
     const within = (px) => () => { const i = px[(rand() * px.length) | 0]; return [i % W + rand() - 0.5, ((i / W) | 0) + rand() - 0.5]; };
 
     const easeOut = (p) => 1 - (1 - p) ** 1.6, smooth = (p) => p * p * (3 - 2 * p), linear = (p) => p;
-    // A layer: `count` strokes from size t0 to t1, due over `dur` ms on the given easing.
-    const layer = (set, pick, count, t0, t1, dur, ease) => ({
-      dur, ease, prep: () => Math.round(count * (instant ? 0.6 : 1)),
-      item: (k, c) => { const [x, y] = pick(); propose(set, lerp(t0, t1, k / c), x, y); },
+    const layerEase = (p) => lerp(easeOut(p), smooth(p), ORDER);
+    // Back to front, each layer's window blends from the whole animation (ORDER 0) to its own slot (ORDER 1).
+    const end = SLOTS[SLOTS.length - 1][1];
+    const slot = (k) => ({ start: ORDER * SLOTS[k][0], dur: lerp(end, SLOTS[k][1], ORDER) - ORDER * SLOTS[k][0] });
+    const progress = (st) => (st.count ? st.made / st.count : 0);
+    // A layer: `count` strokes from size t0 to t1; `item` may override how each stroke is placed.
+    const layer = (k, count, t0, t1, item) => ({
+      ...slot(k), ease: k ? layerEase : easeOut, prep: () => Math.round(count * (instant ? 0.6 : 1)), item: (j, c) => item(lerp(t0, t1, j / c)),
     });
     // Touch-up: small sharp strokes on pixels still showing paper, or (within `px`) the layer underneath.
-    const touchUp = (set, px, dur) => {
+    const touchUp = (set, px, start, dur) => {
       let list;
       const off = (i) => {
         const j = 4 * i;
@@ -226,7 +235,7 @@
         return Math.hypot(cur[j] - ref[0][i], cur[j + 1] - ref[1][i], cur[j + 2] - ref[2][i]) > 50;
       };
       return {
-        dur, ease: linear,
+        start, dur, ease: linear,
         prep: () => {
           read();
           list = [];
@@ -239,37 +248,50 @@
       };
     };
 
+    // Sky strokes sample the sky-and-sea plate as often as ORDER says, and stop landing on the hill or
+    // lighthouse as those fill in, so late sky strokes only nibble at their edges.
+    const hillLayer = layer(1, total * 1.5 * hill.length / n, 0.2, 1, (t) => { const [x, y] = within(hill)(); propose(imgRefs, t, x, y); });
+    const towerLayer = layer(2, total * 6 * tower.length / n, 0.35, 1, (t) => { const [x, y] = within(tower)(); propose(imgRefs, t, x, y); });
+    const skyLayer = layer(0, total * 0.75, 0, 0.8, (t) => {
+      const [x, y] = anywhere(), plate = rand() < ORDER;
+      if (plate && ((inHill(x, y) && rand() < progress(hillLayer)) || (inTower(x, y) && rand() < progress(towerLayer)))) return;
+      propose(plate ? skyRefs : imgRefs, t, x, y);
+    });
     const steps = [
-      layer(skyRefs, anywhere, total * 0.75, 0, 0.8, 1600, easeOut), touchUp(skyRefs, null, 250),
-      layer(imgRefs, within(hill), total * 1.5 * hill.length / n, 0.2, 1, 2000, smooth), touchUp(imgRefs, hill, 300),
-      layer(imgRefs, within(tower), total * 8 * tower.length / n, 0.5, 1, 1300, smooth), touchUp(imgRefs, tower, 200),
-      layer(imgRefs, within(light), total * 5 * light.length / n, 0.35, 1, 1200, smooth), touchUp(imgRefs, light, 200),
-      touchUp(imgRefs, null, 300),
-    ].filter(st => st.dur);
+      skyLayer, hillLayer, towerLayer,
+      touchUp(imgRefs, hill, end, 300), touchUp(imgRefs, tower, end + 300, 200), touchUp(imgRefs, null, end + 500, 300),
+    ].filter(st => !lay ? st === skyLayer || st.ease === linear : true);
+    for (const st of steps) { st.count = 0; st.made = 0; st.live = false; }
 
     if (instant) {
-      for (const st of steps) for (let k = 0, c = st.prep(); k < c; k++) st.item(k, c);
+      for (const st of [...steps].sort((a, b) => a.start - b.start)) for (let k = 0, c = (st.count = st.prep()); k < c; k++) st.item((st.made = k), c);
       return () => {};
     }
 
-    // Each frame paints what is due within a time budget, so a slow device stretches the animation
-    // instead of freezing the page.
-    let si = -1, st = null, count = 0, made = 0, start = 0, lag = 0, raf = 0, cancelled = false;
-    const next = (now) => {
-      st = steps[++si];
-      if (!st) return false;
-      count = st.prep(); made = 0; start = now; lag = 0;
-      return true;
-    };
+    // Each frame paints what is due within a time budget, interleaving every layer that is under way,
+    // so a slow device stretches the animation instead of freezing the page.
+    let t0 = 0, lag = 0, raf = 0, cancelled = false;
     const frame = (now) => {
       if (cancelled) return;
-      if (!st && !next(now)) return;
-      const deadline = performance.now() + FRAME_BUDGET;
-      const p = Math.min(1, (now - start - lag) / st.dur);
-      const goal = Math.ceil(count * st.ease(p));
-      while (made < goal && performance.now() < deadline) st.item(made++, count);
-      if (made < goal) lag += 16;
-      if (made >= count && !next(now)) return;
+      if (!t0) t0 = now;
+      const deadline = performance.now() + FRAME_BUDGET, t = now - t0 - lag;
+      const due = [];
+      for (const st of steps) {
+        if (t < st.start) continue;
+        if (!st.live) { st.live = true; st.count = st.prep(); }
+        const goal = Math.ceil(st.count * st.ease(Math.min(1, (t - st.start) / st.dur)));
+        if (st.made < goal) due.push([st, goal]);
+      }
+      let behind = due.length > 0;
+      while (behind && performance.now() < deadline) {
+        behind = false;
+        for (const [st, goal] of due) {
+          for (let k = 0; k < 8 && st.made < goal; k++) st.item(st.made++, st.count);
+          if (st.made < goal) behind = true;
+        }
+      }
+      if (behind) lag += 16;
+      if (steps.every(st => st.live && st.made >= st.count)) return;
       raf = requestAnimationFrame(frame);
     };
     raf = requestAnimationFrame(frame);
