@@ -4,7 +4,7 @@
 // The ragged border is made by the strokes themselves.
 (() => {
   const SRC = '/images/hero-lighthouse.webp', FOCUS_X = 0.15, FOCUS_Y = 0.17, BLEED = 14;
-  const DURATION = 6000, TAIL = 800, FRAME_BUDGET = 10, READ_EVERY = 300;
+  const DURATION = 7500, TAIL = 800, FRAME_BUDGET = 10, READ_EVERY = 300;
   const canvas = document.getElementById('hero');
   if (!canvas) return;
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -161,6 +161,10 @@
       const x = rand() * W, y = rand() * H;
       if (inside(x, y)) put(makeStroke(build(refFor(r)), r, len / (r * 1.3), x, y, lerp(0.55, 0.85, t)));
     };
+    // The first COAT_SHARE of strokes lays the coat (sizes up to COAT); the rest repaint over it,
+    // so the animation adds REFINE times more strokes, all of them refining edges.
+    const COAT = 0.35, COAT_SHARE = 0.2, REFINE = 1.6;
+    const sizeAt = (u) => (u < COAT_SHARE ? u / COAT_SHARE * COAT : lerp(COAT, 1, (u - COAT_SHARE) / (1 - COAT_SHARE)));
 
     // Pixels still showing paper well inside the border, in random order.
     const gaps = () => {
@@ -173,25 +177,26 @@
     const fill = (i) => { if (cur[4 * i + 3] < 230) put(makeStroke(build(sharpest), sharpest.r, 4, i % W, (i / W) | 0, 0.9)); };
 
     if (instant) {
-      for (let i = 0; i < total; i++) propose(i / total);
+      for (let i = 0; i < total; i++) propose(sizeAt(i / total));
       for (const i of gaps()) fill(i);
       return () => {};
     }
 
-    // Strokes are due on an ease-out schedule; each frame paints what is due within a time budget,
+    // Strokes are due on a gentle ease-out schedule; each frame paints what is due within a time budget,
     // so a slow device stretches the animation instead of freezing the page.
+    const count = Math.round(total * REFINE);
     let made = 0, queue = null, queueTotal = 0, raf = 0, start = 0, lag = 0, cancelled = false;
     const frame = (now) => {
       if (cancelled) return;
       if (!start) start = now;
       const deadline = performance.now() + FRAME_BUDGET;
       const t = now - start - lag, p = Math.min(1, t / DURATION);
-      const goal = Math.floor(total * (1 - (1 - p) ** 2));
+      const goal = Math.floor(count * (1 - (1 - p) ** 1.28));
       while (made < goal && performance.now() < deadline) {
-        for (const end = Math.min(goal, made + 16); made < end; made++) propose(made / total);
+        for (const end = Math.min(goal, made + 16); made < end; made++) propose(sizeAt(made / count));
       }
       if (made < goal) lag += 16;
-      if (made < total) { raf = requestAnimationFrame(frame); return; }
+      if (made < count) { raf = requestAnimationFrame(frame); return; }
       // Tail: small sharp strokes on remaining specks of paper, spread over a few frames.
       if (!queue) { queue = gaps(); queueTotal = queue.length; start = now; lag = 0; }
       const q = Math.min(1, (now - start) / TAIL);
