@@ -140,7 +140,7 @@
     const read = () => { cur = plan.getImageData(0, 0, W, H).data; sinceRead = 0; };
     const at = (x, y) => clamp(Math.round(y), 0, H - 1) * W + clamp(Math.round(x), 0, W - 1);
 
-    const makeStroke = (ref, r, steps, x0, y0, alpha) => {
+    const makeStroke = (ref, r, steps, x0, y0, alpha, blocked) => {
       const [rr, rg, rb] = ref.ch, lum = ref.lum, i0 = at(x0, y0);
       const c0 = rr[i0], c1 = rg[i0], c2 = rb[i0];
       const L = (x, y) => lum[clamp(y, 0, H - 1) * W + clamp(x, 0, W - 1)];
@@ -167,7 +167,7 @@
           if (ldx * dx + ldy * dy < 0) { dx = -dx; dy = -dy; }
         }
         const nx = x + dx * step, ny = y + dy * step;
-        if (nx < pad || ny < pad || nx > W - pad || ny > H - pad || depth(nx, ny) < -m * 0.08) break;
+        if (nx < pad || ny < pad || nx > W - pad || ny > H - pad || depth(nx, ny) < -m * 0.08 || (blocked && blocked(nx, ny))) break;
         x = nx; y = ny; ldx = dx; ldy = dy;
         pts.push(x, y);
       }
@@ -197,10 +197,10 @@
 
     const total = Math.round(9000 * 1.3 * 2 ** 1.6 * (w / 300) ** 0.6 * Math.min(2.5, h / w / 0.66) ** 0.8);
     const sz = (w / 300) ** 0.7;
-    const propose = (set, t, x, y) => {
+    const propose = (set, t, x, y, blocked) => {
       const fine = lerp(Math.SQRT2, 2, t);
       const r = lerp(6, 1.6, t) * sz / fine / 2, len = lerp(16, 4, t) * sz / fine;
-      if (inside(x, y)) put(makeStroke(set.at(r), r, len / (r * 1.3), x, y, lerp(0.55, 0.85, t)));
+      if (inside(x, y)) put(makeStroke(set.at(r), r, len / (r * 1.3), x, y, lerp(0.55, 0.85, t), blocked));
     };
 
     // Pixels of one mask channel, so strokes for a layer can start anywhere inside it.
@@ -248,14 +248,14 @@
       };
     };
 
-    // Sky strokes sample the sky-and-sea plate as often as ORDER says, and stop landing on the hill or
-    // lighthouse as those fill in, so late sky strokes only nibble at their edges.
+    // Sky strokes sample the sky-and-sea plate as often as ORDER says. Those never touch the hill, and stop
+    // landing on the lighthouse as it fills in, so late ones only nibble at its edges.
     const hillLayer = layer(1, total * 1.5 * hill.length / n, 0.2, 1, (t) => { const [x, y] = within(hill)(); propose(imgRefs, t, x, y); });
     const towerLayer = layer(2, total * 6 * tower.length / n, 0.35, 1, (t) => { const [x, y] = within(tower)(); propose(imgRefs, t, x, y); });
     const skyLayer = layer(0, total * 0.75, 0, 0.8, (t) => {
       const [x, y] = anywhere(), plate = rand() < ORDER;
-      if (plate && ((inHill(x, y) && rand() < progress(hillLayer)) || (inTower(x, y) && rand() < progress(towerLayer)))) return;
-      propose(plate ? skyRefs : imgRefs, t, x, y);
+      if (plate && (inHill(x, y) || (inTower(x, y) && rand() < progress(towerLayer)))) return;
+      propose(plate ? skyRefs : imgRefs, t, x, y, plate && inHill);
     });
     const steps = [
       skyLayer, hillLayer, towerLayer,
