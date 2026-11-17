@@ -5,6 +5,8 @@
 (() => {
   const SRC = '/images/hero-lighthouse.webp', FOCUS_X = 0.15, FOCUS_Y = 0.17, BLEED = 14;
   const DURATION = 7500, TAIL = 800, FRAME_BUDGET = 10, READ_EVERY = 300;
+  // HDR glow on the lantern and beam, and its box in source pixels (see _make_hero_glow.py).
+  const GLOW = '/images/hero-glow.avif', GLOW_BOX = [196, 136, 556, 224];
   const canvas = document.getElementById('hero');
   if (!canvas) return;
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -54,7 +56,7 @@
     return out;
   }
 
-  function paint(g, img, w, h, crop, instant) {
+  function paint(g, img, w, h, crop, instant, done) {
     const W = Math.round(w), H = Math.round(h), n = W * H;
     const mk = () => { const c = document.createElement('canvas'); c.width = W; c.height = H; return c.getContext('2d', { willReadFrequently: true }); };
     const src = mk();
@@ -179,6 +181,7 @@
     if (instant) {
       for (let i = 0; i < total; i++) propose(sizeAt(i / total));
       for (const i of gaps()) fill(i);
+      done();
       return () => {};
     }
 
@@ -203,10 +206,31 @@
       const keep = Math.ceil(queueTotal * (1 - q * q * (3 - 2 * q)));
       while (queue.length > keep && performance.now() < deadline) fill(queue.pop());
       if (queue.length) raf = requestAnimationFrame(frame);
+      else done();
     };
     raf = requestAnimationFrame(frame);
     return () => { cancelled = true; cancelAnimationFrame(raf); };
   }
+
+  // Only HDR screens fetch the glow; it fades in once the painting is done.
+  let glow = null;
+  if (matchMedia('(dynamic-range: high)').matches) {
+    glow = new Image();
+    glow.className = 'glow'; glow.alt = ''; glow.decoding = 'async'; glow.src = GLOW;
+    glow.setAttribute('aria-hidden', 'true');
+    canvas.after(glow);
+  }
+  const placeGlow = (crop) => {
+    const [x0, y0, x1, y1] = GLOW_BOX, st = glow.style;
+    st.left = `${(x0 - crop.x) / crop.w * 100}%`; st.top = `${(y0 - crop.y) / crop.h * 100}%`;
+    st.width = `${(x1 - x0) / crop.w * 100}%`; st.height = `${(y1 - y0) / crop.h * 100}%`;
+    st.transition = 'none'; st.opacity = 0;
+  };
+  const showGlow = (fade) => {
+    if (!glow) return;
+    glow.style.transition = fade ? 'opacity 1.5s ease-out' : 'none';
+    glow.style.opacity = 1;
+  };
 
   let stop = () => {};
   function init(img, instant) {
@@ -216,7 +240,9 @@
     const ctx = canvas.getContext('2d');
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     const cw = Math.min(img.naturalWidth, img.naturalHeight * aspect), ch = cw / aspect;
-    stop = paint(ctx, img, w, h, { x: (img.naturalWidth - cw) * FOCUS_X, y: (img.naturalHeight - ch) * FOCUS_Y, w: cw, h: ch }, instant);
+    const crop = { x: (img.naturalWidth - cw) * FOCUS_X, y: (img.naturalHeight - ch) * FOCUS_Y, w: cw, h: ch };
+    if (glow) placeGlow(crop);
+    stop = paint(ctx, img, w, h, crop, instant, () => showGlow(!instant));
   }
 
   const img = new Image();

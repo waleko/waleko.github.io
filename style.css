@@ -101,6 +101,8 @@ footer nav span { opacity: .5; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
 /* Hero */
-.hero { margin: 0 calc(-1 * var(--bleed)) var(--s5); }
+.hero { position: relative; margin: 0 calc(-1 * var(--bleed)) var(--s5); }
 .hero canvas { display: block; width: 100%; height: auto; aspect-ratio: 3.5; }
+.hero .glow { display: none; position: absolute; pointer-events: none; opacity: 0; }
+@media (dynamic-range: high) { .hero .glow { display: block; } }
 @media (max-width: 599px) { .hero canvas { aspect-ratio: 2.3; } }
