@@ -5,6 +5,9 @@
 (() => {
   const SRC = '/images/hero-lighthouse.webp', FOCUS_X = 0.15, FOCUS_Y = 0.17, BLEED = 14;
   const DURATION = 7500, TAIL = 800, FRAME_BUDGET = 10, READ_EVERY = 300;
+  // Hover experiments, chosen with ?hover=brush|beam|tilt|night|lens.
+  const HOVER = new URLSearchParams(location.search).get('hover') || '';
+  const LANTERN = [232, 184]; // in source-image pixels
   const canvas = document.getElementById('hero');
   if (!canvas) return;
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -176,10 +179,34 @@
     };
     const fill = (i) => { if (cur[4 * i + 3] < 230) put(makeStroke(build(sharpest), sharpest.r, 4, i % W, (i / W) | 0, 0.9)); };
 
+    // Brush hover: loose strokes stir the paint under the pointer, then fine ones settle it again.
+    const touches = [];
+    let touchRaf = 0;
+    const dab = (x, y, t, spread) => {
+      const a = rand() * 6.2832, d = spread * Math.sqrt(rand());
+      const px = x + Math.cos(a) * d, py = y + Math.sin(a) * d;
+      const fine = lerp(Math.SQRT2, 2, t), r = lerp(6, 1.6, t) * sz / fine / 2, len = lerp(16, 4, t) * sz / fine;
+      if (depth(px, py) > m * 0.5) put(makeStroke(build(refFor(r)), r, len / (r * 1.3), px, py, lerp(0.55, 0.85, t)));
+    };
+    const pump = (now) => {
+      touchRaf = 0;
+      const deadline = performance.now() + 4;
+      while (touches.length && touches[0].due <= now && performance.now() < deadline) { const q = touches.shift(); dab(q.x, q.y, q.t, q.spread); }
+      if (touches.length) touchRaf = requestAnimationFrame(pump);
+    };
+    const touch = (x, y) => {
+      const now = performance.now(), R = 30 * sz;
+      for (let k = 0; k < 9; k++) touches.push({ x, y, t: lerp(0, 0.3, rand()), spread: R, due: now + rand() * 60 });
+      for (let k = 0; k < 30; k++) touches.push({ x, y, t: lerp(0.75, 1, rand()), spread: R * 1.2, due: now + 350 + rand() * 1200 });
+      touches.sort((a, b) => a.due - b.due);
+      if (touches.length > 4000) touches.splice(0, touches.length - 4000);
+      if (!touchRaf) touchRaf = requestAnimationFrame(pump);
+    };
+
     if (instant) {
       for (let i = 0; i < total; i++) propose(sizeAt(i / total));
       for (const i of gaps()) fill(i);
-      return () => {};
+      return Object.assign(() => cancelAnimationFrame(touchRaf), { touch });
     }
 
     // Strokes are due on a gentle ease-out schedule; each frame paints what is due within a time budget,
@@ -205,10 +232,10 @@
       if (queue.length) raf = requestAnimationFrame(frame);
     };
     raf = requestAnimationFrame(frame);
-    return () => { cancelled = true; cancelAnimationFrame(raf); };
+    return Object.assign(() => { cancelled = true; cancelAnimationFrame(raf); cancelAnimationFrame(touchRaf); }, { touch });
   }
 
-  let stop = () => {};
+  let stop = () => {}, geom = null;
   function init(img, instant) {
     stop();
     const w = Math.max(200, canvas.parentElement.clientWidth), aspect = cssAspect(), h = Math.round(w / aspect);
@@ -216,12 +243,110 @@
     const ctx = canvas.getContext('2d');
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     const cw = Math.min(img.naturalWidth, img.naturalHeight * aspect), ch = cw / aspect;
-    stop = paint(ctx, img, w, h, { x: (img.naturalWidth - cw) * FOCUS_X, y: (img.naturalHeight - ch) * FOCUS_Y, w: cw, h: ch }, instant);
+    const crop = { x: (img.naturalWidth - cw) * FOCUS_X, y: (img.naturalHeight - ch) * FOCUS_Y, w: cw, h: ch };
+    geom = { w, h, crop, lx: (LANTERN[0] - crop.x) / crop.w * w, ly: (LANTERN[1] - crop.y) / crop.h * h };
+    stop = paint(ctx, img, w, h, crop, instant);
+    if (overlay) { overlay.width = canvas.width; overlay.height = canvas.height; }
+  }
+
+  // Overlay for the light and lens effects, stacked exactly on the painting.
+  let overlay = null;
+  if (['beam', 'night', 'lens'].includes(HOVER)) {
+    overlay = document.createElement('canvas');
+    overlay.className = 'hero-fx';
+    overlay.setAttribute('aria-hidden', 'true');
+    canvas.after(overlay);
+  }
+  document.documentElement.dataset.heroHover = HOVER;
+
+  function hover(img) {
+    if (!HOVER || !matchMedia('(hover: hover)').matches) return;
+    const octx = overlay && overlay.getContext('2d');
+    let px = 0, py = 0, raf = 0, last = 0;
+    const local = (e) => { const r = canvas.getBoundingClientRect(); px = (e.clientX - r.left) * geom.w / r.width; py = (e.clientY - r.top) * geom.h / r.height; };
+    const begin = () => { octx.setTransform(dpr, 0, 0, dpr, 0, 0); octx.clearRect(0, 0, geom.w, geom.h); };
+
+    const render = {
+      // A second, softer beam that swings from the lantern toward the pointer.
+      beam() {
+        begin();
+        const { lx, ly, w } = geom, a = Math.atan2(py - ly, px - lx), L = Math.max(w * 0.7, Math.hypot(px - lx, py - ly) * 1.4);
+        octx.filter = 'blur(6px)';
+        const grad = octx.createLinearGradient(lx, ly, lx + Math.cos(a) * L, ly + Math.sin(a) * L);
+        grad.addColorStop(0, 'rgba(255, 226, 170, .75)'); grad.addColorStop(0.35, 'rgba(255, 205, 140, .28)'); grad.addColorStop(1, 'rgba(255, 190, 120, 0)');
+        octx.fillStyle = grad;
+        octx.beginPath(); octx.moveTo(lx, ly);
+        octx.arc(lx, ly, L, a - 0.07, a + 0.07); octx.closePath(); octx.fill();
+        const glow = octx.createRadialGradient(lx, ly, 0, lx, ly, 26 * w / 800);
+        glow.addColorStop(0, 'rgba(255, 236, 190, .9)'); glow.addColorStop(1, 'rgba(255, 210, 150, 0)');
+        octx.fillStyle = glow; octx.fillRect(0, 0, geom.w, geom.h);
+        octx.filter = 'none';
+        clipToPaint();
+      },
+      // Dusk deepens (a CSS filter on the painting) while the lantern swells.
+      night() {
+        begin();
+        const { lx, ly, w } = geom, R = 80 * w / 800;
+        const glow = octx.createRadialGradient(lx, ly, 0, lx, ly, R);
+        glow.addColorStop(0, 'rgba(255, 228, 170, .95)'); glow.addColorStop(0.12, 'rgba(255, 196, 120, .55)'); glow.addColorStop(1, 'rgba(255, 170, 90, 0)');
+        octx.fillStyle = glow; octx.fillRect(0, 0, geom.w, geom.h);
+        const beam = octx.createLinearGradient(lx, ly, lx + w * 0.4, ly);
+        beam.addColorStop(0, 'rgba(255, 220, 160, .45)'); beam.addColorStop(1, 'rgba(255, 200, 140, 0)');
+        octx.filter = 'blur(5px)'; octx.fillStyle = beam;
+        octx.beginPath(); octx.moveTo(lx, ly); octx.arc(lx, ly, w * 0.4, -0.06, 0.06); octx.closePath(); octx.fill();
+        octx.filter = 'none';
+        clipToPaint();
+      },
+      // A loupe: the photograph underneath, magnified, in a small soft-rimmed circle.
+      lens() {
+        begin();
+        const { crop, w, h } = geom, R = 52 * w / 800, Z = 1.8;
+        const sx = crop.x + px / w * crop.w, sy = crop.y + py / h * crop.h, sw = R * 2 / w * crop.w / Z, sh = R * 2 / h * crop.h / Z;
+        octx.save();
+        octx.beginPath(); octx.arc(px, py, R, 0, 6.2832); octx.clip();
+        octx.drawImage(img, sx - sw / 2, sy - sh / 2, sw, sh, px - R, py - R, R * 2, R * 2);
+        const rim = octx.createRadialGradient(px, py, R * 0.8, px, py, R);
+        rim.addColorStop(0, 'rgba(30, 20, 15, 0)'); rim.addColorStop(1, 'rgba(30, 20, 15, .28)');
+        octx.fillStyle = rim; octx.fillRect(px - R, py - R, R * 2, R * 2);
+        octx.restore();
+        octx.beginPath(); octx.arc(px, py, R - 0.5, 0, 6.2832);
+        octx.strokeStyle = 'rgba(255, 248, 240, .55)'; octx.lineWidth = 1; octx.stroke();
+        clipToPaint();
+      },
+    };
+    const clipToPaint = () => {
+      octx.save(); octx.setTransform(1, 0, 0, 1, 0, 0);
+      octx.globalCompositeOperation = 'destination-in'; octx.drawImage(canvas, 0, 0);
+      octx.restore();
+    };
+
+    const tick = () => { raf = 0; if (render[HOVER]) render[HOVER](); };
+    canvas.parentElement.addEventListener('pointerenter', (e) => {
+      local(e); canvas.parentElement.classList.add('is-hover');
+      if (render[HOVER] && !raf) raf = requestAnimationFrame(tick);
+    });
+    canvas.parentElement.addEventListener('pointerleave', () => {
+      canvas.parentElement.classList.remove('is-hover');
+      if (HOVER === 'tilt') canvas.style.transform = '';
+    });
+    canvas.parentElement.addEventListener('pointermove', (e) => {
+      local(e);
+      if (HOVER === 'brush') {
+        const now = performance.now();
+        if (now - last > 30) { last = now; stop.touch && stop.touch(px, py); }
+      } else if (HOVER === 'tilt') {
+        const nx = px / geom.w - 0.5, ny = py / geom.h - 0.5;
+        canvas.style.transform = `rotateX(${(-ny * 5).toFixed(2)}deg) rotateY(${(nx * 4).toFixed(2)}deg)`;
+        canvas.style.setProperty('--sx', `${(-nx * 10).toFixed(1)}px`); canvas.style.setProperty('--sy', `${(6 - ny * 8).toFixed(1)}px`);
+      }
+      if (render[HOVER] && HOVER !== 'night' && !raf) raf = requestAnimationFrame(tick);
+    });
   }
 
   const img = new Image();
   img.onload = () => {
     init(img, reduceMotion);
+    hover(img);
     let lastWidth = canvas.parentElement.clientWidth, lastAspect = cssAspect(), timer = 0;
     addEventListener('resize', () => {
       clearTimeout(timer);

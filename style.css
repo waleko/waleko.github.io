@@ -104,3 +104,15 @@ footer nav span { opacity: .5; }
 .hero { margin: 0 calc(-1 * var(--bleed)) var(--s5); }
 .hero canvas { display: block; width: 100%; height: auto; aspect-ratio: 3.5; }
 @media (max-width: 599px) { .hero canvas { aspect-ratio: 2.3; } }
+
+/* Hero hover lab, chosen with ?hover=<name>; see hero.js. */
+.hero { position: relative; }
+.hero-fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0; transition: opacity .5s; }
+.hero.is-hover .hero-fx { opacity: 1; }
+[data-hero-hover=beam] .hero-fx, [data-hero-hover=night] .hero-fx { mix-blend-mode: screen; }
+[data-hero-hover=tilt] .hero { perspective: 1100px; }
+[data-hero-hover=tilt] .hero canvas { transition: transform .6s cubic-bezier(.2, .7, .2, 1), filter .6s; will-change: transform; }
+[data-hero-hover=tilt] .hero.is-hover canvas { transition-duration: .25s, .6s; filter: drop-shadow(var(--sx, 0) var(--sy, 6px) 14px rgba(70, 40, 20, .22)); }
+[data-hero-hover=night] .hero canvas:first-child { transition: filter 1.2s cubic-bezier(.3, 0, .2, 1); }
+[data-hero-hover=night] .hero.is-hover canvas:first-child { filter: brightness(.72) saturate(1.15) contrast(1.05); }
+[data-hero-hover=night] .hero-fx { transition-duration: 1.2s; }
