@@ -5,6 +5,10 @@
 (() => {
   const SRC = '/images/hero-lighthouse.webp', BLEED = 14;
   const DURATION = 7500, TAIL = 800, FRAME_BUDGET = 10, READ_EVERY = 300;
+  // Experiments, switched on with ?fx=sweep,underpaint,taper,rhythm (or ?fx=all).
+  const fxParam = new URLSearchParams(location.search).get('fx') || '';
+  const FX = new Set(fxParam === 'all' ? ['sweep', 'underpaint', 'taper', 'rhythm'] : fxParam.split(','));
+  const LANTERN = [232, 184], RHYTHM = 650;
   const canvas = document.getElementById('hero');
   if (!canvas) return;
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -98,9 +102,12 @@
     const read = () => { cur = plan.getImageData(0, 0, W, H).data; sinceRead = 0; };
     const at = (x, y) => clamp(Math.round(y), 0, H - 1) * W + clamp(Math.round(x), 0, W - 1);
 
-    const makeStroke = (ref, r, steps, x0, y0, alpha) => {
+    const makeStroke = (ref, r, steps, x0, y0, alpha, tone = 1) => {
       const [rr, rg, rb] = ref.ch, lum = ref.lum, i0 = at(x0, y0);
       const c0 = rr[i0], c1 = rg[i0], c2 = rb[i0];
+      // Underpainting: early strokes are a warm sepia of the same value, blooming into colour.
+      const v = 0.299 * c0 + 0.587 * c1 + 0.114 * c2;
+      const p0 = lerp(Math.min(255, v * 1.08 + 10), c0, tone), p1 = lerp(v * 0.96 + 4, c1, tone), p2 = lerp(v * 0.8, c2, tone);
       const L = (x, y) => lum[clamp(y, 0, H - 1) * W + clamp(x, 0, W - 1)];
       const pts = [x0, y0];
       let x = x0, y = y0, ldx = 0, ldy = 0;
@@ -133,20 +140,40 @@
       return {
         pts,
         r: r * (0.75 + 0.5 * rand()) * lerp(0.45, 1, edge),
-        color: `rgba(${(c0 + jit) | 0},${(c1 + jit) | 0},${(c2 + jit) | 0},${alpha})`,
+        color: `rgba(${(p0 + jit) | 0},${(p1 + jit) | 0},${(p2 + jit) | 0},${alpha})`,
       };
     };
 
+    // Taper's thin ends leave pinholes the sparser instant repaint can't close, so it is animation-only.
+    const tapered = FX.has('taper') && !instant;
     const draw = (ctx, st) => {
       const p = st.pts, len = p.length;
       ctx.strokeStyle = ctx.fillStyle = st.color;
       ctx.beginPath();
       if (len === 2) { ctx.arc(p[0], p[1], st.r, 0, 6.2832); ctx.fill(); return; }
+      if (tapered && !st.fill) { taper(ctx, p, st.r); return; }
       ctx.lineWidth = st.r * 2;
       ctx.moveTo(p[0], p[1]);
       for (let i = 2; i < len - 2; i += 2) ctx.quadraticCurveTo(p[i], p[i + 1], (p[i] + p[i + 2]) / 2, (p[i + 1] + p[i + 3]) / 2);
       ctx.lineTo(p[len - 2], p[len - 1]);
       ctx.stroke();
+    };
+    // Brush taper: the stroke as a filled outline that swells from a fine tip to full width and back.
+    const taper = (ctx, p, r) => {
+      const pts = p.length === 4 ? [p[0], p[1], (p[0] + p[2]) / 2, (p[1] + p[3]) / 2, p[2], p[3]] : p, N = pts.length / 2;
+      const side = [];
+      for (let i = 0; i < N; i++) {
+        const a = Math.max(0, i - 1), b = Math.min(N - 1, i + 1);
+        let tx = pts[2 * b] - pts[2 * a], ty = pts[2 * b + 1] - pts[2 * a + 1];
+        const tl = Math.hypot(tx, ty) || 1; tx /= tl; ty /= tl;
+        const wid = r * (0.55 + 0.6 * Math.sin(Math.PI * (i + 0.5) / N) ** 0.7);
+        side.push(pts[2 * i] - ty * wid, pts[2 * i + 1] + tx * wid, pts[2 * i] + ty * wid, pts[2 * i + 1] - tx * wid);
+      }
+      ctx.moveTo(side[0], side[1]);
+      for (let i = 1; i < N; i++) ctx.lineTo(side[4 * i], side[4 * i + 1]);
+      for (let i = N - 1; i >= 0; i--) ctx.lineTo(side[4 * i + 2], side[4 * i + 3]);
+      ctx.closePath();
+      ctx.fill();
     };
     const put = (st) => {
       draw(plan, st); draw(g, st);
@@ -155,11 +182,20 @@
 
     const total = Math.round(9000 * 1.3 * 2 ** 1.6 * (w / 300) ** 0.6 * Math.min(2.5, h / w / 0.66) ** 0.8);
     const sz = (w / 300) ** 0.7;
+    // Sweep: the first coat spreads outward from the lantern, as if its light reveals the scene.
+    const lx = (LANTERN[0] - crop.x) / crop.w * W, ly = (LANTERN[1] - crop.y) / crop.h * H;
+    const reach = Math.max(Math.hypot(lx, ly), Math.hypot(W - lx, ly), Math.hypot(lx, H - ly), Math.hypot(W - lx, H - ly));
+    const smooth = (q) => { q = clamp(q, 0, 1); return q * q * (3 - 2 * q); };
     const propose = (t) => {
       const fine = lerp(Math.SQRT2, 2, t);
       const r = lerp(6, 1.6, t) * sz / fine / 2, len = lerp(16, 4, t) * sz / fine;
-      const x = rand() * W, y = rand() * H;
-      if (inside(x, y)) put(makeStroke(build(refFor(r)), r, len / (r * 1.3), x, y, lerp(0.55, 0.85, t)));
+      let x = rand() * W, y = rand() * H;
+      if (FX.has('sweep')) {
+        const front = reach * lerp(0.06, 1.05, 1 - (1 - clamp(t / 0.6, 0, 1)) ** 1.4);
+        for (let k = 0; k < 30 && Math.hypot(x - lx, y - ly) > front * (0.85 + 0.3 * rand()); k++) { x = rand() * W; y = rand() * H; }
+      }
+      const tone = FX.has('underpaint') ? smooth((t - 0.12) / 0.5) : 1;
+      if (inside(x, y)) put(makeStroke(build(refFor(r)), r, len / (r * 1.3), x, y, lerp(0.55, 0.85, t), tone));
     };
     // The first COAT_SHARE of strokes lays the coat (sizes up to COAT); the rest repaint over it,
     // so the animation adds REFINE times more strokes, all of them refining edges.
@@ -174,7 +210,7 @@
       for (let i = out.length - 1; i > 0; i--) { const k = (rand() * (i + 1)) | 0; const t = out[i]; out[i] = out[k]; out[k] = t; }
       return out;
     };
-    const fill = (i) => { if (cur[4 * i + 3] < 230) put(makeStroke(build(sharpest), sharpest.r, 4, i % W, (i / W) | 0, 0.9)); };
+    const fill = (i) => { if (cur[4 * i + 3] < 230) { const st = makeStroke(build(sharpest), sharpest.r, 4, i % W, (i / W) | 0, 0.9); st.fill = true; put(st); } };
 
     if (instant) {
       for (let i = 0; i < total; i++) propose(sizeAt(i / total));
@@ -190,7 +226,10 @@
       if (cancelled) return;
       if (!start) start = now;
       const deadline = performance.now() + FRAME_BUDGET;
-      const t = now - start - lag, p = Math.min(1, t / DURATION);
+      const raw = now - start - lag;
+      // Rhythm: strokes come in gentle pulses, like a painter's wrist, instead of an even stream.
+      const t = FX.has('rhythm') ? raw + 0.75 * RHYTHM / 6.2832 * Math.sin(raw / RHYTHM * 6.2832) : raw;
+      const p = Math.min(1, t / DURATION);
       const goal = Math.floor(count * (1 - (1 - p) ** 1.28));
       while (made < goal && performance.now() < deadline) {
         for (const end = Math.min(goal, made + 16); made < end; made++) propose(sizeAt(made / count));
