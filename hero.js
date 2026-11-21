@@ -3,7 +3,7 @@
 // the image's contours (Hertzmann '98) and samples a reference that sharpens as strokes shrink.
 // The ragged border is made by the strokes themselves.
 (() => {
-  const SRC = '/images/hero-lighthouse.webp', FOCUS_X = 0.15, FOCUS_Y = 0.17, BLEED = 14;
+  const SRC = '/images/hero-lighthouse.webp', BLEED = 14;
   const DURATION = 7500, TAIL = 800, FRAME_BUDGET = 10, READ_EVERY = 300;
   const canvas = document.getElementById('hero');
   if (!canvas) return;
@@ -208,6 +208,17 @@
     return () => { cancelled = true; cancelAnimationFrame(raf); };
   }
 
+  // Crop with the lantern on the top third line, zoomed in toward the left third only while
+  // at least SEA of the frame stays sea below the horizon.
+  const LANTERN = [237, 185], HORIZON = 315, SEA = 0.2;
+  function frame(img, aspect) {
+    const W = img.naturalWidth, H = img.naturalHeight, [lx, ly] = LANTERN;
+    // Bottom edge is ly + 2/3 ch; requiring (bottom - HORIZON) >= SEA * ch bounds ch from below.
+    const minCh = (HORIZON - ly) / (2 / 3 - SEA);
+    const cw = Math.max(Math.min(W, H * aspect, lx * 3), Math.min(W, H * aspect, minCh * aspect)), ch = cw / aspect;
+    return { x: clamp(lx - cw / 3, 0, W - cw), y: clamp(ly - ch / 3, 0, H - ch), w: cw, h: ch };
+  }
+
   let stop = () => {};
   function init(img, instant) {
     stop();
@@ -215,8 +226,7 @@
     canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
     const ctx = canvas.getContext('2d');
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const cw = Math.min(img.naturalWidth, img.naturalHeight * aspect), ch = cw / aspect;
-    stop = paint(ctx, img, w, h, { x: (img.naturalWidth - cw) * FOCUS_X, y: (img.naturalHeight - ch) * FOCUS_Y, w: cw, h: ch }, instant);
+    stop = paint(ctx, img, w, h, frame(img, aspect), instant);
   }
 
   const img = new Image();
