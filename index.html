@@ -12,3 +12,11 @@ script: /hero.js
     <p>I also have a background in competitive programming and math competitions (NWERC silver medal, IMC first prize) and occasionally teach at the <a href="https://lp.jetbrains.com/academy/acts/">ACTS</a> camp.</p>
   </section>
 
+<script>
+  const hover = new URLSearchParams(location.search).get('hover');
+  if (hover) document.documentElement.dataset.hover = hover;
+  for (const a of document.querySelectorAll('.bio a')) a.addEventListener('pointermove', (e) => {
+    const r = [...a.getClientRects()].find((r) => e.clientY >= r.top && e.clientY <= r.bottom) || a.getClientRects()[0];
+    a.style.setProperty('--x', (e.clientX - r.left) / (a.currentCSSZoom || 1) + 'px');
+  });
+</script>

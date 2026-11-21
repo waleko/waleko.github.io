@@ -104,3 +104,58 @@ footer nav span { opacity: .5; }
 .hero { margin: 0 calc(-1 * var(--bleed)) var(--s5); }
 .hero canvas { display: block; width: 100%; height: auto; aspect-ratio: 3.5; }
 @media (max-width: 599px) { .hero canvas { aspect-ratio: 2.3; } }
+
+/* Hover lab (bio links only), chosen with ?hover=<name>. */
+@property --glow { syntax: '<number>'; inherits: false; initial-value: 0; }
+[data-hover] .bio a:hover, [data-hover] .bio a:focus-visible { background-color: transparent; }
+[data-hover] .bio a { -webkit-box-decoration-break: clone; box-decoration-break: clone; background-repeat: no-repeat; }
+
+/* highlighter: a warm marker pass sweeps under the word, soft at both ends. */
+[data-hover=highlighter] .bio a {
+  background-image: linear-gradient(100deg, rgba(246, 180, 92, 0), rgba(246, 180, 92, .42) .25em, rgba(240, 170, 85, .36) calc(100% - .25em), rgba(246, 180, 92, 0));
+  background-position: 0 85%; background-size: 0 .6em;
+  transition: background-size .5s cubic-bezier(.2, .7, .2, 1);
+}
+[data-hover=highlighter] .bio a:hover, [data-hover=highlighter] .bio a:focus-visible { background-size: 100% .6em; }
+
+/* lantern: the word warms to amber and gathers a faint halo, like the lighthouse coming on. */
+[data-hover=lantern] .bio a { transition: color .6s, text-shadow .6s; }
+[data-hover=lantern] .bio a:hover, [data-hover=lantern] .bio a:focus-visible {
+  color: #9a4a14; text-shadow: 0 0 .7em rgba(246, 170, 80, .7), 0 0 .2em rgba(250, 200, 130, .5);
+}
+
+/* brush: the dashes give way to a painted sienna stroke pulled along under the word. */
+[data-hover=brush] .bio a {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20' preserveAspectRatio='none'%3E%3Cpath fill='%23c26a32' fill-opacity='.62' d='M1 13C22 9 60 7 104 8s78 0 95-2c1 2 0 4-1 5-30 3-62 3-98 4S30 18 4 17C2 16 1 15 1 13z'/%3E%3Cpath fill='%23c26a32' fill-opacity='.3' d='M8 16c40-2 90-3 150-4 14 0 26-1 36-2l-1 2c-50 3-120 5-184 6z'/%3E%3C/svg%3E");
+  background-position: 0 100%; background-size: 0 .62em;
+  transition: background-size .55s cubic-bezier(.3, .6, .2, 1), text-decoration-color .3s;
+}
+[data-hover=brush] .bio a:hover, [data-hover=brush] .bio a:focus-visible { background-size: 100% .62em; text-decoration-color: transparent; }
+
+/* ink: a solid line runs along the dashes and joins them, left to right. */
+[data-hover=ink] .bio a {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 calc(100% - 2px); background-size: 0 1px;
+  transition: background-size .45s cubic-bezier(.4, 0, .2, 1);
+}
+[data-hover=ink] .bio a:hover, [data-hover=ink] .bio a:focus-visible { background-size: 100% 1px; }
+
+/* march: the dashes start to drift, slowly, as if the line were alive. */
+[data-hover=march] .bio a {
+  text-decoration: none;
+  background-image: repeating-linear-gradient(90deg, currentColor 0 3px, transparent 3px 5px);
+  background-position: 0 calc(100% - 2px); background-size: 100% 1px; background-repeat: repeat-x;
+}
+[data-hover=march] .bio a:hover, [data-hover=march] .bio a:focus-visible { animation: march 1s linear infinite; }
+@keyframes march { to { background-position: 5px calc(100% - 2px); } }
+
+/* beam: a small pool of lantern light follows the pointer across the word. */
+[data-hover=beam] .bio a {
+  padding: .45em 0; /* room for the glow above and below the line; inline padding doesn't move text */
+  background-image: radial-gradient(circle 1.6em at var(--x, 50%) 52%, rgba(246, 172, 84, calc(.55 * var(--glow))), rgba(246, 172, 84, 0));
+  transition: --glow .45s;
+}
+[data-hover=beam] .bio a:hover { --glow: 1; }
+[data-hover=beam] .bio a:focus-visible { --glow: .6; }
+
+@media (prefers-reduced-motion: reduce) { [data-hover=march] .bio a:hover { animation: none; } }
