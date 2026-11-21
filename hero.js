@@ -208,15 +208,11 @@
     return () => { cancelled = true; cancelAnimationFrame(raf); };
   }
 
-  // Crop with the lantern on the top third line, zoomed in toward the left third only while
-  // at least SEA of the frame stays sea below the horizon.
-  const LANTERN = [237, 185], HORIZON = 315, SEA = 0.2;
+  // Full-width crop with the lantern on the top third line.
+  const LANTERN_Y = 185;
   function frame(img, aspect) {
-    const W = img.naturalWidth, H = img.naturalHeight, [lx, ly] = LANTERN;
-    // Bottom edge is ly + 2/3 ch; requiring (bottom - HORIZON) >= SEA * ch bounds ch from below.
-    const minCh = (HORIZON - ly) / (2 / 3 - SEA);
-    const cw = Math.max(Math.min(W, H * aspect, lx * 3), Math.min(W, H * aspect, minCh * aspect)), ch = cw / aspect;
-    return { x: clamp(lx - cw / 3, 0, W - cw), y: clamp(ly - ch / 3, 0, H - ch), w: cw, h: ch };
+    const cw = Math.min(img.naturalWidth, img.naturalHeight * aspect), ch = cw / aspect;
+    return { x: 0, y: clamp(LANTERN_Y - ch / 3, 0, img.naturalHeight - ch), w: cw, h: ch };
   }
 
   let stop = () => {};
